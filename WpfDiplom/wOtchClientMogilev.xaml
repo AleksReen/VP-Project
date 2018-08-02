@@ -1,0 +1,83 @@
+﻿<Window x:Class="WpfDiplom.wOtchClientMogilev"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfDiplom"
+        mc:Ignorable="d"
+        Title="Клиенты г.Могилёв" Height="443" Width="750" Icon="Images/drill.ico">
+
+    <StackPanel  Background="{StaticResource LGB}" Margin="0,0,2,-3" >
+        <StackPanel  Orientation="Vertical" Height="auto" HorizontalAlignment="Center" Margin="10,0" Width="720">
+            <StackPanel  Orientation="Horizontal" Height="68">
+                <Label x:Name="IDemp" Content="Отчет о клиентах (г.Могилёв) " Height="40" Margin="10,14,10,15" Background="Transparent" FontSize="20" FontStyle="Italic" FontWeight="Bold"/>
+                <Button Content="Сохранить в Exсel" 
+                        Width="110" Height="30" 
+                        Margin="0,0,0,0" 
+                        Background="#FFA1E68D" FontStyle="Italic" 
+                        Click="Export"
+                        />
+
+                <Button Content="Печать" 
+                        Width="110" Height="30" 
+                        Margin="40,0,0,0" 
+                        Background="#FFA1E68D" FontStyle="Italic"
+                        Click="Print"
+                        />
+            </StackPanel>
+            <StackPanel Height="300">
+
+                <DataGrid 
+        				x:Name="dgClientMogilev"
+        				ItemsSource="{Binding}" 
+        				RowHeight="25" 
+        				MaxWidth="1000" 
+        				MaxHeight="295"
+        				BorderThickness="3"
+        				Cursor="Hand" 
+        				BorderBrush="BurlyWood"
+        				AutoGenerateColumns="False"
+        				CanUserAddRows="True" 
+        				CanUserDeleteRows="False" 
+                        IsReadOnly="True"
+        				Height="auto" Width="auto" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="    Фамилия    " 
+        						Binding="{Binding Фамилия, StringFormat={}{0:dd/MM/yyyy}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        						IsReadOnly="True"/>
+                        <DataGridTextColumn Header="   Имя   "
+        						Binding="{Binding Имя, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="        Организация        "
+        						Binding="{Binding Организация, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="            Адрес          "
+        						Binding="{Binding Адрес, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="      Номер телефона      "
+        						Binding="{Binding Номер_телефона, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header=" Канал продаж "
+        						Binding="{Binding Канал_продаж, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </StackPanel>
+        </StackPanel>
+
+        <Grid Height="35" VerticalAlignment="Bottom">
+            <StatusBar Margin="3,10,3,3" Height="25">
+                <TextBlock Width="150">Статус состояния записей:</TextBlock>
+                <TextBlock Width="120" x:Name="tbSt"></TextBlock>
+                <TextBlock Width="118" Margin="60,0,0,0">
+                    Количество записей:
+                </TextBlock>
+                <TextBlock Width="60" x:Name="tbCount"></TextBlock>
+                <TextBlock Width="85">
+                    Текущая дата:
+                </TextBlock>
+                <TextBlock Width="95" x:Name="tbDate"></TextBlock>
+            </StatusBar>
+        </Grid>
+
+    </StackPanel>
+
+</Window>

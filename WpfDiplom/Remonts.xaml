@@ -1,0 +1,236 @@
+﻿<Page x:Class="WpfDiplom.Remonts"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:core="clr-namespace:WpfDiplom.Classes"
+      mc:Ignorable="d" 
+
+	Title="Изделия в ремонте" Loaded="Page_LoadedRemonts">
+
+    <Page.Resources>
+        <core:ListRemontsProducts x:Key="ListRemontsProducts"/>
+        <core:ListRemontsClients x:Key="ListRemontsClients"/>
+
+        <DataTemplate x:Key="DataTemplateV">
+            <TextBox Text="{Binding Дата_выдачи, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}" VerticalAlignment="Center" 
+                     IsReadOnly="True" Height="25"/>
+        </DataTemplate>
+        <DataTemplate x:Key="EditingDateTemplateV">
+            <DatePicker SelectedDate="{Binding Дата_выдачи,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="25"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="DataTemplateP">
+            <TextBox Text="{Binding Дата_приемки, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}" VerticalAlignment="Center" 
+                     IsReadOnly="True" Height="25"/>
+        </DataTemplate>
+        <DataTemplate x:Key="EditingDateTemplateP">
+            <DatePicker SelectedDate="{Binding Дата_приемки,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="25"/>
+        </DataTemplate>
+
+    </Page.Resources>
+    
+    <StackPanel 
+        Name="Stack2"  
+        Background="{StaticResource LGB}">
+        <Menu Height="30" 
+              Background="{StaticResource LGB}">
+            <MenuItem Header="Документ" Height="30">
+                <MenuItem Header="Оформить новый ремонт"  Width="270" Click="clNewRemont"/>
+                <MenuItem Header="Обновить таблицу" Click="clRefreshRemont" Width="270"/>
+                <MenuItem Header="Редактировать записи" Click="clEditRemont" Width="270"/>
+                <MenuItem Header="Сохранить изменения" Click="clSaveRemont" Width="270"/>
+                <MenuItem Header="Удалить ремонт" Click="clDeleteRemont" Width="270"/>
+                <Separator></Separator>
+                <MenuItem Header="Завершение работы "  Click="clExit" Width="270"/>
+            </MenuItem>
+            <MenuItem Header="Очет" Height="30">
+                <MenuItem Header="Отчет по ремонту"  Width="320" Click="OtchRemont"/>
+            </MenuItem>
+        </Menu>
+
+
+        <ToolBar 
+            Name="ToolBar1" 
+            Margin="3" 
+            Height="45">
+
+            <Button 
+                Name="Refresh"   
+                Margin="5,2,5,2"   
+                ToolTip="Обновить"
+                Click="clRefreshRemont"
+                >
+                <Image Source="Images/refresh_48.png" />
+            </Button>
+
+            <Button 
+                Name="Add" 
+                ToolTip="Оформить новый ремонт" 
+                Margin="5,2,5,2" 
+                Click="clNewRemont"
+                 >
+                <Image Source="Images/add_48.png" />
+            </Button>
+
+            <Button 
+                Name="Edit" 
+                ToolTip="Редактировать" 
+                Margin="5,2,5,2"
+                Click="clEditRemont"
+                >
+                <Image Source="Images/paper_content_pencil_48.png" />
+            </Button>
+
+            <Button 
+                Name="Save" 
+                ToolTip="Сохранить" 
+                Margin="5,2,5,2"
+                Click="clSaveRemont"
+                >
+                <Image Source="Images/floppy_disk_48.png" />
+            </Button>
+
+            <Button 
+                Name="Delete" 
+                ToolTip="Удалить" 
+                Margin="5,2,5,2" 
+                Click="clDeleteRemont"
+                >
+                <Image Source="Images/cancel_48.png" />
+            </Button>
+
+        </ToolBar>
+
+        <TextBlock 
+            Margin="5" 
+            Height="30" 
+            FontSize="20" 
+            FontStyle="Italic" 
+            FontWeight="Bold" Width="630" >Список изделий в ремонте</TextBlock>
+
+        <StackPanel 
+            Orientation="Horizontal" 
+            Height="40" Width="630" >
+
+            <TextBlock 
+                x:Name="TextBlockFamily" 
+                Text="Поиск по номеру акта" 
+                Padding="0,5,0,0" 
+                Margin="0,0,350,0" 
+                Height="30" 
+                FontStyle="Italic" 
+                FontSize="14" />
+
+            <TextBox 
+                x:Name="tbRem" 
+                Margin="-300,0,0,0" 
+                HorizontalAlignment="Left" 
+                Height ="30"  
+                Width="275" 
+                Padding="0,5,0,0" />
+
+            <Button 
+                Content="Найти" 
+                Width="100" 
+                Height="30" 
+                Margin="10,0,0,0" 
+                Background="#FFA1E68D"
+                Click="clFindRemont"
+                FontStyle="Italic"/>
+        </StackPanel>
+
+        <StackPanel Height="260">
+            <DataGrid x:Name="dgRemonts"  
+                      ItemsSource="{Binding}" 
+                      AutoGenerateColumns="False" 
+                      MaxWidth="1000" 
+                      MaxHeight="260" 
+                      BorderThickness="3" 
+                      RowHeight="25"
+                      Cursor="Hand" 
+                      BorderBrush="BurlyWood" 
+                      IsReadOnly="True" 
+                      CanUserAddRows="True" 
+                      CanUserDeleteRows="False" 
+                      HorizontalAlignment="Left">
+
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Оформить новый ремонт" Click="clNewRemont"  Width="270"/>
+                        <MenuItem Header="Обновить таблицу" Click="clRefreshRemont" Width="270"/>
+                        <MenuItem Header="Редактировать записи" Click="clEditRemont" Width="270"/>
+                        <MenuItem Header="Сохранить изменения" Click="clSaveRemont" Width="270"/>
+                        <MenuItem Header="Удалить ремонт" Click="clDeleteRemont" Width="270"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+
+                <DataGrid.Columns>
+                <DataGridTextColumn Header=" Номер акта " IsReadOnly="True"
+                                    Binding="{Binding Номер_акта, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                
+                    <!--<DataGridTextColumn Header="   Дата приемки  "
+                                    Binding="{Binding Дата_приемки, StringFormat={}{0:dd/MM/yyyy}, 
+                                    Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
+
+                    <DataGridTemplateColumn Header="   Дата приемки  " 
+                                        CellTemplate="{StaticResource DataTemplateP}"
+                                        CellEditingTemplate="{StaticResource EditingDateTemplateP}"/>
+
+                    <DataGridTextColumn Header="   Готовность    "
+                                    Binding="{Binding Готовность, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <!--<DataGridTextColumn Header="   Дата_выдачи   "
+                                    Binding="{Binding Дата_выдачи, StringFormat={}{0:dd/MM/yyyy}, 
+                                                Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
+
+
+                    <DataGridTemplateColumn Header="   Дата выдачи   " 
+                                        CellTemplate="{StaticResource DataTemplateV}"
+                                        CellEditingTemplate="{StaticResource EditingDateTemplateV}"/>
+
+
+                    <DataGridComboBoxColumn Header="   Клиент                 "
+                                    ItemsSource="{Binding Source={StaticResource ListRemontsClients}}"
+                                    DisplayMemberPath="Организация"
+                                    SelectedValueBinding="{Binding Path=Код_клиента, 
+                                    Mode=TwoWay, 
+                                    UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedValuePath="Код_клиента">
+                    </DataGridComboBoxColumn>
+                    
+                    
+                    <DataGridComboBoxColumn Header="   Товар                  "
+                                    ItemsSource="{Binding Source={StaticResource ListRemontsProducts}}"
+                                    DisplayMemberPath="Наименование_товара"
+                                    SelectedValueBinding="{Binding Path=Код_товара, 
+                                    Mode=TwoWay, 
+                                    UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedValuePath="Код_товара">
+                    </DataGridComboBoxColumn>
+
+                    <DataGridTextColumn Header="   Стоимость     "  
+                        Binding="{Binding Стоимость,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat= {}{0:0.00} }"/>
+                    
+                <DataGridTextColumn Header="   Заключение             "
+                                    Binding="{Binding Заключение, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        </StackPanel>
+
+        <Grid Height="35" VerticalAlignment="Bottom">
+            <StatusBar Margin="3,10,3,0" Height="25">
+                <TextBlock Width="150">Статус состояния записей:</TextBlock>
+                <TextBlock Width="100" x:Name="tbSt"></TextBlock>
+                <TextBlock Width="118" Margin="200,0,0,0">
+                    Количество записей:
+                </TextBlock>
+                <TextBlock Width="60" x:Name="tbCount"></TextBlock>
+                <TextBlock Width="85">
+                    Текущая дата:
+                </TextBlock>
+                <TextBlock Width="95" x:Name="tbDate"></TextBlock>
+            </StatusBar>
+        </Grid>
+
+    </StackPanel>
+</Page>
