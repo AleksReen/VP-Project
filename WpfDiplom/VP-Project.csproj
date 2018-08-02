@@ -431,11 +431,11 @@
     <Resource Include="Images\drill.ico" />
     <Resource Include="Images\drill.png" />
     <Content Include="DB\Stroitel.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="DB\Stroitel_log.ldf">
       <DependentUpon>Stroitel.mdf</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Stroitel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

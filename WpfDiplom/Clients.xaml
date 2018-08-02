@@ -132,7 +132,7 @@
                     </ContextMenu>
                 </DataGrid.ContextMenu>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header=" Код клиента " 
+                    <DataGridTextColumn Header=" Код клиента " IsReadOnly="True"
                                     Binding="{Binding Код_клиента, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <DataGridTextColumn Header="   Фамилия           "
                                     Binding="{Binding Фамилия, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
