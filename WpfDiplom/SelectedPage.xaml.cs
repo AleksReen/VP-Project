@@ -24,5 +24,35 @@ namespace WpfDiplom
         {
             InitializeComponent();
         }
+
+        private void btnProducts_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnOrders_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnClients_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnProviders_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRemonts_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnEmployees_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

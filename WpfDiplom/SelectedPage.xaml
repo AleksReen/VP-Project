@@ -6,76 +6,81 @@
       xmlns:command="clr-namespace:System.Windows.Input;assembly=System"
       mc:Ignorable="d" 
 
-	Title="Выбор раздела">
-    <StackPanel Name="Stack" Margin="0,0,-445,-46" Background="{StaticResource LGB}">
-        <TextBlock Margin="25,30,25, 5" FontSize="24" FontStyle="Italic" FontWeight="Bold">
-            <TextBlock.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FFF11010" Offset="1"/>
-                </LinearGradientBrush>
-            </TextBlock.Foreground>
-          Информационная система ОАО Строитель
+	Title="Выбор раздела" Height="550" Width="900">
+    <StackPanel Name="Stack" Margin="0,0,0,0" Background="{StaticResource LGB}">
+        <TextBlock Margin="25,30,25, 5" FontSize="24" FontWeight="Bold" Foreground="White" TextAlignment="Center">          
+          Справочники 
         </TextBlock>
         <Grid>
-        <StackPanel HorizontalAlignment="Left" Width="722">
-        <TextBlock Margin="25,30,0,5" HorizontalAlignment="Left" Width="167" FontStyle="Italic" TextDecorations="{x:Null}">
-            <Hyperlink NavigateUri="Products.xaml" FontSize="20">
-  	            <Hyperlink.Foreground>
-  		            <RadialGradientBrush>
-  			            <GradientStop Color="Black" Offset="0"/>
-  			            <GradientStop Color="#FFF31212" Offset="1"/>
-  		            </RadialGradientBrush>
-  	            </Hyperlink.Foreground>Товары</Hyperlink>
-        </TextBlock>
-                <TextBlock Margin="25,30,0,5" HorizontalAlignment="Left" Width="167" FontStyle="Italic"><Hyperlink NavigateUri="Orders.xaml" FontSize="20"><Hyperlink.Foreground>
-        			<RadialGradientBrush>
-        				<GradientStop Color="Black"/>
-        				<GradientStop Color="#FFF01212" Offset="1"/>
-        			</RadialGradientBrush>
-        		</Hyperlink.Foreground><Run Text="Заказы"/></Hyperlink></TextBlock>
+            <StackPanel HorizontalAlignment="Center" Width="722">
 
-                <TextBlock Margin="25,30,0,5" HorizontalAlignment="Left" Width="167" FontStyle="Italic">
-            <Hyperlink NavigateUri="Clients.xaml" FontSize="20">
-  	            <Hyperlink.Foreground>
-  		            <RadialGradientBrush>
-  			            <GradientStop Color="Black"/>
-  			            <GradientStop Color="#FFF01212" Offset="1"/>
-  		            </RadialGradientBrush>
-  	            </Hyperlink.Foreground >Клиенты</Hyperlink>
-        </TextBlock>
-        
-        <TextBlock Margin="25,30,0,5" HorizontalAlignment="Left" Width="167" FontStyle="Italic">
-            <Hyperlink NavigateUri="Providers.xaml" FontSize="20">
-  	            <Hyperlink.Foreground>
-  		            <RadialGradientBrush>
-  			            <GradientStop Color="Black"/>
-  			            <GradientStop Color="#FFF01212" Offset="1"/>
-  		            </RadialGradientBrush>
-  	            </Hyperlink.Foreground >Поставщики</Hyperlink>
-        </TextBlock>
-        
-        <TextBlock Margin="25,30,0,5" HorizontalAlignment="Left" Width="190" FontStyle="Italic">
-            <Hyperlink NavigateUri="Remonts.xaml" FontSize="20">
-  	            <Hyperlink.Foreground>
-  		            <RadialGradientBrush>
-  			            <GradientStop Color="Black"/>
-  			            <GradientStop Color="#FFF01212" Offset="1"/>
-  		            </RadialGradientBrush>
-  	            </Hyperlink.Foreground >Изделия в ремонте</Hyperlink>
-        </TextBlock>
-        
-        <TextBlock Margin="25,30,0,5" HorizontalAlignment="Left" Width="167" FontStyle="Italic">
-            <Hyperlink NavigateUri="Employees.xaml" FontSize="20">
-  	            <Hyperlink.Foreground>
-  		            <RadialGradientBrush>
-  			            <GradientStop Color="Black"/>
-  			            <GradientStop Color="#FFF01212" Offset="1"/>
-  		            </RadialGradientBrush>
-  	        </Hyperlink.Foreground >Сотрудники</Hyperlink>
-        </TextBlock>
-        </StackPanel>
+                <TextBlock Margin="0,30,0,0" HorizontalAlignment="Center">         
+                    <Button Content="Продукты" 
+                            Name="btnProducts"
+                            Click="btnProducts_Click"        
+                            Width="650" 
+                            FontSize="14"
+                            Background="{StaticResource ButtonBg}"
+                            Height="30">               
+                    </Button>
+                </TextBlock>
+
+                <TextBlock Margin="0,30,0,0" HorizontalAlignment="Center">                         
+                    <Button Content="Заказы" 
+                            Name="btnOrders"
+                            Click="btnOrders_Click"        
+                            Width="650" 
+                            FontSize="14"
+                            Background="{StaticResource ButtonBg}"
+                            Height="30">
+                    </Button>
+                </TextBlock>
+
+                <TextBlock Margin="0,30,0,0" HorizontalAlignment="Center">                         
+                    <Button Content="Клиенты" 
+                            Name="btnClients"
+                            Click="btnClients_Click"        
+                            Width="650" 
+                            FontSize="14"
+                            Background="{StaticResource ButtonBg}"
+                            Height="30">
+                    </Button>
+                </TextBlock>
+
+                <TextBlock Margin="0,30,0,0" HorizontalAlignment="Center">         
+                    <Button Content="Поставщики" 
+                            Name="btnProviders"
+                            Click="btnProviders_Click"        
+                            Width="650" 
+                            FontSize="14"
+                            Background="{StaticResource ButtonBg}"
+                            Height="30">
+                    </Button>
+                </TextBlock>
+
+                <TextBlock Margin="0,30,0,0" HorizontalAlignment="Center">         
+                    <Button Content="Ремонты" 
+                            Name="btnRemonts"
+                            Click="btnRemonts_Click"        
+                            Width="650" 
+                            FontSize="14"
+                            Background="{StaticResource ButtonBg}"
+                            Height="30">
+                    </Button>
+                </TextBlock>
+
+                <TextBlock Margin="0,30,0,0" HorizontalAlignment="Center">         
+                
+                    <Button Content="Сотрудники" 
+                            Name="btnEmployees"
+                            Click="btnEmployees_Click"        
+                            Width="650" 
+                            FontSize="14"
+                            Background="{StaticResource ButtonBg}"
+                            Height="30">
+                    </Button>
+                </TextBlock>
+            </StackPanel>
         </Grid>
     </StackPanel>
-
 </Page>
