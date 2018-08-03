@@ -35,7 +35,7 @@ namespace WpfDiplom
                 DG.DataContext = RabMagPeriod.Работа_магазина_за_период(N, K);
 
                 tbCount.Text = RabMagPeriod.Работа_магазина_за_период(N, K).Count().ToString();
-                tbSt.Text = "Отчет сформирован";
+                tbSt.Text = "Cформирован";
             }
             catch
             {

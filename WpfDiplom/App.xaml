@@ -4,15 +4,20 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
-        
-            <LinearGradientBrush x:Key="LGB">
-                <LinearGradientBrush.GradientStops>
-                    <GradientStop Offset="0.00" Color="#FF87A0DE"/>
-                    <GradientStop Offset="0.50" Color="Azure"/>
-                    <GradientStop Offset="1.00" Color="#FF009CFF"/>
-                </LinearGradientBrush.GradientStops>
-            </LinearGradientBrush>
-       
+        <LinearGradientBrush x:Key="LGB">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Offset="0.00" Color="#000000"/>
+                <GradientStop Offset="1.00" Color="#006A9B"/>
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="ButtonBg" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+            <GradientStop Color="#FFF3F3F3" Offset="1"/>
+        </LinearGradientBrush>
+
 
     </Application.Resources>
 </Application>

@@ -5,32 +5,25 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
    
-	Title="Клиенты" Loaded="Page_LoadedClients">
+	Title="Клиенты" Height="550" Width="900" Loaded="Page_LoadedClients">
 
-    <StackPanel 
-        Name="Stack2"  
-        Background="{StaticResource LGB}">
-        <Menu Height="30" 
-              Background="{StaticResource LGB}">
+    <StackPanel Name="Stack2"  Background="{StaticResource LGB}">
+        <Menu Height="30" Background="Green" Foreground="White" FontStyle="Italic"  Width="120" Margin="0,0,780,5">
             <MenuItem Header="Документ" Height="30">
-                <MenuItem Header="Добавить нового клиента" Click="clNewClient" Width="270"/>
-                <MenuItem Header="Обновить таблицу" Click="clRefreshClient"  Width="270"/>
-                <MenuItem Header="Редактировать записи" Click="clEditClient" Width="270"/>
-                <MenuItem Header="Сохранить изменения" Click="clSaveClient" Width="270"/>
-                <MenuItem Header="Удалить клиента" Click="clDeleteClient" Width="270"/>
+                <MenuItem Header="Добавить нового клиента" Click="clNewClient" Foreground="Black"/>
+                <MenuItem Header="Обновить таблицу" Click="clRefreshClient"  Foreground="Black"/>
+                <MenuItem Header="Редактировать записи" Click="clEditClient" Foreground="Black"/>
+                <MenuItem Header="Сохранить изменения" Click="clSaveClient" Foreground="Black"/>
+                <MenuItem Header="Удалить клиента" Click="clDeleteClient" Foreground="Black"/>
                 <Separator></Separator>
-                <MenuItem Header="Завершение работы " Click="clExit"  Width="270"/>
+                <MenuItem Header="Завершение работы " Click="clExit"  FontWeight="Bold" Foreground="Black"/>
             </MenuItem>
             <MenuItem Header="Очет" Height="30">
-                <MenuItem Header="Клиенты расположенные в г. Могилёв"  Width="320" Click="wOtchClientMogilev"/>
+                <MenuItem Header="Клиенты расположенные в г. Могилёв"  Click="wOtchClientMogilev" Foreground="Black"/>
             </MenuItem>
         </Menu>
 
-        <ToolBar 
-            Name="ToolBar1" 
-            Margin="3" 
-            Height="45">
-
+        <ToolBar Name="ToolBar1" Height="45" Width="890">
             <Button 
                 Name="Refresh"   
                 Margin="5,2,5,2"   
@@ -71,57 +64,76 @@
                 <Image Source="Images/cancel_48.png" />
             </Button>
 
-        </ToolBar>
-
-        <TextBlock 
-            Margin="5" 
-            Height="30" 
-            FontSize="20" 
-            FontStyle="Italic" 
-            FontWeight="Bold" Width="630" >Список клиентов</TextBlock>
-
-        <StackPanel 
-            Orientation="Horizontal" 
-            Height="40" Width="630" >
-
-            <TextBlock 
-                x:Name="TextBlockFamily" 
-                Text="Поиск по организации" 
-                Padding="0,5,0,0" 
-                Margin="5,0,350,0" 
-                Height="30" 
-                FontStyle="Italic" 
-                FontSize="14" />
-
             <TextBox 
                 x:Name="tbOrg" 
-                Margin="-300,0,0,0" 
+                Margin="250,0,0,0" 
                 HorizontalAlignment="Left" 
                 Height ="30"  
                 Width="275" 
-                Padding="0,5,0,0" />
+                BorderThickness="1"
+                BorderBrush="{StaticResource LGB}">
+
+                <TextBox.Style>
+                    <Style TargetType="TextBox"  xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <Label Content=" Поиск по организации" Foreground="LightGray" Background="White" Width="275" Height="30" VerticalContentAlignment="Center" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+
+            </TextBox>
 
             <Button 
                 Content="Найти" 
                 Width="100" 
                 Height="30" 
-                Margin="10,0,0,0" 
-                Background="#FFA1E68D"
+                Margin="10,0,0,0"                
+                Background="Green"
+                Foreground="White"
+                BorderThickness="1"
+                BorderBrush="Black"
                 Click="clFindClient"
                 FontStyle="Italic"/>
-        </StackPanel>
+
+        </ToolBar>
+
+        <TextBlock 
+            Margin="10" 
+            Height="30" 
+            FontSize="20" 
+            Foreground="White"
+            TextAlignment="Center"
+            FontWeight="Bold" Width="672" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            Справочник клиентов
+        </TextBlock>
+
         
-        <StackPanel Height="260" >
+        <StackPanel Height="370" >
 
             <DataGrid x:Name="dgClients"  ItemsSource="{Binding}" 
-                      AutoGenerateColumns="False"
-                      MaxWidth="1000" 
-                      MaxHeight="260" 
-                      BorderThickness="3" 
-                      RowHeight="25"
-                      Cursor="Hand" 
-                      BorderBrush="BurlyWood" 
-                      IsReadOnly="True" CanUserAddRows="True" CanUserDeleteRows="False" HorizontalAlignment="Left">
+                  AutoGenerateColumns="False" 
+                  Margin="0,0,0,0"
+                  MaxWidth="1000" 
+                  MaxHeight="370" 
+                  BorderThickness="3" 
+                  RowHeight="25"
+                  Cursor="Hand" BorderBrush="BurlyWood" 
+                  IsReadOnly="True" CanUserAddRows="True" CanUserDeleteRows="False" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Добавить нового клиента"  Click="clNewClient" Width="270"/>
@@ -151,19 +163,15 @@
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
-        <Grid Height="35" VerticalAlignment="Bottom">
-            <StatusBar Margin="3,10,3,0" Height="25">
-                <TextBlock Width="150">Статус состояния записей:</TextBlock>
-                <TextBlock Width="100" x:Name="tbSt"></TextBlock>
-                <TextBlock Width="118" Margin="200,0,0,0">
-                    Количество записей:
-                </TextBlock>
-                <TextBlock Width="60" x:Name="tbCount"></TextBlock>
-                <TextBlock Width="85">
-                    Текущая дата:
-                </TextBlock>
-                <TextBlock Width="95" x:Name="tbDate"></TextBlock>
-            </StatusBar>
+        
+        <Grid Margin="0,10,0,0">
+            <TextBlock Width="150" Margin="0,0,700,0" Foreground="White">Состояние данных</TextBlock>
+            <TextBlock Width="100" Margin="0,0,520,0" x:Name="tbSt" Foreground="White"></TextBlock>
+            <TextBlock Width="118" Margin="0,0,0,0" Foreground="White">Количество записей:</TextBlock>
+            <TextBlock Width="60"  Margin="0,0,-200,0" x:Name="tbCount" Foreground="White"></TextBlock>
+            <TextBlock Width="85"  Margin="0,0,-600,0" Foreground="White">Текущая дата:</TextBlock>
+            <TextBlock Width="95"  Margin="0,0,-790,0" x:Name="tbDate" Foreground="White"></TextBlock>
         </Grid>
+        
     </StackPanel>
 </Page>

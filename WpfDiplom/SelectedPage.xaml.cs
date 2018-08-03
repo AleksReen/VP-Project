@@ -24,5 +24,35 @@ namespace WpfDiplom
         {
             InitializeComponent();
         }
+
+        private void btnProducts_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("Products.xaml", UriKind.Relative));
+        }
+
+        private void btnOrders_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("Orders.xaml", UriKind.Relative));
+        }
+
+        private void btnClients_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("Clients.xaml", UriKind.Relative));
+        }
+
+        private void btnProviders_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("Providers.xaml", UriKind.Relative));
+        }
+
+        private void btnRemonts_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("Remonts.xaml", UriKind.Relative));
+        }
+
+        private void btnEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("Employees.xaml", UriKind.Relative));
+        }
     }
 }

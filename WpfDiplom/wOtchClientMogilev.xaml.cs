@@ -22,7 +22,7 @@ namespace WpfDiplom
             ClientMogilev = new StroitelEntities();
             ClientMogilev.Клиенты_Могилёв.Load();
             dgClientMogilev.DataContext = ClientMogilev.Клиенты_Могилёв.Local.ToBindingList();
-            tbSt.Text = "Отчет сформирован";
+            tbSt.Text = "Cформирован";
             tbCount.Text = Convert.ToString(ClientMogilev.Клиенты_Могилёв.Local.Count);
             tbDate.Text = Convert.ToString(DateTime.Today.ToString("dd MMMM yyyy"));
         }

@@ -108,11 +108,13 @@ namespace WpfDiplom
         {
             string org = tbOrg.Text;
             DataEntitiesClients = new StroitelEntities();
+
             ListClients.Clear();
-            var clients = DataEntitiesClients.Клиент;
-            var queryClient = from client in clients
-                              where client.Организация == org 
-                              select client;
+
+
+            var queryClient = DataEntitiesClients.Клиент.Where(c => c.Организация.Contains(org)).ToList();
+                              
+
             foreach (Клиент cl in queryClient)
             {
                 ListClients.Add(cl);
@@ -123,7 +125,9 @@ namespace WpfDiplom
                 tbCount.Text = Convert.ToString(ListClients.Count());
             }
             else
+            {
                 MessageBox.Show("Организация клиента \n" + org + "\n не найдена", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }       
         }
 
         private void clExit(object sender, RoutedEventArgs e)

@@ -6,55 +6,31 @@
       xmlns:core="clr-namespace:WpfDiplom.Classes"
       mc:Ignorable="d" 
 
-	Title="Изделия в ремонте" Loaded="Page_LoadedRemonts">
+	Title="Изделия в ремонте" Height="550" Width="900" Loaded="Page_LoadedRemonts">
 
     <Page.Resources>
         <core:ListRemontsProducts x:Key="ListRemontsProducts"/>
         <core:ListRemontsClients x:Key="ListRemontsClients"/>
-
-        <DataTemplate x:Key="DataTemplateV">
-            <TextBox Text="{Binding Дата_выдачи, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}" VerticalAlignment="Center" 
-                     IsReadOnly="True" Height="25"/>
-        </DataTemplate>
-        <DataTemplate x:Key="EditingDateTemplateV">
-            <DatePicker SelectedDate="{Binding Дата_выдачи,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="25"/>
-        </DataTemplate>
-
-        <DataTemplate x:Key="DataTemplateP">
-            <TextBox Text="{Binding Дата_приемки, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}}" VerticalAlignment="Center" 
-                     IsReadOnly="True" Height="25"/>
-        </DataTemplate>
-        <DataTemplate x:Key="EditingDateTemplateP">
-            <DatePicker SelectedDate="{Binding Дата_приемки,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Height="25"/>
-        </DataTemplate>
-
     </Page.Resources>
     
-    <StackPanel 
-        Name="Stack2"  
-        Background="{StaticResource LGB}">
-        <Menu Height="30" 
-              Background="{StaticResource LGB}">
+    <StackPanel Name="Stack2"  Background="{StaticResource LGB}">
+        <Menu Height="30"  Background="Green" Foreground="White" FontStyle="Italic"  Width="120" Margin="0,0,780,5">
             <MenuItem Header="Документ" Height="30">
-                <MenuItem Header="Оформить новый ремонт"  Width="270" Click="clNewRemont"/>
-                <MenuItem Header="Обновить таблицу" Click="clRefreshRemont" Width="270"/>
-                <MenuItem Header="Редактировать записи" Click="clEditRemont" Width="270"/>
-                <MenuItem Header="Сохранить изменения" Click="clSaveRemont" Width="270"/>
-                <MenuItem Header="Удалить ремонт" Click="clDeleteRemont" Width="270"/>
+                <MenuItem Header="Оформить новый ремонт" Click="clNewRemont" Foreground="Black"/>
+                <MenuItem Header="Обновить таблицу" Click="clRefreshRemont" Foreground="Black"/>
+                <MenuItem Header="Редактировать записи" Click="clEditRemont" Foreground="Black"/>
+                <MenuItem Header="Сохранить изменения" Click="clSaveRemont" Foreground="Black"/>
+                <MenuItem Header="Удалить ремонт" Click="clDeleteRemont" Foreground="Black"/>
                 <Separator></Separator>
-                <MenuItem Header="Завершение работы "  Click="clExit" Width="270"/>
+                <MenuItem Header="Завершение работы "  Click="clExit" Foreground="Black"  FontWeight="Bold"/>
             </MenuItem>
             <MenuItem Header="Очет" Height="30">
-                <MenuItem Header="Отчет по ремонту"  Width="320" Click="OtchRemont"/>
+                <MenuItem Header="Отчет по ремонту"  Click="OtchRemont" Foreground="Black"/>
             </MenuItem>
         </Menu>
 
 
-        <ToolBar 
-            Name="ToolBar1" 
-            Margin="3" 
-            Height="45">
-
+        <ToolBar Name="ToolBar1" Height="45" Width="890">
             <Button 
                 Name="Refresh"   
                 Margin="5,2,5,2"   
@@ -100,60 +76,74 @@
                 <Image Source="Images/cancel_48.png" />
             </Button>
 
-        </ToolBar>
-
-        <TextBlock 
-            Margin="5" 
-            Height="30" 
-            FontSize="20" 
-            FontStyle="Italic" 
-            FontWeight="Bold" Width="630" >Список изделий в ремонте</TextBlock>
-
-        <StackPanel 
-            Orientation="Horizontal" 
-            Height="40" Width="630" >
-
-            <TextBlock 
-                x:Name="TextBlockFamily" 
-                Text="Поиск по номеру акта" 
-                Padding="0,5,0,0" 
-                Margin="0,0,350,0" 
-                Height="30" 
-                FontStyle="Italic" 
-                FontSize="14" />
-
             <TextBox 
                 x:Name="tbRem" 
-                Margin="-300,0,0,0" 
+                 Margin="250,0,0,0" 
                 HorizontalAlignment="Left" 
                 Height ="30"  
                 Width="275" 
-                Padding="0,5,0,0" />
+                BorderThickness="1"
+                BorderBrush="{StaticResource LGB}">
+
+                <TextBox.Style>
+                    <Style TargetType="TextBox"  xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <Label Content=" Поиск по номеру акта" Foreground="LightGray" Background="White" Width="275" Height="30" VerticalContentAlignment="Center" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+
+            </TextBox>
 
             <Button 
                 Content="Найти" 
                 Width="100" 
                 Height="30" 
-                Margin="10,0,0,0" 
-                Background="#FFA1E68D"
+                Margin="10,0,0,0"                
+                Background="Green"
+                Foreground="White"
+                BorderThickness="1"
+                BorderBrush="Black"
                 Click="clFindRemont"
                 FontStyle="Italic"/>
-        </StackPanel>
 
-        <StackPanel Height="260">
-            <DataGrid x:Name="dgRemonts"  
-                      ItemsSource="{Binding}" 
-                      AutoGenerateColumns="False" 
-                      MaxWidth="1000" 
-                      MaxHeight="260" 
-                      BorderThickness="3" 
-                      RowHeight="25"
-                      Cursor="Hand" 
-                      BorderBrush="BurlyWood" 
-                      IsReadOnly="True" 
-                      CanUserAddRows="True" 
-                      CanUserDeleteRows="False" 
-                      HorizontalAlignment="Left">
+        </ToolBar>
+
+        <TextBlock 
+            Margin="10" 
+            Height="30" 
+            FontSize="20" 
+            Foreground="White"
+            TextAlignment="Center"
+            FontWeight="Bold" Width="672" HorizontalAlignment="Center" VerticalAlignment="Center"  >
+            Справочник ремонтов
+        </TextBlock>
+
+        <StackPanel  Height="370">
+            <DataGrid x:Name="dgRemonts" ItemsSource="{Binding}" 
+                  AutoGenerateColumns="False" 
+                  Margin="0,0,0,0"
+                  MaxWidth="1000" 
+                  MaxHeight="370" 
+                  BorderThickness="3" 
+                  RowHeight="25"
+                  Cursor="Hand" BorderBrush="BurlyWood" 
+                  IsReadOnly="True" CanUserAddRows="True" CanUserDeleteRows="False" HorizontalAlignment="Center" VerticalAlignment="Center">
 
                 <DataGrid.ContextMenu>
                     <ContextMenu>
@@ -168,26 +158,40 @@
                 <DataGrid.Columns>
                 <DataGridTextColumn Header=" Номер акта " IsReadOnly="True"
                                     Binding="{Binding Номер_акта, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                
-                    <!--<DataGridTextColumn Header="   Дата приемки  "
-                                    Binding="{Binding Дата_приемки, StringFormat={}{0:dd/MM/yyyy}, 
-                                    Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
 
-                    <DataGridTemplateColumn Header="   Дата приемки  " 
-                                        CellTemplate="{StaticResource DataTemplateP}"
-                                        CellEditingTemplate="{StaticResource EditingDateTemplateP}"/>
+
+                    <DataGridTemplateColumn Header="   Дата приемки  ">
+
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Дата_приемки, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding Дата_приемки, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+
+                    </DataGridTemplateColumn>
 
                     <DataGridTextColumn Header="   Готовность    "
                                     Binding="{Binding Готовность, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <!--<DataGridTextColumn Header="   Дата_выдачи   "
-                                    Binding="{Binding Дата_выдачи, StringFormat={}{0:dd/MM/yyyy}, 
-                                                Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
 
+                    <DataGridTemplateColumn Header="   Дата выдачи   ">
 
-                    <DataGridTemplateColumn Header="   Дата выдачи   " 
-                                        CellTemplate="{StaticResource DataTemplateV}"
-                                        CellEditingTemplate="{StaticResource EditingDateTemplateV}"/>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Дата_выдачи, StringFormat={}{0:dd\.}{0:MM\.}{0:yyyy}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding Дата_выдачи, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
 
+                    </DataGridTemplateColumn>
 
                     <DataGridComboBoxColumn Header="   Клиент                 "
                                     ItemsSource="{Binding Source={StaticResource ListRemontsClients}}"
@@ -211,25 +215,19 @@
                     <DataGridTextColumn Header="   Стоимость     "  
                         Binding="{Binding Стоимость,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat= {}{0:0.00} }"/>
                     
-                <DataGridTextColumn Header="   Заключение             "
+                <DataGridTextColumn Header="   Заключение    "
                                     Binding="{Binding Заключение, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
         </DataGrid>
         </StackPanel>
 
-        <Grid Height="35" VerticalAlignment="Bottom">
-            <StatusBar Margin="3,10,3,0" Height="25">
-                <TextBlock Width="150">Статус состояния записей:</TextBlock>
-                <TextBlock Width="100" x:Name="tbSt"></TextBlock>
-                <TextBlock Width="118" Margin="200,0,0,0">
-                    Количество записей:
-                </TextBlock>
-                <TextBlock Width="60" x:Name="tbCount"></TextBlock>
-                <TextBlock Width="85">
-                    Текущая дата:
-                </TextBlock>
-                <TextBlock Width="95" x:Name="tbDate"></TextBlock>
-            </StatusBar>
+        <Grid Margin="0,10,0,0">
+            <TextBlock Width="150" Margin="0,0,700,0" Foreground="White">Состояние данных</TextBlock>
+            <TextBlock Width="100" Margin="0,0,520,0" x:Name="tbSt" Foreground="White"></TextBlock>
+            <TextBlock Width="118" Margin="0,0,0,0" Foreground="White">Количество записей:</TextBlock>
+            <TextBlock Width="60"  Margin="0,0,-200,0" x:Name="tbCount" Foreground="White"></TextBlock>
+            <TextBlock Width="85"  Margin="0,0,-600,0" Foreground="White">Текущая дата:</TextBlock>
+            <TextBlock Width="95"  Margin="0,0,-790,0" x:Name="tbDate" Foreground="White"></TextBlock>
         </Grid>
 
     </StackPanel>

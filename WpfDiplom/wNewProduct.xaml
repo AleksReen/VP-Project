@@ -19,7 +19,9 @@
                    Content="Наименование товара" 
                    Height="28" Margin="0,14,200,15" 
                    Background="Transparent" 
-                   Width="187" 
+                   Width="187"
+                   Foreground="White"
+                   FontStyle="Italic"
                    FontSize="14"/>
             <TextBox x:Name="tbNameProd"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
         </StackPanel>
@@ -27,6 +29,8 @@
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
             <Label x:Name="ProProduct" 
                    Content="Производитель" Height="28" 
+                   Foreground="White"
+                   FontStyle="Italic"
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
@@ -36,6 +40,8 @@
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center" Margin="42,0">
             <Label x:Name="EdIzm" 
                    Content="Ед. измерения" 
+                   Foreground="White"
+                   FontStyle="Italic"
                    Height="28" 
                    Margin="0,14,200,15" 
                    Background="Transparent"  
@@ -46,6 +52,8 @@
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
             <Label x:Name="Balance" 
                    Content="Количество" 
+                   Foreground="White"
+                   FontStyle="Italic"
                    Height="28" 
                    Margin="0,14,200,15" 
                    Background="Transparent"  
@@ -56,6 +64,8 @@
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
             <Label x:Name="Price" 
                    Content="Цена" 
+                   Foreground="White"
+                   FontStyle="Italic"
                    Height="28" 
                    Margin="0,14,200,15" 
                    Background="Transparent"  
@@ -66,6 +76,8 @@
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
             <Label x:Name="Prov" 
                    Content="Поставщик" 
+                   Foreground="White"
+                   FontStyle="Italic"
                    Height="28" 
                    Margin="0,14,200,15" 
                    Background="Transparent"  
@@ -81,6 +93,8 @@
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
             <Label x:Name="New" 
                    Content="Новинка" 
+                   Foreground="White"
+                   FontStyle="Italic"
                    Height="28" 
                    Margin="0,14,200,15" 
                    Background="Transparent"  
@@ -90,9 +104,9 @@
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center" Margin="42,0,28,0" Width="422">
 
-            <Button Content="Добавить" Width="100" Height="30" Margin="156,0,0,0" Background="#FFA1E68D" FontStyle="Italic" Click="AddNewProd" />
+            <Button Content="Добавить" Width="100" Height="30" Margin="156,0,0,0" Background="Green" FontStyle="Italic" Click="AddNewProd"></Button>
 
-            <Button Content="Очистить" Width="100" Height="30" Margin="50,0,0,0" Background="#FFF38686" FontStyle="Italic" Click="ClearNewProd" />
+            <Button Content="Очистить" Width="100" Height="30" Margin="50,0,0,0" Background="Red" FontStyle="Italic" Click="ClearNewProd" />
 
         </StackPanel>
 

@@ -17,7 +17,9 @@
     <StackPanel Background="{StaticResource LGB}" Margin="0,0,0,-3" >
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
-            <Label x:Name="Date" 
+            <Label x:Name="Date"
+                    Foreground="White"
+                   FontStyle="Italic"
                    Content="Дата оформления" 
                    Height="28" Margin="0,14,200,15" 
                    Background="Transparent" 
@@ -28,6 +30,8 @@
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
             <Label x:Name="Employeer" 
+                    Foreground="White"
+                   FontStyle="Italic"
                    Content="Сотрудник" 
                    Height="28" 
                    Margin="0,14,200,15" 
@@ -38,12 +42,13 @@
                       FontSize="14" 
                       ItemsSource="{Binding Source={StaticResource ListZakazEmployee}}"
                       DisplayMemberPath="Фамилия"
-                      SelectedValuePath="Код_сотрудника"
-                      />
+                      SelectedValuePath="Код_сотрудника"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
             <Label x:Name="Client" 
+                    Foreground="White"
+                   FontStyle="Italic"
                    Content="Клиент" 
                    Height="28" 
                    Margin="0,14,200,15" 
@@ -60,6 +65,8 @@
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
             <Label x:Name="Tovar" 
+                    Foreground="White"
+                   FontStyle="Italic"
                    Content="Наименование товара" 
                    Height="28" 
                    Margin="0,14,200,15" 
@@ -76,6 +83,8 @@
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
             <Label x:Name="Col" 
+                    Foreground="White"
+                   FontStyle="Italic"
                    Content="Количество" 
                    Height="28" Margin="0,14,200,15" 
                    Background="Transparent" 
@@ -86,6 +95,8 @@
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
             <Label x:Name="Discont" 
+                    Foreground="White"
+                   FontStyle="Italic"
                    Content="Скидка" 
                    Height="28" Margin="0,14,200,15" 
                    Background="Transparent" 
@@ -96,6 +107,8 @@
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
             <Label x:Name="Dostavka" 
+                    Foreground="White"
+                   FontStyle="Italic"
                    Content="Стоимость доставки" 
                    Height="28" Margin="0,14,200,15" 
                    Background="Transparent" 
@@ -106,6 +119,8 @@
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
             <Label x:Name="Oplata" 
+                    Foreground="White"
+                   FontStyle="Italic"
                    Content="Оплата" 
                    Height="28" Margin="0,14,200,15" 
                    Background="Transparent" 
@@ -116,9 +131,9 @@
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center" Margin="42,0,28,0" Width="422">
 
-            <Button Content="Добавить" Width="100" Height="30" Margin="156,0,0,0" Background="#FFA1E68D" Click="AddNewOrder" FontStyle="Italic" />
+            <Button Content="Добавить" Width="100" Height="30" Margin="156,0,0,0" Background="Green" Click="AddNewOrder" FontStyle="Italic" />
 
-            <Button Content="Очистить" Width="100" Height="30" Margin="50,0,0,0" Background="#FFF38686" Click="ClearNewOrd" FontStyle="Italic" />
+            <Button Content="Очистить" Width="100" Height="30" Margin="50,0,0,0" Background="Red" Click="ClearNewOrd" FontStyle="Italic" />
 
         </StackPanel>
 

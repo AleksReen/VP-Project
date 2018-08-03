@@ -140,8 +140,10 @@ namespace WpfDiplom
             #region Поиск по фамилии клиента
             string org = tbFamily.Text;
             DataEntitiesOrders = new StroitelEntities();
+
             ListOrders.Clear();
             ArrayList SerchListFamily = new ArrayList();
+
             var orders = DataEntitiesOrders.Заказ;
             var client = DataEntitiesOrders.Клиент;
 
@@ -162,31 +164,9 @@ namespace WpfDiplom
                 tbCount.Text = Convert.ToString(SerchListFamily.Count);
             }
             else
-                MessageBox.Show("Заказы клиента \n" + org + "\n не найден",
-                     "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Заказы клиента \n" + org + "\n не найден", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
             #endregion
 
-            #region Поиск по номеру заказа
-            //int org = Convert.ToInt32(tbFamily.Text);
-            //DataEntitiesOrders = new StroitelEntities();
-            //ListOrders.Clear();
-            //var orders = DataEntitiesOrders.Заказ;
-            //var queryClient = from ord in orders
-            //                  where ord.Код_заказа == org
-            //                  select ord;
-            //foreach (Заказ or in queryClient)
-            //{
-            //    ListOrders.Add(or);
-            //}
-            //if (ListOrders.Count > 0)
-            //{
-            //   dgOrders.ItemsSource = ListOrders;
-            //    tbCount.Text = Convert.ToString(ListOrders.Count());
-            //}
-            //else
-            //    MessageBox.Show("Заказ клиента \n" + org + "\n не найден",
-            //         "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
-            #endregion
         }
         #endregion
 

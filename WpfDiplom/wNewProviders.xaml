@@ -11,9 +11,11 @@
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
             <Label x:Name="NameProv" 
-                   Content="Наименование поставщика" 
+                   Content="Поставщик" 
                    Height="28" Margin="0,14,200,15" 
                    Background="Transparent" 
+                    Foreground="White"
+                   FontStyle="Italic"
                    Width="187" 
                    FontSize="14"/>
             <TextBox x:Name="tbNameProv"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
@@ -22,7 +24,9 @@
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
             <Label x:Name="AdressProv" 
                    Content="Адрес" Height="28" 
-                   Margin="0,14,200,15" 
+                   Margin="0,14,200,15"
+                    Foreground="White"
+                   FontStyle="Italic"
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
             <TextBox x:Name="tbAdressProv"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" AcceptsReturn="True" FontSize="14"/>
@@ -32,6 +36,8 @@
             <Label x:Name="TelProv" 
                    Content="Номер телефона" 
                    Height="28" 
+                    Foreground="White"
+                   FontStyle="Italic"
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
@@ -39,7 +45,9 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
-            <Label x:Name="Contact" 
+            <Label x:Name="Contact"
+                    Foreground="White"
+                   FontStyle="Italic"
                    Content="Контактное лицо" 
                    Height="28" 
                    Margin="0,14,200,15" 
@@ -50,9 +58,9 @@
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center" Margin="42,0,28,0" Width="422">
 
-            <Button Content="Добавить" Width="100" Height="30" Margin="156,0,0,0" Background="#FFA1E68D" FontStyle="Italic" Click="AddNewPr" />
+            <Button Content="Добавить" Width="100" Height="30" Margin="156,0,0,0" Background="Green" FontStyle="Italic" Click="AddNewPr" />
 
-            <Button Content="Очистить" Width="100" Height="30" Margin="50,0,0,0" Background="#FFF38686" FontStyle="Italic" Click="ClearNewPr" />
+            <Button Content="Очистить" Width="100" Height="30" Margin="50,0,0,0" Background="Red" FontStyle="Italic" Click="ClearNewPr" />
 
         </StackPanel>
 
