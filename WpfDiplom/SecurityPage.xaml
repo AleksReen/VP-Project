@@ -21,7 +21,7 @@
                 <PasswordBox x:Name="textBox1" Height="30" Margin="-170,0,0,0" HorizontalAlignment="Center" Width="190" FontSize="14" Padding="0,5,0,0"/>
             </StackPanel>
             <Button x:Name="EnterSecurity" 
-                    Content="Вход" Height="30" Margin="-135,30,70,0"  
+                    Content="Вход" Height="30" Margin="-135,20,70,0"  
                     HorizontalAlignment="Center" 
                     Width="120" 
                     VerticalContentAlignment="Center" 

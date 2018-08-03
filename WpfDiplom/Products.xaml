@@ -13,12 +13,13 @@
     <StackPanel Name="Stack2"  Background="{StaticResource LGB}">
         <Menu Height="30" Background="Green" Foreground="White" FontStyle="Italic"  Width="120" Margin="0,0,780,5">
             <MenuItem Header="Действия" Height="30">
-                <MenuItem Header="Добавить новый товар" Click="clNewProduct" Width="270" Foreground="Black"/>
-                <MenuItem Header="Обновить таблицу" Click="clRefreshProd"  Width="270" Foreground="Black"/>
-                <MenuItem Header="Редактировать записи" Click="clEditProd"  Width="270" Foreground="Black"/>
-                <MenuItem Header="Сохранить изменения" Click="clSaveProd"  Width="270" Foreground="Black"/>
-                <MenuItem Header="Удалить товар" Click="clDeleteProd"  Width="270" Foreground="Black"/>
-                <MenuItem Header="Завершение работы  " Click="pdExit"  Width="270" Foreground="Black" FontWeight="Bold"/>
+                <MenuItem Header="Добавить новый товар" Click="clNewProduct" Foreground="Black"/>
+                <MenuItem Header="Обновить таблицу" Click="clRefreshProd"  Foreground="Black"/>
+                <MenuItem Header="Редактировать записи" Click="clEditProd"  Foreground="Black"/>
+                <MenuItem Header="Сохранить изменения" Click="clSaveProd"  Foreground="Black"/>
+                <MenuItem Header="Удалить товар" Click="clDeleteProd"  Foreground="Black"/>
+                <Separator></Separator>
+                <MenuItem Header="Завершение работы  " Click="pdExit" Foreground="Black" FontWeight="Bold"/>
             </MenuItem>
             <MenuItem Header="Очет" Height="30">
                 <MenuItem Header="Новинки в ассортименте" Click="newOtchNovinki" Foreground="Black"/>
@@ -69,7 +70,7 @@
             <TextBox 
                 x:Name="tbName" 
                 Margin="250,0,0,0" 
-                HorizontalAlignment="Left" 
+                HorizontalAlignment="Left"
                 Height ="30"  
                 Width="275" 
                 BorderThickness="1"
@@ -80,7 +81,7 @@
                         <Style.Resources>
                             <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
                                 <VisualBrush.Visual>
-                                    <Label Content="Поиск по наименованию товара" Foreground="LightGray" Background="White" Width="275" Height="30" VerticalContentAlignment="Center" />
+                                    <Label Content=" Поиск по наименованию товара" Foreground="LightGray" Background="White" Width="275" Height="30" VerticalContentAlignment="Center" />
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </Style.Resources>

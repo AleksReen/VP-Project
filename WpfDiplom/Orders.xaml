@@ -17,12 +17,13 @@
 
         <Menu Height="30" Background="Green" Foreground="White" FontStyle="Italic"  Width="120" Margin="0,0,780,5">
             <MenuItem Header="Действия" Height="30">
-                <MenuItem Header="Добавить новый товар" Click="clNewOrder" Width="270" Foreground="Black"/>
-                <MenuItem Header="Обновить таблицу" Click="clRefreshOrders"  Width="270" Foreground="Black"/>
-                <MenuItem Header="Редактировать записи" Click="clEditOrder"  Width="270" Foreground="Black"/>
-                <MenuItem Header="Сохранить изменения" Click="clSaveOrder"  Width="270" Foreground="Black"/>
-                <MenuItem Header="Удалить товар" Click="clDeleteOrder"  Width="270" Foreground="Black"/>
-                <MenuItem Header="Завершение работы  " Click="clExit"  Width="270" Foreground="Black" FontWeight="Bold"/>
+                <MenuItem Header="Добавить новый закз" Click="clNewOrder" Foreground="Black"/>
+                <MenuItem Header="Обновить таблицу" Click="clRefreshOrders" Foreground="Black"/>
+                <MenuItem Header="Редактировать записи" Click="clEditOrder"  Foreground="Black"/>
+                <MenuItem Header="Сохранить изменения" Click="clSaveOrder"  Foreground="Black"/>
+                <MenuItem Header="Удалить товар" Click="clDeleteOrder"  Foreground="Black"/>
+                <Separator></Separator>
+                <MenuItem Header="Завершение работы  " Click="clExit" Foreground="Black" FontWeight="Bold"/>
             </MenuItem>
             <MenuItem Header="Очет" Height="30">
                 <MenuItem Header="Работа магазина за период" Click="OtchRabMagPeriod" Foreground="Black"/>
@@ -78,7 +79,7 @@
 
             <TextBox 
                 x:Name="tbFamily" 
-                 Margin="250,0,0,0" 
+                Margin="250,0,0,0" 
                 HorizontalAlignment="Left" 
                 Height ="30"  
                 Width="275" 
