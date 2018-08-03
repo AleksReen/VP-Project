@@ -5,38 +5,32 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:databinding="clr-namespace:WpfDiplom.Classes"
       mc:Ignorable="d"
-	Title="Товары" Loaded="Page_LoadedProducts">
+	Title="Товары" Height="550" Width="900" Loaded="Page_LoadedProducts">
     <Page.Resources>
         <databinding:ListPostProd x:Key="ListPostProd"/>
     </Page.Resources>
     
     <StackPanel Name="Stack2"  Background="{StaticResource LGB}">
-        <Menu Height="30" 
-              Background="{StaticResource LGB}">
-            <MenuItem Header="Документ" Height="30">
-                <MenuItem Header="Добавить новый товар" Click="clNewProduct" Width="270"/>
-                <MenuItem Header="Обновить таблицу" Click="clRefreshProd"  Width="270"/>
-                <MenuItem Header="Редактировать записи" Click="clEditProd"  Width="270"/>
-                <MenuItem Header="Сохранить изменения" Click="clSaveProd"  Width="270"/>
-                <MenuItem Header="Удалить товар" Click="clDeleteProd"  Width="270"/>
-                <Separator></Separator>
-                <MenuItem Header="Завершение работы  " Click="pdExit"  Width="270"/>
+        <Menu Height="30" Background="{StaticResource LGB}" Foreground="White">
+            <MenuItem Header="Действия" Height="30">
+                <MenuItem Header="Добавить новый товар" Click="clNewProduct" Width="270" Foreground="Black"/>
+                <MenuItem Header="Обновить таблицу" Click="clRefreshProd"  Width="270" Foreground="Black"/>
+                <MenuItem Header="Редактировать записи" Click="clEditProd"  Width="270" Foreground="Black"/>
+                <MenuItem Header="Сохранить изменения" Click="clSaveProd"  Width="270" Foreground="Black"/>
+                <MenuItem Header="Удалить товар" Click="clDeleteProd"  Width="270" Foreground="Black"/>
+                <MenuItem Header="Завершение работы  " Click="pdExit"  Width="270" Foreground="Black"/>
             </MenuItem>
             <MenuItem Header="Очет" Height="30">
-                <MenuItem Header="Новинки в ассортименте" Click="newOtchNovinki"/>
+                <MenuItem Header="Новинки в ассортименте" Click="newOtchNovinki" Foreground="Black"/>
             </MenuItem>
         </Menu>
-        <ToolBar 
-            Name="ToolBar1" 
-            Margin="3" 
-            Height="45">
-
+        
+        <ToolBar Name="ToolBar1"  Height="45" Width="890">
             <Button 
                 Name="Refresh"   
                 Margin="5,2,5,2"   
                 ToolTip="Обновить"
-                Click="clRefreshProd"
-                >
+                Click="clRefreshProd">
                 <Image Source="Images/refresh_48.png" />
             </Button>
 
@@ -44,8 +38,7 @@
                 Name="Add" 
                 ToolTip="Добавить новый товар" 
                 Margin="5,2,5,2" 
-                Click="clNewProduct"
-                >
+                Click="clNewProduct">
                 <Image Source="Images/add_48.png" />
             </Button>
 
@@ -53,8 +46,7 @@
                 Name="Edit" 
                 ToolTip="Редактировать" 
                 Margin="5,2,5,2"
-                Click="clEditProd"
-                >
+                Click="clEditProd">
                 <Image Source="Images/paper_content_pencil_48.png" />
             </Button>
 
@@ -62,8 +54,7 @@
                 Name="Save" 
                 ToolTip="Сохранить" 
                 Margin="5,2,5,2"
-                Click="clSaveProd"
-                >
+                Click="clSaveProd">
                 <Image Source="Images/floppy_disk_48.png" />
             </Button>
 
@@ -71,55 +62,74 @@
                 Name="Delete" 
                 ToolTip="Удалить" 
                 Margin="5,2,5,2" 
-                Click="clDeleteProd"
-                >
+                Click="clDeleteProd">
                 <Image Source="Images/cancel_48.png" />
             </Button>
 
-        </ToolBar>
-        <TextBlock 
-            Margin="5" 
-            Height="30" 
-            FontSize="20" 
-            FontStyle="Italic" 
-            FontWeight="Bold" Width="672" HorizontalAlignment="Center" VerticalAlignment="Center" >Список товаров</TextBlock>
-
-        <StackPanel 
-            Orientation="Horizontal" 
-            Height="40" Width="680" >
-
-            <TextBlock 
-                x:Name="TextBlockFamily" 
-                Text="Поиск по наименованию товара" 
-                Padding="0,5,0,0" 
-                Margin="5,0,350,0" 
-                Height="30" 
-                FontStyle="Italic" 
-                FontSize="14" />
-
             <TextBox 
                 x:Name="tbName" 
-                Margin="-300,0,0,0" 
+                Margin="250,0,0,0" 
                 HorizontalAlignment="Left" 
                 Height ="30"  
                 Width="275" 
-                Padding="0,5,0,0" />
+                BorderThickness="1"
+                BorderBrush="{StaticResource LGB}">
+
+                <TextBox.Style>
+                    <Style TargetType="TextBox"  xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <Label Content="Поиск по наименованию товара" Foreground="LightGray" Background="White" Width="275" Height="30" VerticalContentAlignment="Center" />
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+
+            </TextBox>
 
             <Button 
                 Content="Найти" 
                 Width="100" 
                 Height="30" 
-                Margin="10,0,0,0" 
-                Background="#FFA1E68D"
+                Margin="10,0,0,0"                
+                Background="Green"
+                Foreground="White"
+                BorderThickness="1"
+                BorderBrush="Black"
                 Click="clFindProd"
                 FontStyle="Italic"/>
-        </StackPanel>
-        <StackPanel Height="260">
+
+        </ToolBar>
+        
+        <TextBlock 
+            Margin="10" 
+            Height="30" 
+            FontSize="20" 
+            Foreground="White"
+            TextAlignment="Center"
+            FontWeight="Bold" Width="672" HorizontalAlignment="Center" VerticalAlignment="Center">
+            Справочник Товары
+        </TextBlock>
+
+        <StackPanel Height="370">
         <DataGrid x:Name="dgProducts"  ItemsSource="{Binding}" 
                   AutoGenerateColumns="False" 
                   Margin="0,0,0,0"
                   MaxWidth="1000" 
-                  MaxHeight="260" 
+                  MaxHeight="370" 
                   BorderThickness="3" 
                   RowHeight="25"
                   Cursor="Hand" BorderBrush="BurlyWood" 
@@ -161,19 +171,14 @@
             </DataGrid.Columns>
         </DataGrid>
         </StackPanel>
-        <Grid Height="35" VerticalAlignment="Bottom">
-            <StatusBar Margin="3,10,3,0" Height="25">
-                <TextBlock Width="150">Статус состояния записей:</TextBlock>
-                <TextBlock Width="100" x:Name="tbSt"></TextBlock>
-                <TextBlock Width="118" Margin="200,0,0,0">
-                    Количество записей:
-                </TextBlock>
-                <TextBlock Width="60" x:Name="tbCount"></TextBlock>
-                <TextBlock Width="85">
-                    Текущая дата:
-                </TextBlock>
-                <TextBlock Width="95" x:Name="tbDate"></TextBlock>
-            </StatusBar>
+
+        <Grid Margin="0,10,0,0">
+            <TextBlock Width="150" Margin="0,0,700,0" Foreground="White">Состояние данных</TextBlock>
+            <TextBlock Width="100" Margin="0,0,520,0" x:Name="tbSt" Foreground="White"></TextBlock>
+            <TextBlock Width="118" Margin="0,0,0,0" Foreground="White">Количество записей:</TextBlock>
+            <TextBlock Width="60"  Margin="0,0,-200,0" x:Name="tbCount" Foreground="White"></TextBlock>
+            <TextBlock Width="85"  Margin="0,0,-600,0" Foreground="White">Текущая дата:</TextBlock>
+            <TextBlock Width="95"  Margin="0,0,-790,0" x:Name="tbDate" Foreground="White"></TextBlock>
         </Grid>
 
     </StackPanel>

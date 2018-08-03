@@ -15,7 +15,7 @@
             <StackPanel HorizontalAlignment="Center" Width="722">
 
                 <TextBlock Margin="0,30,0,0" HorizontalAlignment="Center">         
-                    <Button Content="Продукты" 
+                    <Button Content="Товары" 
                             Name="btnProducts"
                             Click="btnProducts_Click"        
                             Width="650" 

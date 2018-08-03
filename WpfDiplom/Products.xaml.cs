@@ -116,26 +116,26 @@ namespace WpfDiplom
         {
             
             string name = tbName.Text;
+
             DataEntitiesProducts = new StroitelEntities();
             ListProducts.Clear();
 
-            // работа хранимой процедура St c параметром name
-
             var products = DataEntitiesProducts.St(name);
-            var list = new List<St_Result>(); // St_Result - сложный тип, создается в моделе EF
+            var list = new List<St_Result>();
 
-            list = (from item in products select item).ToList(); // Linq запрос для создания коллекции и её добавления в list
+            list = (from item in products select item).ToList();
 
             if (list.Count > 0)
             {
 
-                dgProducts.ItemsSource = list; // вывод результата в DataGrid
-                tbCount.Text = Convert.ToString(ListProducts.Count());
+                dgProducts.ItemsSource = list;
+                tbCount.Text = Convert.ToString(list.Count());
             }
             else
-                MessageBox.Show("Товар с названием \n" + name + "\n не найден",
-                     "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
-
+            {
+                MessageBox.Show("Товар с названием \n" + name + "\n не найден", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            
         }
 
         private void pdExit(object sender, RoutedEventArgs e)
