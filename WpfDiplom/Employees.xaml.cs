@@ -11,31 +11,23 @@ namespace WpfDiplom
     public partial class Employees : Page
     {
         public static StroitelEntities DataEntitiesEmployees { get; set; }
-        ObservableCollection<Сотрудник> ListEmployees;
+        private ObservableCollection<Сотрудник> ListEmployees;
 
-        #region Конструктор
         public Employees()
         {
             DataEntitiesEmployees = new StroitelEntities();
             InitializeComponent();
             ListEmployees = new ObservableCollection<Сотрудник>();
         }
-        #endregion
-
-        #region Метод загрузки страницы
+  
         private void Page_LoadedEmployees(object sender, RoutedEventArgs e)
         {
-
-            ZagrEmp();
+            GetData();
             tbSt.Text = "ЗАГРУЖЕНО";
         }
-        #endregion
 
-        #region Метод заполнения DataGrid
-        private void ZagrEmp()
-
+        private void GetData()
         {
-
             ListEmployees.Clear();
             var employees = DataEntitiesEmployees.Сотрудник;
             var queryEmployee = from employee in employees
@@ -49,36 +41,25 @@ namespace WpfDiplom
             tbCount.Text = Convert.ToString(ListEmployees.Count());
             tbDate.Text = Convert.ToString(DateTime.Today.ToString("dd MMMM yyyy"));
         }
-        #endregion
 
-        #region Метод вызова окна новый сотрудник
         private void clNewEmployee(object sender, RoutedEventArgs e)
         {
-
             var newEmp = new wNewEmployee(this);
             newEmp.Closed += newEmp_Closed;
-            newEmp.ShowDialog(); 
-              
+            newEmp.ShowDialog();      
         }
-        #endregion
 
-        #region Метод делегат на закрытие окна новый сотрудник
         void newEmp_Closed(object sender, EventArgs e)
         {
-
-            ZagrEmp();
-
+            GetData();
         }
-        #endregion
 
-        #region Метод удаления сотрудника
         private void clDeleteEmployee(object sender, RoutedEventArgs e)
         {
             Сотрудник emp = dgEmployees.SelectedItem as Сотрудник;
             if (emp != null)
             {
-                MessageBoxResult result =
-                    MessageBox.Show("Удалить данные", "Предупреждение", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Удалить данные", "Предупреждение", MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if (result == MessageBoxResult.OK)
                 {
                     try
@@ -95,7 +76,6 @@ namespace WpfDiplom
                     {
                         MessageBox.Show("Сотрудник имеет связанные данные, удаление не возможно", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    
                 }
             }
             else
@@ -103,34 +83,26 @@ namespace WpfDiplom
                 MessageBox.Show("Выберите строку для удаления", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-        #endregion
 
-        #region Метод сохранения 
         private void clSaveEmployee(object sender, RoutedEventArgs e)
         {
             DataEntitiesEmployees.SaveChanges();
             dgEmployees.IsReadOnly = true;
             tbSt.Text = "СОХРАНЕНО";
         }
-        #endregion
 
-        #region Метод редактирования
         private void clEditEmployee(object sender, RoutedEventArgs e)
         {
             dgEmployees.IsReadOnly = false;
             dgEmployees.BeginEdit();
             tbSt.Text = "РЕДАКТИРУЕТСЯ";
         }
-        #endregion
 
-        #region Метод обновления
         private void clRefreshEmployee(object sender, RoutedEventArgs e)
         {
-            ZagrEmp();
+            GetData();
         }
-        #endregion
 
-        #region Метод поиска через LINQ
         private void clFindEmployee(object sender, RoutedEventArgs e)
         {
             string surname = tbFamily.Text;
@@ -150,26 +122,18 @@ namespace WpfDiplom
                 tbCount.Text = Convert.ToString(ListEmployees.Count());
             }
             else
-                MessageBox.Show("Сотрудник с фамилией \n" + surname + "\n не найден !",
-                     "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Сотрудник с фамилией \n" + surname + "\n не найден !", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
-        #endregion
 
-        #region Метод выход из программы
         private void clExit(object sender, RoutedEventArgs e)
         {
             Other.Exit();
         }
-        #endregion
 
-        #region Отчет по всем сотрудникам за период
         private void OtchVseSt(object sender, RoutedEventArgs e)
         {
-
             var newOtchVseSt = new wOtchVseSt();
             newOtchVseSt.Show();
-
         }
-        #endregion
     }
 }

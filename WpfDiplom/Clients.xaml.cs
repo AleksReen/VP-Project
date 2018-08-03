@@ -8,13 +8,10 @@ using System.Data;
 
 namespace WpfDiplom
 {
-    /// <summary>
-    /// Логика взаимодействия для Clients.xaml
-    /// </summary>
     public partial class Clients : Page 
     {
         public static StroitelEntities DataEntitiesClients { get; set; }
-        ObservableCollection<Клиент> ListClients;
+        private ObservableCollection<Клиент> ListClients;
 
         public Clients()
         {
@@ -25,11 +22,11 @@ namespace WpfDiplom
 
         private void Page_LoadedClients(object sender, RoutedEventArgs e)
         {
-            ZagruzkaCl();
+            GetData();
             tbSt.Text = "ЗАГРУЖЕНО";
         }
 
-        private void ZagruzkaCl()
+        private void GetData()
         {
             ListClients.Clear();
             var clients = DataEntitiesClients.Клиент;
@@ -47,16 +44,14 @@ namespace WpfDiplom
 
         private void clNewClient(object sender, RoutedEventArgs e)
         {
-
             var newClient = new wNewClient(this);
             newClient.Closed += newClient_Closed;
             newClient.ShowDialog();
-
         }
 
         void newClient_Closed(object sender, EventArgs e)
         {
-            ZagruzkaCl();
+            GetData();
         }
 
         private void clDeleteClient(object sender, RoutedEventArgs e)
@@ -64,8 +59,7 @@ namespace WpfDiplom
             Клиент cl = dgClients.SelectedItem as Клиент;
             if (cl != null)
             {
-                MessageBoxResult result =
-                    MessageBox.Show("Удалить данные", "Предупреждение", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Удалить данные", "Предупреждение", MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if (result == MessageBoxResult.OK)
                 {
                     try
@@ -81,9 +75,8 @@ namespace WpfDiplom
                     catch (Exception)
                     {
 
-                        MessageBox.Show("Удаление не возможно,клиент имеет связанные записи", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Удаление невозможно, клиент имеет связанные записи", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    
                 }
             }
             else
@@ -108,7 +101,7 @@ namespace WpfDiplom
 
         private void clRefreshClient(object sender, RoutedEventArgs e)
         {
-            ZagruzkaCl();
+            GetData();
         }
 
         private void clFindClient(object sender, RoutedEventArgs e)
@@ -119,7 +112,7 @@ namespace WpfDiplom
             var clients = DataEntitiesClients.Клиент;
             var queryClient = from client in clients
                               where client.Организация == org 
-                                select client;
+                              select client;
             foreach (Клиент cl in queryClient)
             {
                 ListClients.Add(cl);
@@ -130,8 +123,7 @@ namespace WpfDiplom
                 tbCount.Text = Convert.ToString(ListClients.Count());
             }
             else
-                MessageBox.Show("Организация клиента \n" + org + "\n не найдена",
-                     "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Организация клиента \n" + org + "\n не найдена", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void clExit(object sender, RoutedEventArgs e)
@@ -139,15 +131,10 @@ namespace WpfDiplom
             Other.Exit();
         }
 
-        #region вызов окна отчета клиент Могилёв
         private void wOtchClientMogilev(object sender, RoutedEventArgs e)
         {
-
             var newOtchClientMogilev = new wOtchClientMogilev();
             newOtchClientMogilev.Show();
-
         }
-        #endregion
-
     }
 }

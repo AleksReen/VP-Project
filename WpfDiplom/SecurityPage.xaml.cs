@@ -1,23 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfDiplom
 {
-    /// <summary>
-    /// Логика взаимодействия для SecurityPage.xaml
-    /// </summary>
     public partial class SecurityPage : Page
     {
         public SecurityPage()
@@ -28,49 +16,31 @@ namespace WpfDiplom
         private void EnterSecurity_Click(object sender, RoutedEventArgs e)
         {
             StroitelEntities userDB = new StroitelEntities();
-
-            string userlogin = String.Empty;
-            string userpass = String.Empty;
-
+            
             try
             {
-                userlogin = (from u in userDB.user
-                                 where u.login == textBox.Text
-                                 select u.login).FirstOrDefault();
-                userpass = (from u in userDB.user
-                                where u.password == textBox1.Password
-                                select u.password).FirstOrDefault();
+                if (!String.IsNullOrEmpty(textBox.Text) || !String.IsNullOrEmpty(textBox1.Password))
+                {
+                    var userApp = userDB.user.Where(u => u.login == textBox.Text && u.password == textBox1.Password).FirstOrDefault();
+
+                    if (userApp != null)
+                    {
+                        NavigationService.Navigate(new Uri("/SelectedPage.xaml", UriKind.Relative));
+                    }
+                    else
+                    {
+                        MessageBox.Show("Пользователь не существует, проверьте логин и пароль", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Заполните все поля данные", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             catch (Exception)
             {
-
-                MessageBox.Show("Ошибка получения данных", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ошибка обработки данных", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-               
-                try
-                {
-                    if (textBox.Text == userlogin)
-                    {
-                        try
-                        {
-                            if (textBox1.Password == userpass)
-                            {
-
-                                NavigationService.Navigate(new Uri("/SelectedPage.xaml", UriKind.Relative));
-                            }
-                        }
-                        catch (SystemException)
-                        {
-                            MessageBox.Show("Ошибка ввода пароля!!!");
-                        }
-
-                    }
-                    
-                }
-                catch (SystemException)
-                {
-                    MessageBox.Show("Ошибка ввода логина!!!");
-                }
         }
     }
 }
