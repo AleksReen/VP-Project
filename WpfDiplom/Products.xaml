@@ -11,14 +11,14 @@
     </Page.Resources>
     
     <StackPanel Name="Stack2"  Background="{StaticResource LGB}">
-        <Menu Height="30" Background="{StaticResource LGB}" Foreground="White">
+        <Menu Height="30" Background="Green" Foreground="White" FontStyle="Italic"  Width="120" Margin="0,0,780,5">
             <MenuItem Header="Действия" Height="30">
                 <MenuItem Header="Добавить новый товар" Click="clNewProduct" Width="270" Foreground="Black"/>
                 <MenuItem Header="Обновить таблицу" Click="clRefreshProd"  Width="270" Foreground="Black"/>
                 <MenuItem Header="Редактировать записи" Click="clEditProd"  Width="270" Foreground="Black"/>
                 <MenuItem Header="Сохранить изменения" Click="clSaveProd"  Width="270" Foreground="Black"/>
                 <MenuItem Header="Удалить товар" Click="clDeleteProd"  Width="270" Foreground="Black"/>
-                <MenuItem Header="Завершение работы  " Click="pdExit"  Width="270" Foreground="Black"/>
+                <MenuItem Header="Завершение работы  " Click="pdExit"  Width="270" Foreground="Black" FontWeight="Bold"/>
             </MenuItem>
             <MenuItem Header="Очет" Height="30">
                 <MenuItem Header="Новинки в ассортименте" Click="newOtchNovinki" Foreground="Black"/>
@@ -144,7 +144,7 @@
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.Columns>
-                <DataGridTextColumn Header=" Код товара " 
+                <DataGridTextColumn Header=" Код товара " IsReadOnly="True" 
                                     Binding="{Binding Код_товара, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <DataGridTextColumn Header="  Наименование товара            "
                                     Binding="{Binding Наименование_товара, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>

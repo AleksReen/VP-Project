@@ -5,50 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfDiplom"
         mc:Ignorable="d"
-        Title="Работа магазина за период" Height="443" Width="750" Icon="Images/drill.ico">
+        Title="Работа магазина за период" Height="550" Width="900" Icon="Images/drill.ico">
 
-    <StackPanel  Background="{StaticResource LGB}" Margin="0,0,2,-3" >
-        <StackPanel  Orientation="Vertical" Height="auto" HorizontalAlignment="Center" Margin="10,0" Width="720">
+    <StackPanel  Background="{StaticResource LGB}">
 
+        <Menu Height="30" Width="70" Background="Green" Margin="0,0,815,0" HorizontalAlignment="Right" FontStyle="Italic">
+            <MenuItem Header="Действия" Height="30" Foreground="White">
+                <MenuItem Header="Сохранить в Exсel" Click="Export" Width="190" Foreground="Black"/>
+                <MenuItem Header="Печать" Click="Print"  Width="190" Foreground="Black"/>
+            </MenuItem>
+        </Menu>
 
-            <StackPanel  Orientation="Horizontal" Height="50">
-                <Label x:Name="IDemp" Content="Работа магазина за период  " Height="40" Margin="10,0,10,0" Background="Transparent" FontSize="20" FontStyle="Italic" FontWeight="Bold"/>
-                <Button Content="Сохранить в Exсel" 
-                        Width="110" Height="30" 
-                        Margin="85,0,0,0" 
-                        Background="#FFA1E68D" FontStyle="Italic" 
-                        Click="Export"
-                        />
-                <Button Content="Печать" 
-                        Width="110" Height="30" 
-                        Margin="40,0,0,0" 
-                        Background="#FFA1E68D" FontStyle="Italic"
-                        Click="Print"
-                        />
+        <StackPanel  Orientation="Vertical" Height="auto" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Height="68" HorizontalAlignment="Center">
+                <Label x:Name="IDemp" Content="Работа магазина за период" Height="40" Margin="10" Background="Transparent" FontSize="20" Foreground="White" FontWeight="Bold"/>
             </StackPanel>
 
-            <StackPanel  Orientation="Horizontal" Height="50">
-                <Label x:Name="IDem" Content="Выберите период формирования " Height="40" Margin="10,0,10,0" Background="Transparent" FontSize="14" FontStyle="Italic" VerticalContentAlignment="Center"/>
-                <Label  Content="от - " HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <DatePicker x:Name="dpDateN"  Height="30"    Width="100" Padding="0,2.5,0,0" ScrollViewer.CanContentScroll="True"  FontSize="14"/>
-                <Label  Content="до - " HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <DatePicker x:Name="dpDateK"  Height="30"    Width="100" Padding="0,2.5,0,0" ScrollViewer.CanContentScroll="True"  FontSize="14"/>
+            <StackPanel  Orientation="Horizontal" Height="68" HorizontalAlignment="Center">
+                <Label x:Name="IDem" Content="Выберите период" Height="40" Margin="10,0,10,0" Foreground="White" Background="Transparent" FontSize="14" FontStyle="Italic" VerticalContentAlignment="Center"/>
+                <Label  Content="c - " Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <DatePicker x:Name="dpDateN"  Height="30" Width="100" Padding="0,2.5,0,0" ScrollViewer.CanContentScroll="True"  FontSize="14"/>
+                <Label  Content="до - " Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <DatePicker x:Name="dpDateK"  Height="30"  Width="100" Padding="0,2.5,0,0" ScrollViewer.CanContentScroll="True"  FontSize="14"/>
 
                 <Button Content="Сформировать" 
                         Width="110" Height="30" 
                         Margin="40,0,0,0" 
-                        Background="#FFA1E68D" FontStyle="Italic"
+                        Background="Green"
+                        Foreground="White"
+                        FontStyle="Italic"
                         Click="Start"
                         />
             </StackPanel>
 
-            <StackPanel Height="268">
+            <StackPanel Height="310">
                 <DataGrid 
         				x:Name="DG"
         				ItemsSource="{Binding}" 
         				RowHeight="25" 
         				MaxWidth="1000" 
-        				MaxHeight="260"
+        				MaxHeight="310"
         				BorderThickness="3"
         				Cursor="Hand" 
         				BorderBrush="BurlyWood"
@@ -56,7 +52,10 @@
         				CanUserAddRows="True" 
         				CanUserDeleteRows="False" 
                         IsReadOnly="True"
-        				Height="auto" Width="auto" HorizontalAlignment="Center" VerticalAlignment="Center">
+        				Height="auto" 
+                        Width="auto" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header=" Количество заказов " 
@@ -77,22 +76,17 @@
                 </DataGrid>
 
             </StackPanel>
-        </StackPanel>
 
-        <Grid Height="35" VerticalAlignment="Bottom">
-            <StatusBar Margin="3,10,3,3" Height="25">
-                <TextBlock Width="150">Статус состояния записей:</TextBlock>
-                <TextBlock Width="120" x:Name="tbSt"></TextBlock>
-                <TextBlock Width="118" Margin="60,0,0,0">
-                    Количество записей:
-                </TextBlock>
-                <TextBlock Width="60" x:Name="tbCount"></TextBlock>
-                <TextBlock Width="85">
-                    Текущая дата:
-                </TextBlock>
-                <TextBlock Width="95" x:Name="tbDate"></TextBlock>
-            </StatusBar>
-        </Grid>
+            <Grid Margin="0,10,0,0">
+                <TextBlock Width="150" Margin="0,0,700,0" Foreground="White">Состояние данных</TextBlock>
+                <TextBlock Width="100" Margin="0,0,520,0" x:Name="tbSt" Foreground="White"></TextBlock>
+                <TextBlock Width="118" Margin="0,0,0,0" Foreground="White">Количество записей:</TextBlock>
+                <TextBlock Width="60"  Margin="0,0,-200,0" x:Name="tbCount" Foreground="White"></TextBlock>
+                <TextBlock Width="85"  Margin="0,0,-600,0" Foreground="White">Текущая дата:</TextBlock>
+                <TextBlock Width="95"  Margin="0,0,-790,0" x:Name="tbDate" Foreground="White"></TextBlock>
+            </Grid>
+
+        </StackPanel>
     </StackPanel>
 
 </Window>

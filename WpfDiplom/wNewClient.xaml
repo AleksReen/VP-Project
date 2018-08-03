@@ -14,13 +14,17 @@
                    Content="Фамилия" 
                    Height="28" Margin="0,14,200,15" 
                    Background="Transparent" 
+                   Foreground="White"
+                   FontStyle="Italic"
                    Width="187" 
                    FontSize="14"/>
             <TextBox x:Name="tbFamCl"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
-            <Label x:Name="NameCl" 
+            <Label x:Name="NameCl"
+                   Foreground="White"
+                   FontStyle="Italic"
                    Content="Имя" Height="28" 
                    Margin="0,14,200,15" 
                    Background="Transparent"  
@@ -29,7 +33,9 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center" Margin="42,0">
-            <Label x:Name="PatCl" 
+            <Label x:Name="PatCl"
+                    Foreground="White"
+                   FontStyle="Italic"
                    Content="Отчество" 
                    Height="28" 
                    Margin="0,14,200,15" 
@@ -39,7 +45,9 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
-            <Label x:Name="ClOrg" 
+            <Label x:Name="ClOrg"
+                    Foreground="White"
+                   FontStyle="Italic"
                    Content="Организация" 
                    Height="28" 
                    Margin="0,14,200,15" 
@@ -49,7 +57,9 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
-            <Label x:Name="AdressCl" 
+            <Label x:Name="AdressCl"
+                    Foreground="White"
+                   FontStyle="Italic"
                    Content="Адрес клиента" 
                    Height="28" 
                    Margin="0,14,200,15" 
@@ -60,7 +70,9 @@
 
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
-            <Label x:Name="TelephoneCl" 
+            <Label x:Name="TelephoneCl"
+                    Foreground="White"
+                   FontStyle="Italic"
                    Content="Телефон" 
                    Height="28" 
                    Margin="0,14,200,15" 
@@ -72,7 +84,9 @@
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
             <Label x:Name="CanalCl" 
-                   Content="Канал (опт или розница)" 
+                    Foreground="White"
+                   FontStyle="Italic"
+                   Content="Канал продаж" 
                    Height="28" 
                    Margin="0,14,200,15" 
                    Background="Transparent"  
@@ -82,9 +96,9 @@
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center" Margin="42,0,28,0" Width="422">
 
-            <Button Content="Добавить" Width="100" Height="30" Margin="156,0,0,0" Background="#FFA1E68D" FontStyle="Italic" Click="AddNewClient" />
+            <Button Content="Добавить" Width="100" Height="30" Margin="156,0,0,0" Background="Green" FontStyle="Italic" Click="AddNewClient" />
 
-            <Button Content="Очистить" Width="100" Height="30" Margin="50,0,0,0" Background="#FFF38686" FontStyle="Italic" Click="ClearNewCl" />
+            <Button Content="Очистить" Width="100" Height="30" Margin="50,0,0,0" Background="Red" FontStyle="Italic" Click="ClearNewCl" />
 
         </StackPanel>
 

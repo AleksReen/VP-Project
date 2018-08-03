@@ -27,7 +27,7 @@ namespace WpfDiplom
             OtchNovinki.Обзор_новинок.Load();
             dgNovinki.DataContext = OtchNovinki.Обзор_новинок.Local.ToBindingList();
 
-            tbSt.Text = "Отчет сформирован";
+            tbSt.Text = "Cформирован";
             tbCount.Text = Convert.ToString(OtchNovinki.Обзор_новинок.Local.Count);
             tbDate.Text = Convert.ToString(DateTime.Today.ToString("dd MMMM yyyy"));
         }
