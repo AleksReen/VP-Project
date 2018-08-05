@@ -1,29 +1,30 @@
 ﻿using System;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 using System.Data.Entity;
-using System.IO;
-using Microsoft.Win32;
 
 namespace VPproject
 {
-    /// <summary>
-    /// Логика взаимодействия для wOtchClientMogilev.xaml
-    /// </summary>
     public partial class wOtchClientMogilev : Window
     {
-        private readonly StroitelEntities ClientMogilev;
+        private StroitelEntities dbContext;
+
         public wOtchClientMogilev()
         {
-            InitializeComponent();
+            dbContext = new StroitelEntities();
+            InitializeComponent();         
+        }
 
-            ClientMogilev = new StroitelEntities();
-            ClientMogilev.Клиенты_Могилёв.Load();
-            dgClientMogilev.DataContext = ClientMogilev.Клиенты_Могилёв.Local.ToBindingList();
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            GetData();
+        }
+
+        private void GetData()
+        {
+            dbContext.Клиенты_Могилёв.Load();
+            dgClientMogilev.DataContext = dbContext.Клиенты_Могилёв.Local.ToBindingList();
             tbSt.Text = "Cформирован";
-            tbCount.Text = Convert.ToString(ClientMogilev.Клиенты_Могилёв.Local.Count);
+            tbCount.Text = Convert.ToString(dbContext.Клиенты_Могилёв.Local.Count);
             tbDate.Text = Convert.ToString(DateTime.Today.ToString("dd MMMM yyyy"));
         }
 

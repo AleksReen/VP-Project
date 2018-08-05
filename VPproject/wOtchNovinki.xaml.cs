@@ -1,34 +1,32 @@
 ﻿using System;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 using System.Data.Entity;
-using System.IO;
-using Microsoft.Win32;
 
 namespace VPproject
 {
-    /// <summary>
-    /// Логика взаимодействия для wOtchNovinki.xaml
-    /// </summary>
     public partial class wOtchNovinki : Window
     {
-        private readonly StroitelEntities OtchNovinki;
+        private StroitelEntities dbContext;
         public wOtchNovinki()
         {
+            dbContext = new StroitelEntities();
             InitializeComponent();
-            OtchNovinki = new StroitelEntities();
-            Start();
+
+            GetData();
         }
 
-        private void Start()
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            OtchNovinki.Обзор_новинок.Load();
-            dgNovinki.DataContext = OtchNovinki.Обзор_новинок.Local.ToBindingList();
+            GetData();
+        }
+
+        private void GetData()
+        {
+            dbContext.Обзор_новинок.Load();
+            dgNovinki.DataContext = dbContext.Обзор_новинок.Local.ToBindingList();
 
             tbSt.Text = "Cформирован";
-            tbCount.Text = Convert.ToString(OtchNovinki.Обзор_новинок.Local.Count);
+            tbCount.Text = Convert.ToString(dbContext.Обзор_новинок.Local.Count);
             tbDate.Text = Convert.ToString(DateTime.Today.ToString("dd MMMM yyyy"));
         }
 
@@ -41,6 +39,6 @@ namespace VPproject
         {
             string name = "Отчет новинки в ассортименте ";
             Other.Exports(dgNovinki, name);
-        }
+        }   
     }
 }

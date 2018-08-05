@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VPproject"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
         Title="Новинки в ассортименте" Height="550" Width="900" Icon="Images/drill.ico">
 
     <StackPanel  Background="{StaticResource LGB}">

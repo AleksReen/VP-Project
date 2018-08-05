@@ -1,45 +1,38 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.IO;
-using Microsoft.Win32;
 
 namespace VPproject
 {
-    /// <summary>
-    /// Логика взаимодействия для wOtchRabMagPeriod.xaml
-    /// </summary>
     public partial class wOtchRabMagPeriod : Window
     {
-        private readonly StroitelEntities RabMagPeriod;
-        private DateTime N { get; set; }
-        private DateTime K { get; set; }
+        private readonly StroitelEntities dbContex;
+       
         public wOtchRabMagPeriod()
         {
+            dbContex = new StroitelEntities();
             InitializeComponent();
-            RabMagPeriod = new StroitelEntities();
+
             tbSt.Text = "Сформируйте отчет";
             tbCount.Text = "0";
             tbDate.Text = Convert.ToString(DateTime.Today.ToString("dd MMMM yyyy"));
         }
+
         private void Start(object sender, RoutedEventArgs e)
         {
             try
             {
-                N = Convert.ToDateTime(dpDateN.Text);
-                K = Convert.ToDateTime(dpDateK.Text);
+                var N = Convert.ToDateTime(dpDateN.Text);
+                var K = Convert.ToDateTime(dpDateK.Text);
 
-                DG.DataContext = RabMagPeriod.Работа_магазина_за_период(N, K);
+                DG.DataContext = dbContex.Работа_магазина_за_период(N, K);
 
-                tbCount.Text = RabMagPeriod.Работа_магазина_за_период(N, K).Count().ToString();
+                tbCount.Text = dbContex.Работа_магазина_за_период(N, K).Count().ToString();
                 tbSt.Text = "Cформирован";
             }
             catch
             {
-                MessageBox.Show("Проверьте заполнение полей!!!", "Ошибка");
+                MessageBox.Show("Проверьте заполнение полей!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

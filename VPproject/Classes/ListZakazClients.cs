@@ -7,7 +7,7 @@ namespace VPproject.Classes
     {
         public ListZakazClients()
         {
-            var listZakCl = Orders.DataEntitiesOrders.Клиент;
+            var listZakCl = Orders.dbContext.Клиент;
                 
 
 

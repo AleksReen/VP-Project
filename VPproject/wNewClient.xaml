@@ -18,7 +18,7 @@
                    FontStyle="Italic"
                    Width="187" 
                    FontSize="14"/>
-            <TextBox x:Name="tbFamCl"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbFamCl"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
@@ -29,7 +29,7 @@
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
-            <TextBox x:Name="tbNameCl"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbNameCl"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center" Margin="42,0">
@@ -41,7 +41,7 @@
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
-            <TextBox x:Name="tbPatCl"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbPatCl"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
@@ -53,7 +53,7 @@
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
-            <TextBox x:Name="tbOrgCl"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbOrgCl"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" AcceptsReturn="True" FontSize="14"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
@@ -65,7 +65,7 @@
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
-            <TextBox x:Name="tbAdCl"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbAdCl"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" AcceptsReturn="True" FontSize="14"/>
         </StackPanel>
 
 
@@ -78,7 +78,7 @@
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
-            <TextBox x:Name="tbTelephoneCl"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbTelephoneCl"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
         </StackPanel>
 
 
@@ -92,7 +92,7 @@
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
 
-            <ComboBox x:Name="tbCanalCl" Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True"  FontSize="14">
+            <ComboBox x:Name="tbCanalCl" Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True"  FontSize="14">
                 <TextBlock>опт</TextBlock>
                 <TextBlock>розница</TextBlock>
             </ComboBox>

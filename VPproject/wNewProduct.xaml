@@ -23,7 +23,7 @@
                    Foreground="White"
                    FontStyle="Italic"
                    FontSize="14"/>
-            <TextBox x:Name="tbNameProd"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbNameProd" VerticalContentAlignment="Center" Height="30"  Margin="-170,0,0,0"  Width="190" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
@@ -34,7 +34,7 @@
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
-            <TextBox x:Name="tbProProduct"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbProProduct"  Height="30" VerticalContentAlignment="Center" Margin="-170,0,0,0"  Width="190" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center" Margin="42,0">
@@ -46,7 +46,7 @@
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
-            <TextBox x:Name="tbEdIzmProduct"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbEdIzmProduct"  Height="30" VerticalContentAlignment="Center" Margin="-170,0,0,0"  Width="190" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
@@ -58,7 +58,11 @@
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
-            <TextBox x:Name="tbBalanceProd"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbBalanceProd"  
+                     Height="30"  Margin="-170,0,0,0"  Width="190" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True"
+                     VerticalContentAlignment="Center"
+                     TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"
+                     PreviewTextInput="tbBalanceProd_PreviewTextInput"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
@@ -70,7 +74,9 @@
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
-            <TextBox x:Name="tbPrice"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbPrice"  Height="30"
+                     PreviewTextInput="tbPrice_PreviewTextInput"
+                     VerticalContentAlignment="Center" Margin="-170,0,0,0"  Width="190" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
@@ -83,7 +89,7 @@
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
 
-            <ComboBox x:Name="cbProvProduct"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" 
+            <ComboBox x:Name="cbProvProduct"  Height="30" VerticalContentAlignment="Center" Margin="-170,0,0,0"  Width="190" Padding="5,0,0,0" 
                       FontSize="14" 
                       ItemsSource="{Binding Source={StaticResource ListPostProd}}"
                       DisplayMemberPath="Наименование"
@@ -99,7 +105,9 @@
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
-            <TextBox x:Name="tbNewProd"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            <ComboBox x:Name="tbNewProd" Height="30" VerticalContentAlignment="Center" Padding="5,0,0,0" Margin="-170,0,0,0"  Width="190"  ScrollViewer.CanContentScroll="True"  FontSize="14">
+                <TextBlock Padding="5,0,0,0">Новинка</TextBlock>
+            </ComboBox>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center" Margin="42,0,28,0" Width="422">

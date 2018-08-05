@@ -3,88 +3,76 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Collections.ObjectModel;
 using System.Data;
-
 
 namespace VPproject
 {
-    /// <summary>
-    /// Логика взаимодействия для Products.xaml
-    /// </summary>
     public partial class Products : Page
     {
-        public static StroitelEntities DataEntitiesProducts { get; set; }
-        ObservableCollection<Товар> ListProducts;
+        public static StroitelEntities dbContext { get; set; }
+        private List<Товар> ListProducts { get; set; }
         
         public Products()
         {
-            DataEntitiesProducts = new StroitelEntities();
+            dbContext = new StroitelEntities();
             InitializeComponent();
-            ListProducts = new ObservableCollection<Товар>();
+            ListProducts = new List<Товар>();
         }
-
 
         private void Page_LoadedProducts(object sender, RoutedEventArgs e)
         {
-            ZagrProd();
+            GetData();
+            tbDate.Text = Convert.ToString(DateTime.Today.ToString("dd MMMM yyyy"));
             tbSt.Text = "ЗАГРУЖЕНО";
         }
 
-        private void ZagrProd()
+        private void GetData()
         {
-            ListProducts.Clear();
-            var products = DataEntitiesProducts.Товар;
-            var queryProduct = from product in products
-                               orderby product.Код_товара
-                               select product;
-            foreach (Товар product in queryProduct)
+            if (ListProducts.Any())
             {
-                ListProducts.Add(product);
+                ListProducts.Clear();
             }
+
+            ListProducts = dbContext.Товар.OrderBy(p => p.Код_товара).ToList();
+          
             dgProducts.ItemsSource = ListProducts;
-            tbCount.Text = Convert.ToString(ListProducts.Count());
-            tbDate.Text = Convert.ToString(DateTime.Today.ToString("dd MMMM yyyy"));
+            tbCount.Text = Convert.ToString(ListProducts.Count());          
         }
 
         private void clNewProduct(object sender, RoutedEventArgs e)
         {
-
             var newProd = new wNewProduct(this);
             newProd.Closed += newProd_Closed;
             newProd.ShowDialog();
-
         }
 
         void newProd_Closed(object sender, EventArgs e)
         {
-            ZagrProd();
+            GetData();
         }
 
         private void clDeleteProd(object sender, RoutedEventArgs e)
         {
             Товар prod = dgProducts.SelectedItem as Товар;
+
             if (prod != null)
             {
-                MessageBoxResult result = MessageBox.Show("Удалить данные", "Предупреждение", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Удалить данные?", "Предупреждение", MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if (result == MessageBoxResult.OK)
                 {
                     try
                     {
-                        DataEntitiesProducts.Товар.Remove(prod);
-                        DataEntitiesProducts.SaveChanges();
+                        dbContext.Товар.Remove(prod);
+                        dbContext.SaveChanges();
 
-                        dgProducts.SelectedIndex = dgProducts.SelectedIndex == 0 ? 1 : dgProducts.SelectedIndex - 1;
-                        ListProducts.Remove(prod);
+                        GetData();
 
-                        tbCount.Text = Convert.ToString(ListProducts.Count());
                         MessageBox.Show("Выбранная вами запись удалена!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     catch (Exception)
                     {
                         MessageBox.Show("Удаление не возможно", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    
+                    }                   
                 }
             }
             else
@@ -95,7 +83,7 @@ namespace VPproject
 
         private void clSaveProd(object sender, RoutedEventArgs e)
         {
-            DataEntitiesProducts.SaveChanges();
+            dbContext.SaveChanges();
             dgProducts.IsReadOnly = true;
             tbSt.Text = "СОХРАНЕНО";
         }
@@ -109,33 +97,29 @@ namespace VPproject
 
         private void clRefreshProd(object sender, RoutedEventArgs e)
         {
-            ZagrProd();
+            GetData();
         }
 
         private void clFindProd(object sender, RoutedEventArgs e)
-        {
-            
+        {          
             string name = tbName.Text;
 
-            DataEntitiesProducts = new StroitelEntities();
-            ListProducts.Clear();
-
-            var products = DataEntitiesProducts.St(name);
-            var list = new List<St_Result>();
-
-            list = (from item in products select item).ToList();
-
-            if (list.Count > 0)
+            if (ListProducts.Any())
             {
+                ListProducts.Clear();
+            }
 
-                dgProducts.ItemsSource = list;
-                tbCount.Text = Convert.ToString(list.Count());
+            ListProducts = dbContext.Товар.Where(c => c.Наименование_товара.Contains(name)).ToList();                    
+
+            if (ListProducts.Count > 0)
+            {
+                dgProducts.ItemsSource = ListProducts;
+                tbCount.Text = Convert.ToString(ListProducts.Count());
             }
             else
             {
                 MessageBox.Show("Товар с названием \n" + name + "\n не найден", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            
+            }         
         }
 
         private void pdExit(object sender, RoutedEventArgs e)

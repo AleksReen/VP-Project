@@ -1,28 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace VPproject
 {
-    /// <summary>
-    /// Логика взаимодействия для wNewOrders.xaml
-    /// </summary>
     public partial class wNewOrders : Window
     {
-        public static StroitelEntities NewOrd { get; set; }
+        public static StroitelEntities dbContext { get; set; }
         public wNewOrders()
         {
-            NewOrd = new StroitelEntities();
+            dbContext = new StroitelEntities();
             InitializeComponent();
         }
 
@@ -30,42 +16,95 @@ namespace VPproject
         {
             try
             {
-                DateTime date = Convert.ToDateTime(dpDate.Text);
-                decimal dostavka = Convert.ToDecimal(tbDostavka.Text);
-                int kolichestvo = Convert.ToInt32(tbKolichestvo.Text);
-                decimal skidka = Convert.ToDecimal(tbDiscont.Text);
+                DateTime date = Convert.ToDateTime(dpDate.Text);               
                 string oplata = tbOplata.Text;
+
                 int cod_cl = Convert.ToInt32(cbClient.SelectedValue);
                 int cod_emp = Convert.ToInt32(cbEmployeer.SelectedValue);
                 int cod_prd = Convert.ToInt32(cbTovar.SelectedValue);
 
-           
-                MessageBoxResult result =
-                        MessageBox.Show("Оформить новый заказ?", "Проверка данных", MessageBoxButton.OKCancel);
+                var dostavka = tbDostavka.Text.Trim();
+                
+                var skidka = tbDiscont.Text.Trim();
+
+                if (tbDostavka.Text.Contains("."))
+                {
+                    dostavka = tbDostavka.Text.Replace(".", ",");
+                }
+
+                if (tbDiscont.Text.Contains("."))
+                {
+                    skidka = tbDiscont.Text.Replace(".", ",");
+                }
+
+
+                decimal dostavkaOrder = Convert.ToDecimal(dostavka);
+                decimal skidkaOrder = Convert.ToDecimal(skidka);
+
+                int kolichestvo = Convert.ToInt32(tbKolichestvo.Text.Trim());
+                
+
+                MessageBoxResult result = MessageBox.Show("Оформить новый заказ?", "Проверка данных", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+
                 if (result == MessageBoxResult.OK)
                 {
-                    NewOrd.Add_Zakaz_NEW(date, dostavka, kolichestvo, skidka, oplata, cod_cl, cod_emp, cod_prd);
-                    MessageBox.Show("Новый заказ оформлен!", "Статус операции");
+                    try
+                    {
+                        dbContext.Add_Zakaz_NEW(date, dostavkaOrder, kolichestvo, skidkaOrder, oplata, cod_cl, cod_emp, cod_prd);
+                        Clear();
 
-                    TbClear();
+                        MessageBox.Show("Новый заказ оформлен!", "Статус операции", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show(" Добавление невозможно \n Ошибка базы данных!", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }                
                 }
             }
             catch
             {
-                MessageBox.Show(" Добавление невозможно \n Проверьте заполнение полей!!!", "Ошибка добавления");
+                MessageBox.Show(" Добавление невозможно \n Проверьте заполнение полей!", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void ClearNewOrd(object sender, RoutedEventArgs e)
         {
-            TbClear();
+            Clear();
         }
-        private void TbClear()
+        private void Clear()
         {
             tbDiscont.Clear();
             tbDostavka.Clear();
             tbKolichestvo.Clear();
             tbOplata.Clear();
+            dpDate.DisplayDate = DateTime.Today;
+            cbEmployeer.SelectedIndex = -1;
+            cbClient.SelectedIndex = -1;
+            cbTovar.SelectedIndex = -1;
+        }
+
+        private void tbKolichestvo_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            if (!Char.IsDigit(e.Text, 0))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tbDiscont_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            if (!(Char.IsDigit(e.Text, 0) || (e.Text == ".") && (!tbDiscont.Text.Contains(".") && tbDiscont.Text.Length != 0)))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tbDostavka_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            if (!(Char.IsDigit(e.Text, 0) || (e.Text == ".") && (!tbDostavka.Text.Contains(".") && tbDostavka.Text.Length != 0)))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

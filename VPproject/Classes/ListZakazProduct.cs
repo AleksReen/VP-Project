@@ -8,7 +8,7 @@ namespace VPproject.Classes
     {
         public ListZakazProduct()
         {
-            var listZakPr = Orders.DataEntitiesOrders.Товар;
+            var listZakPr = Orders.dbContext.Товар;
 
             var queryZakPr = from pr in listZakPr
                              orderby pr.Наименование_товара

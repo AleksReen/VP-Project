@@ -7,7 +7,7 @@ namespace VPproject.Classes
     {
         public ListZakazEmployee()
         {
-            var listZakEm = Orders.DataEntitiesOrders.Сотрудник;
+            var listZakEm = Orders.dbContext.Сотрудник;
             
             var queryZakEm = from em in listZakEm
                              orderby em.Фамилия

@@ -25,7 +25,7 @@
                    Background="Transparent" 
                    Width="187" 
                    FontSize="14"/>
-            <DatePicker x:Name="dpDate"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,2.5,0,0" ScrollViewer.CanContentScroll="True"  FontSize="14"/>
+            <DatePicker x:Name="dpDate"  Height="30"  Margin="-170,0,0,0"  Width="190"  VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True"  FontSize="14"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
@@ -38,7 +38,7 @@
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
 
-            <ComboBox x:Name="cbEmployeer"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" 
+            <ComboBox x:Name="cbEmployeer"  Height="30"  Margin="-170,0,0,0"  Width="190"  VerticalContentAlignment="Center" Padding="5,0,0,0" 
                       FontSize="14" 
                       ItemsSource="{Binding Source={StaticResource ListZakazEmployee}}"
                       DisplayMemberPath="Фамилия"
@@ -55,7 +55,7 @@
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
 
-            <ComboBox x:Name="cbClient"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" 
+            <ComboBox x:Name="cbClient"  Height="30"  Margin="-170,0,0,0"  Width="190"  VerticalContentAlignment="Center" Padding="5,0,0,0" 
                       FontSize="14" 
                       ItemsSource="{Binding Source={StaticResource ListZakazClients}}"
                       DisplayMemberPath="Организация"
@@ -73,7 +73,7 @@
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
 
-            <ComboBox x:Name="cbTovar"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" 
+            <ComboBox x:Name="cbTovar"  Height="30"  Margin="-170,0,0,0"  Width="190"  VerticalContentAlignment="Center" Padding="5,0,0,0" 
                       FontSize="14" 
                       ItemsSource="{Binding Source={StaticResource ListZakazProduct}}"
                       DisplayMemberPath="Наименование_товара"
@@ -90,7 +90,9 @@
                    Background="Transparent" 
                    Width="187" 
                    FontSize="14"/>
-            <TextBox x:Name="tbKolichestvo"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbKolichestvo"  
+                     PreviewTextInput ="tbKolichestvo_PreviewTextInput" 
+                     Height="30"  Margin="-170,0,0,0"  Width="190"  VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
@@ -102,7 +104,9 @@
                    Background="Transparent" 
                    Width="187" 
                    FontSize="14"/>
-            <TextBox x:Name="tbDiscont"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbDiscont" 
+                     PreviewTextInput="tbDiscont_PreviewTextInput"  
+                     Height="30"  Margin="-170,0,0,0"  Width="190"  VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
@@ -114,7 +118,9 @@
                    Background="Transparent" 
                    Width="187" 
                    FontSize="14"/>
-            <TextBox x:Name="tbDostavka"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbDostavka" 
+                     PreviewTextInput="tbDostavka_PreviewTextInput"
+                     Height="30"  Margin="-170,0,0,0"  Width="190"  VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
@@ -126,7 +132,7 @@
                    Background="Transparent" 
                    Width="187" 
                    FontSize="14"/>
-            <TextBox x:Name="tbOplata"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbOplata"  Height="30"  Margin="-170,0,0,0"  Width="190"  VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center" Margin="42,0,28,0" Width="422">

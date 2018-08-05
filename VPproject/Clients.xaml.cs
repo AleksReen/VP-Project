@@ -9,7 +9,7 @@ namespace VPproject
 {
     public partial class Clients : Page 
     {
-        private StroitelEntities dbContext { get; set; }
+        public static StroitelEntities dbContext { get; set; }
         public List<Клиент> ListClients { get; set; }
 
         public Clients()
@@ -109,7 +109,7 @@ namespace VPproject
                 ListClients.Clear();
             }
            
-            ListClients = dbContext.Клиент.Where(c => c.Организация.Contains(this.tbOrg.Text)).ToList();
+            ListClients = dbContext.Клиент.Where(c => c.Организация.Contains(org)).ToList();
                               
             if (ListClients.Count > 0)
             {

@@ -8,7 +8,7 @@ namespace VPproject.Classes
         public ListOstatokProd()
         {
 
-            var listPP = Products.DataEntitiesProducts.Товар;
+            var listPP = Products.dbContext.Товар;
 
             var queryPP = from rс in listPP
                           orderby rс.Наименование_товара

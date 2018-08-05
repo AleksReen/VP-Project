@@ -2,29 +2,22 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Collections.ObjectModel;
 using System.Data;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace VPproject
 {
-    /// <summary>
-    /// Логика взаимодействия для Orders.xaml
-    /// </summary>
     public partial class Orders : Page
     {
-        public static StroitelEntities DataEntitiesOrders { get; set; }
-        ObservableCollection<Заказ> ListOrders;
+        public static StroitelEntities dbContext { get; set; }
+        private List<Заказ> ListOrders;
         
-
         public Orders()
         {
-            DataEntitiesOrders = new StroitelEntities();
+            dbContext = new StroitelEntities();
             InitializeComponent();
-            ListOrders = new ObservableCollection<Заказ>();
+            ListOrders = new List<Заказ>();
         }
-
-        #region Оформление заказа
 
         private void clNewOrder(object sender, RoutedEventArgs e)
         {
@@ -32,66 +25,55 @@ namespace VPproject
             newOrder.Closed += newOrder_Closed;
             newOrder.ShowDialog();
         }
+
         void newOrder_Closed(object sender, EventArgs e)
         {
-            ZagrOrders();
+            GetData();
         }
 
-        #endregion
-
-        #region Старт страницы
         private void Page_LoadedOrders(object sender, RoutedEventArgs e)
         {
-            ZagrOrders();
+            GetData();
+            tbDate.Text = Convert.ToString(DateTime.Today.ToString("dd MMMM yyyy"));
             tbSt.Text = "ЗАГРУЖЕНО";
         }
-        #endregion
 
-        #region загрузка заказов
-        private void ZagrOrders()
+        private void GetData()
         {
-            ListOrders.Clear();
-            var orders = DataEntitiesOrders.Заказ;
-            var queryOrder = from order in orders
-                             orderby order.Код_заказа
-                             select order;
-            foreach (Заказ order in queryOrder)
+            if (ListOrders.Any())
             {
-                ListOrders.Add(order);
+                ListOrders.Clear();
             }
-            dgOrders.ItemsSource = ListOrders;
-            tbCount.Text = Convert.ToString(ListOrders.Count());
-            tbDate.Text = Convert.ToString(DateTime.Today.ToString("dd MMMM yyyy"));
-        }
-        #endregion
 
-        #region Удаление Заказа
+            ListOrders = dbContext.Заказ.OrderBy(o => o.Код_заказа).ToList();
+         
+            dgOrders.ItemsSource = ListOrders;
+            tbCount.Text = Convert.ToString(ListOrders.Count());          
+        }
+
         private void clDeleteOrder(object sender, RoutedEventArgs e)
         {
             Заказ ord = dgOrders.SelectedItem as Заказ;
+
             if (ord != null)
             {
-                MessageBoxResult result =
-                    MessageBox.Show("Удалить данные о заказе?", "Предупреждение", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Удалить данные о заказе?", "Предупреждение", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+
                 if (result == MessageBoxResult.OK)
                 {
                     try
                     {
-                        DataEntitiesOrders.Заказ.Remove(ord);
-                        DataEntitiesOrders.SaveChanges();
+                        dbContext.Заказ.Remove(ord);
+                        dbContext.SaveChanges();
 
-                        dgOrders.SelectedIndex = dgOrders.SelectedIndex == 0 ? 1 : dgOrders.SelectedIndex - 1;
-                        ListOrders.Remove(ord);
+                        GetData();
 
-                        tbCount.Text = Convert.ToString(ListOrders.Count());
-                        MessageBox.Show("Выбранная вами запись удалена!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Выбранная запись удалена!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     catch (Exception)
                     {
-
                         MessageBox.Show("Удаление не возможно", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                   
                 }
             }
             else
@@ -99,86 +81,66 @@ namespace VPproject
                 MessageBox.Show("Выберите строку для удаления", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-        #endregion
 
-        #region Метод сохранения 
         private void clSaveOrder(object sender, RoutedEventArgs e)
         {
-            DataEntitiesOrders.SaveChanges();
+            dbContext.SaveChanges();
             dgOrders.IsReadOnly = true;
             tbSt.Text = "СОХРАНЕНО";
         }
-        #endregion
 
-        #region Метод редактирования
         private void clEditOrder(object sender, RoutedEventArgs e)
-        {
-            dgOrders.IsReadOnly = false;
+        {          
             dgOrders.BeginEdit();
+            dgOrders.IsReadOnly = false;
             tbSt.Text = "РЕДАКТИРУЕТСЯ";
         }
-        #endregion
 
-        #region Метод обновления
         private void clRefreshOrders(object sender, RoutedEventArgs e)
         {
-            ZagrOrders();
+            GetData();
         }
-        #endregion
 
-        #region Метод выход из программы
         private void clExit(object sender, RoutedEventArgs e)
         {
             Other.Exit();
         }
-        #endregion
-
-        #region Поиск 
+ 
         private void clFindOrder(object sender, RoutedEventArgs e)
         {
-
-            #region Поиск по фамилии клиента
             string org = tbFamily.Text;
-            DataEntitiesOrders = new StroitelEntities();
 
-            ListOrders.Clear();
-            ArrayList SerchListFamily = new ArrayList();
-
-            var orders = DataEntitiesOrders.Заказ;
-            var client = DataEntitiesOrders.Клиент;
-
-            var queryClient = from ord in orders
-                              join cl in client
-                              on ord.Код_клиента equals cl.Код_клиента
-                              where cl.Организация.Contains(org)
-                              select ord;
-                              
-            foreach (var or in queryClient)
+            if (ListOrders.Any())
             {
-                SerchListFamily.Add(or);
+                ListOrders.Clear();
             }
-            if (SerchListFamily.Count > 0)
-            {
-                dgOrders.ItemsSource = SerchListFamily;
 
-                tbCount.Text = Convert.ToString(SerchListFamily.Count);
+            ListOrders = dbContext.Заказ.Join( 
+                dbContext.Клиент, 
+                o => o.Код_клиента,
+                c => c.Код_клиента,
+                (o, c) => new
+                {
+                    Order = o,
+                    Client = c
+                }).Where(r => r.Client.Организация.Contains(org)).Select( r => r.Order).ToList<Заказ>();
+                              
+           
+            if (ListOrders.Count > 0)
+            {
+                dgOrders.ItemsSource = ListOrders;
+                tbCount.Text = Convert.ToString(ListOrders.Count);
             }
             else
-                MessageBox.Show("Заказы клиента \n" + org + "\n не найден", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
-            #endregion
-
+            {
+                MessageBox.Show("Заказы \n" + org + "\n не найден", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
+            }             
         }
-        #endregion
-
-        #region Работа магазина за период
 
         private void OtchRabMagPeriod(object sender, RoutedEventArgs e)
         {
             var _newOtchRabMagPeriod = new wOtchRabMagPeriod();
             _newOtchRabMagPeriod.ShowDialog();
         }
-
-        #endregion
-
     }
 }
