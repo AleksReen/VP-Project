@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Collections.ObjectModel;
 
-
 namespace VPproject.Classes
 {
     class ListZakazProduct: ObservableCollection<Товар>

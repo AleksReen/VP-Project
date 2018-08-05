@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
+using WpfDiplom.Models;
 
 namespace VPproject
 {
@@ -10,6 +12,7 @@ namespace VPproject
         {
             dbContext = new StroitelEntities();
             InitializeComponent();
+            this.DataContext = new ClientValidationModel();
         }
 
         private void AddNewClient(object sender, RoutedEventArgs e)

@@ -9,11 +9,9 @@ namespace VPproject.Classes
         {
             var listEmp = Employees.DataEntitiesEmployees.Сотрудник;
 
-
-
             var queryEmp = from emp in listEmp
                            orderby emp.Фамилия
-                             select emp;
+                           select emp;
 
             foreach (var emp in queryEmp)
             {

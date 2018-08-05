@@ -18,7 +18,47 @@
                    FontStyle="Italic"
                    Width="187" 
                    FontSize="14"/>
-            <TextBox x:Name="tbFamCl"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+
+            <TextBox 
+                x:Name="tbFamCl"  
+                Height="30"  
+                Margin="-170,0,0,0"  
+                Width="190" 
+                VerticalContentAlignment="Center" 
+                Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14">
+
+                <TextBox.Text>
+                    <Binding Path="Surname" >
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Validation.ErrorTemplate">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <DockPanel LastChildFill="True">
+                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
+                                                       Text="**"/>
+                                        <Border BorderBrush="Red" BorderThickness="2">
+                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
+                                        </Border>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+
+            </TextBox>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
@@ -29,10 +69,49 @@
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
-            <TextBox x:Name="tbNameCl"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbNameCl"  
+                     Height="30"  
+                     Margin="-170,0,0,0"  
+                     Width="190" 
+                     VerticalContentAlignment="Center" 
+                     Padding="5,0,0,0" 
+                     ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14">
+
+                <TextBox.Text>
+                    <Binding Path="Name" >
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Validation.ErrorTemplate">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <DockPanel LastChildFill="True">
+                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
+                                                       Text="**"/>
+                                        <Border BorderBrush="Red" BorderThickness="2">
+                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
+                                        </Border>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+
+            </TextBox>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center" Margin="42,0">
+        <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
             <Label x:Name="PatCl"
                     Foreground="White"
                    FontStyle="Italic"
@@ -41,7 +120,46 @@
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
-            <TextBox x:Name="tbPatCl"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            
+            <TextBox x:Name="tbPatCl"  
+                    Height="30"  
+                    Margin="-170,0,0,0"  
+                    Width="190" 
+                    VerticalContentAlignment="Center" 
+                    Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14">
+
+                <TextBox.Text>
+                    <Binding Path="Patronymic" >
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Validation.ErrorTemplate">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <DockPanel LastChildFill="True">
+                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
+                                                       Text="**"/>
+                                        <Border BorderBrush="Red" BorderThickness="2">
+                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
+                                        </Border>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+
+            </TextBox>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
@@ -53,7 +171,49 @@
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
-            <TextBox x:Name="tbOrgCl"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" AcceptsReturn="True" FontSize="14"/>
+
+            <TextBox x:Name="tbOrgCl"  
+                     Height="30"  
+                     Margin="-170,0,0,0"  
+                     Width="190" 
+                     VerticalContentAlignment="Center" 
+                     Padding="5,0,0,0" 
+                     ScrollViewer.CanContentScroll="True" 
+                     AcceptsReturn="True" FontSize="14">
+
+                <TextBox.Text>
+                    <Binding Path="Company" >
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Validation.ErrorTemplate">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <DockPanel LastChildFill="True">
+                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
+                                                       Text="**"/>
+                                        <Border BorderBrush="Red" BorderThickness="2">
+                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
+                                        </Border>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+
+            </TextBox>
+
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
@@ -65,7 +225,46 @@
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
-            <TextBox x:Name="tbAdCl"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" AcceptsReturn="True" FontSize="14"/>
+
+            <TextBox x:Name="tbAdCl"  
+                     Height="30"  
+                     Margin="-170,0,0,0"  
+                     Width="190" 
+                     VerticalContentAlignment="Center" 
+                     Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" AcceptsReturn="True" FontSize="14">
+
+                <TextBox.Text>
+                    <Binding Path="Adress" >
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Validation.ErrorTemplate">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <DockPanel LastChildFill="True">
+                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
+                                                       Text="**"/>
+                                        <Border BorderBrush="Red" BorderThickness="2">
+                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
+                                        </Border>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+
+            </TextBox>
         </StackPanel>
 
 
@@ -78,7 +277,45 @@
                    Margin="0,14,200,15" 
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
-            <TextBox x:Name="tbTelephoneCl"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+            <TextBox x:Name="tbTelephoneCl"  
+                     Height="30"  
+                     Margin="-170,0,0,0" 
+                     Width="190" 
+                     VerticalContentAlignment="Center" 
+                     Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14">
+
+                <TextBox.Text>
+                    <Binding Path="Phone" >
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Validation.ErrorTemplate">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <DockPanel LastChildFill="True">
+                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
+                                                       Text="**"/>
+                                        <Border BorderBrush="Red" BorderThickness="2">
+                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
+                                        </Border>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+
+            </TextBox>
         </StackPanel>
 
 
