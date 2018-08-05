@@ -4,11 +4,11 @@ namespace VPproject
 {
     public partial class wNewClient : Window
     {
-        public static StroitelEntities NewCl { set; get; }
+        private StroitelEntities dbContext { set; get; }
 
         public wNewClient(Clients newClient)
         {
-            NewCl = new StroitelEntities();
+            dbContext = new StroitelEntities();
             InitializeComponent();
         }
 
@@ -21,33 +21,32 @@ namespace VPproject
             string ad = tbAdCl.Text;
             string tel = tbTelephoneCl.Text;
             string can = tbCanalCl.Text;
+          
+            MessageBoxResult result = MessageBox.Show("Добавить нового клиента?", "Проверка данных", MessageBoxButton.OKCancel, MessageBoxImage.Question);
 
-            try
+            if (result == MessageBoxResult.OK)
             {
-                MessageBoxResult result =
-                        MessageBox.Show("Добавить нового клиента?", "Проверка данных", MessageBoxButton.OKCancel);
-                if (result == MessageBoxResult.OK)
+                try
                 {
-                    NewCl.Add_Client(fam, name, pat, org, ad, tel, can);
-                    MessageBox.Show("Новый клиент добавлен!", "Статус операции");
+                    dbContext.Add_Client(fam, name, pat, org, ad, tel, can);
+                    Clear();
+                    MessageBox.Show("Новый клиент добавлен!", "Статус операции", MessageBoxButton.OK, MessageBoxImage.Information);                   
+                }
 
-                    tbFamCl.Clear();
-                    tbNameCl.Clear();
-                    tbPatCl.Clear();
-                    tbOrgCl.Clear();
-                    tbAdCl.Clear();
-                    tbTelephoneCl.Clear();
-                    tbCanalCl.Clear();
+                catch
+                {
+                    MessageBox.Show(" Добавление невозможно \n Проверьте заполнение полей!", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch
-            {
-                MessageBox.Show(" Добавление невозможно \n Проверьте заполнение полей!!!","Ошибка добавления");
-            }    
-
         }
 
         private void ClearNewCl(object sender, RoutedEventArgs e)
+        {
+            Clear();
+            MessageBox.Show("Форма очищена!", "Статус операции", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void Clear()
         {
             tbFamCl.Clear();
             tbNameCl.Clear();
@@ -55,10 +54,7 @@ namespace VPproject
             tbOrgCl.Clear();
             tbAdCl.Clear();
             tbTelephoneCl.Clear();
-            tbCanalCl.Clear();
-
-            MessageBox.Show("Форма очищена!", "Статус операции");
+            tbCanalCl.SelectedIndex = -1;
         }
-
     }
 }
