@@ -98,6 +98,7 @@
       <DependentUpon>Employees.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\ClientValidationModel.cs" />
+    <Compile Include="Models\ProductValidationModel.cs" />
     <Compile Include="Orders.xaml.cs">
       <DependentUpon>Orders.xaml</DependentUpon>
     </Compile>

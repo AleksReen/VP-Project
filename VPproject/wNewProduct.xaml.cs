@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Windows;
+using WpfDiplom.Models;
 
 namespace VPproject
 {  
     public partial class wNewProduct : Window
     {
         public static StroitelEntities dbContext { get; set; }
+        public bool IsValid { get; set; } = true;
+
         public wNewProduct(Products newPr)
         {
             dbContext = new StroitelEntities();
             InitializeComponent();
+            this.DataContext = new ProductValidationModel();
         }
         private void AddNewProd(object sender, RoutedEventArgs e)
         {
@@ -54,6 +58,7 @@ namespace VPproject
             }
 
         }
+
         private void ClearNewProd(object sender, RoutedEventArgs e)
         {
             Clear();
