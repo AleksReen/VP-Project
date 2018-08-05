@@ -1,0 +1,1904 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище StroitelModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Stroitel.dbo.user" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="login" />
+            <PropertyRef Name="password" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Stroitel.dbo.Выведенный_ассортимент" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Выведенный_ассортимент">
+          <Key>
+            <PropertyRef Name="Код_товара" />
+            <PropertyRef Name="Наименование_товара" />
+            <PropertyRef Name="Производитель" />
+            <PropertyRef Name="Ед_изм" />
+            <PropertyRef Name="Тов_остаток" />
+            <PropertyRef Name="Цена" />
+            <PropertyRef Name="Код_поставщика" />
+            <PropertyRef Name="Новинка" />
+          </Key>
+          <Property Name="Код_товара" Type="int" Nullable="false" />
+          <Property Name="Наименование_товара" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Производитель" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ед_изм" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Тов_остаток" Type="int" Nullable="false" />
+          <Property Name="Цена" Type="money" Nullable="false" />
+          <Property Name="Код_поставщика" Type="int" Nullable="false" />
+          <Property Name="Новинка" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Заказ">
+          <Key>
+            <PropertyRef Name="Код_заказа" />
+          </Key>
+          <Property Name="Код_заказа" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Дата_заказа" Type="date" Nullable="false" />
+          <Property Name="Стоимость_доставки" Type="money" Nullable="false" />
+          <Property Name="Количество" Type="int" Nullable="false" />
+          <Property Name="Скидка" Type="money" Nullable="false" />
+          <Property Name="Оплата" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Код_клиента" Type="int" Nullable="false" />
+          <Property Name="Код_сотрудника" Type="int" Nullable="false" />
+          <Property Name="Код_товара" Type="int" Nullable="false" />
+          <Property Name="Сумма_заказа" Type="money" />
+        </EntityType>
+        <EntityType Name="Клиент">
+          <Key>
+            <PropertyRef Name="Код_клиента" />
+          </Key>
+          <Property Name="Код_клиента" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Отчество" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Организация" Type="varchar" MaxLength="50" />
+          <Property Name="Адрес" Type="varchar" MaxLength="50" />
+          <Property Name="Номер_телефона" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Канал_продаж" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Поставщик">
+          <Key>
+            <PropertyRef Name="Код_поставщика" />
+          </Key>
+          <Property Name="Код_поставщика" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Адрес" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Телефон" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Контактное_лицо" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Ремонт">
+          <Key>
+            <PropertyRef Name="Номер_акта" />
+          </Key>
+          <Property Name="Номер_акта" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Дата_приемки" Type="date" Nullable="false" />
+          <Property Name="Готовность" Type="varchar" MaxLength="50" />
+          <Property Name="Дата_выдачи" Type="date" />
+          <Property Name="Код_клиента" Type="int" />
+          <Property Name="Код_товара" Type="int" />
+          <Property Name="Стоимость" Type="money" />
+          <Property Name="Заключение" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Сотрудник">
+          <Key>
+            <PropertyRef Name="Код_сотрудника" />
+          </Key>
+          <Property Name="Код_сотрудника" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Отчество" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Должность" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Телефон" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Товар">
+          <Key>
+            <PropertyRef Name="Код_товара" />
+          </Key>
+          <Property Name="Код_товара" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование_товара" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Производитель" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ед_изм" Type="varchar" MaxLength="50" />
+          <Property Name="Тов_остаток" Type="int" Nullable="false" />
+          <Property Name="Цена" Type="money" Nullable="false" />
+          <Property Name="Код_поставщика" Type="int" Nullable="false" />
+          <Property Name="Новинка" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Stroitel.dbo.Удаленные_клиенты" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Удаленные_клиенты">
+          <Key>
+            <PropertyRef Name="Код_клиента" />
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Имя" />
+            <PropertyRef Name="Отчество" />
+            <PropertyRef Name="Адрес" />
+            <PropertyRef Name="Номер_телефона" />
+            <PropertyRef Name="Канал_продаж" />
+            <PropertyRef Name="Дата_удаления" />
+          </Key>
+          <Property Name="Код_клиента" Type="int" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Отчество" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Организация" Type="varchar" MaxLength="50" />
+          <Property Name="Адрес" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Номер_телефона" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Канал_продаж" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Дата_удаления" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Stroitel.dbo.Заказы_клиентов" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Заказы_клиентов">
+          <Key>
+            <PropertyRef Name="Код_заказа" />
+            <PropertyRef Name="Дата_заказа" />
+            <PropertyRef Name="Наименование_товара" />
+            <PropertyRef Name="Количество" />
+            <PropertyRef Name="Цена" />
+            <PropertyRef Name="Фамилия" />
+          </Key>
+          <Property Name="Код_заказа" Type="int" Nullable="false" />
+          <Property Name="Дата_заказа" Type="date" Nullable="false" />
+          <Property Name="Организация" Type="varchar" MaxLength="50" />
+          <Property Name="Наименование_товара" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Количество" Type="int" Nullable="false" />
+          <Property Name="Цена" Type="money" Nullable="false" />
+          <Property Name="Expr1" Type="money" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Stroitel.dbo.Клиенты_купившие_новинки" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Клиенты_купившие_новинки">
+          <Key>
+            <PropertyRef Name="Дата_заказа" />
+            <PropertyRef Name="Наименование_товара" />
+            <PropertyRef Name="Количество" />
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Имя" />
+          </Key>
+          <Property Name="Дата_заказа" Type="date" Nullable="false" />
+          <Property Name="Наименование_товара" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Количество" Type="int" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Организация" Type="varchar" MaxLength="50" />
+          <Property Name="Новинка" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Stroitel.dbo.Клиенты_Могилёв" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Клиенты_Могилёв">
+          <Key>
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Имя" />
+            <PropertyRef Name="Номер_телефона" />
+            <PropertyRef Name="Канал_продаж" />
+          </Key>
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Организация" Type="varchar" MaxLength="50" />
+          <Property Name="Адрес" Type="varchar" MaxLength="50" />
+          <Property Name="Номер_телефона" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Канал_продаж" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Stroitel.dbo.Клиенты_Область" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Клиенты_Область">
+          <Key>
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Имя" />
+            <PropertyRef Name="Номер_телефона" />
+            <PropertyRef Name="Канал_продаж" />
+          </Key>
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Организация" Type="varchar" MaxLength="50" />
+          <Property Name="Адрес" Type="varchar" MaxLength="50" />
+          <Property Name="Номер_телефона" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Канал_продаж" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Stroitel.dbo.Обзор_новинок" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Обзор_новинок">
+          <Key>
+            <PropertyRef Name="Код_товара" />
+            <PropertyRef Name="Наименование_товара" />
+            <PropertyRef Name="Тов_остаток" />
+            <PropertyRef Name="Цена" />
+          </Key>
+          <Property Name="Код_товара" Type="int" Nullable="false" />
+          <Property Name="Наименование_товара" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Тов_остаток" Type="int" Nullable="false" />
+          <Property Name="Цена" Type="money" Nullable="false" />
+          <Property Name="Новинка" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Stroitel.dbo.Оптовые_клиенты" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Оптовые_клиенты">
+          <Key>
+            <PropertyRef Name="Код_клиента" />
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Имя" />
+            <PropertyRef Name="Номер_телефона" />
+          </Key>
+          <Property Name="Код_клиента" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Организация" Type="varchar" MaxLength="50" />
+          <Property Name="Адрес" Type="varchar" MaxLength="50" />
+          <Property Name="Номер_телефона" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Stroitel.dbo.Отчет_по_ремонту" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Отчет_по_ремонту">
+          <Key>
+            <PropertyRef Name="Дата_приемки" />
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Имя" />
+            <PropertyRef Name="Номер_телефона" />
+            <PropertyRef Name="Наименование_товара" />
+          </Key>
+          <Property Name="Дата_приемки" Type="date" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Организация" Type="varchar" MaxLength="50" />
+          <Property Name="Номер_телефона" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Наименование_товара" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Стоимость" Type="money" />
+          <Property Name="Заключение" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Stroitel.dbo.Продажи_ОПТ_за_день" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Продажи_ОПТ_за_день">
+          <Key>
+            <PropertyRef Name="Канал_продаж" />
+          </Key>
+          <Property Name="Количество_заказов_опт" Type="int" />
+          <Property Name="Сумма_продаж" Type="money" />
+          <Property Name="Канал_продаж" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Stroitel.dbo.Продажи_РОЗНИЦА_за_день" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Продажи_РОЗНИЦА_за_день">
+          <Key>
+            <PropertyRef Name="Канал_продаж" />
+          </Key>
+          <Property Name="Количество_заказов_розница" Type="int" />
+          <Property Name="Сумма_продаж" Type="money" />
+          <Property Name="Канал_продаж" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Stroitel.dbo.Результат_сотрудников_за_день" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Результат_сотрудников_за_день">
+          <Key>
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Имя" />
+            <PropertyRef Name="Отчество" />
+            <PropertyRef Name="Должность" />
+            <PropertyRef Name="Дата_заказа" />
+          </Key>
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Отчество" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Должность" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Заказы_сотрудников" Type="int" />
+          <Property Name="Cумма" Type="money" />
+          <Property Name="Дата_заказа" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Stroitel.dbo.Розничные_клиенты" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Розничные_клиенты">
+          <Key>
+            <PropertyRef Name="Код_клиента" />
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Имя" />
+            <PropertyRef Name="Номер_телефона" />
+          </Key>
+          <Property Name="Код_клиента" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Организация" Type="varchar" MaxLength="50" />
+          <Property Name="Адрес" Type="varchar" MaxLength="50" />
+          <Property Name="Номер_телефона" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Stroitel.dbo.Товарные_остатки" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Товарные_остатки">
+          <Key>
+            <PropertyRef Name="Код_товара" />
+            <PropertyRef Name="Наименование_товара" />
+            <PropertyRef Name="Тов_остаток" />
+            <PropertyRef Name="Цена" />
+          </Key>
+          <Property Name="Код_товара" Type="int" Nullable="false" />
+          <Property Name="Наименование_товара" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Тов_остаток" Type="int" Nullable="false" />
+          <Property Name="Цена" Type="money" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Заказ__Код_клиен__1BFD2C07">
+          <End Role="Клиент" Type="Self.Клиент" Multiplicity="1" />
+          <End Role="Заказ" Type="Self.Заказ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Клиент">
+              <PropertyRef Name="Код_клиента" />
+            </Principal>
+            <Dependent Role="Заказ">
+              <PropertyRef Name="Код_клиента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Заказ__Код_сотру__1B0907CE">
+          <End Role="Сотрудник" Type="Self.Сотрудник" Multiplicity="1" />
+          <End Role="Заказ" Type="Self.Заказ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудник">
+              <PropertyRef Name="Код_сотрудника" />
+            </Principal>
+            <Dependent Role="Заказ">
+              <PropertyRef Name="Код_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Заказ__Код_товар__1A14E395">
+          <End Role="Товар" Type="Self.Товар" Multiplicity="1" />
+          <End Role="Заказ" Type="Self.Заказ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Товар">
+              <PropertyRef Name="Код_товара" />
+            </Principal>
+            <Dependent Role="Заказ">
+              <PropertyRef Name="Код_товара" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Товар__Код_поста__1ED998B2">
+          <End Role="Поставщик" Type="Self.Поставщик" Multiplicity="1" />
+          <End Role="Товар" Type="Self.Товар" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поставщик">
+              <PropertyRef Name="Код_поставщика" />
+            </Principal>
+            <Dependent Role="Товар">
+              <PropertyRef Name="Код_поставщика" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ремонт_Клиент">
+          <End Role="Клиент" Type="Self.Клиент" Multiplicity="0..1" />
+          <End Role="Ремонт" Type="Self.Ремонт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Клиент">
+              <PropertyRef Name="Код_клиента" />
+            </Principal>
+            <Dependent Role="Ремонт">
+              <PropertyRef Name="Код_клиента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ремонт_Товар">
+          <End Role="Товар" Type="Self.Товар" Multiplicity="0..1" />
+          <End Role="Ремонт" Type="Self.Ремонт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Товар">
+              <PropertyRef Name="Код_товара" />
+            </Principal>
+            <Dependent Role="Ремонт">
+              <PropertyRef Name="Код_товара" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Add_Client" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Surname" Type="varchar" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Middle_name" Type="varchar" Mode="In" />
+          <Parameter Name="Organization" Type="varchar" Mode="In" />
+          <Parameter Name="Address" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="sales_channel" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Add_New_Product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name_product" Type="varchar" Mode="In" />
+          <Parameter Name="manufacturer" Type="varchar" Mode="In" />
+          <Parameter Name="unit" Type="varchar" Mode="In" />
+          <Parameter Name="balance" Type="int" Mode="In" />
+          <Parameter Name="price" Type="money" Mode="In" />
+          <Parameter Name="code_provider" Type="int" Mode="In" />
+          <Parameter Name="new" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ADD_NEW_REMONT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="code_cl" Type="int" Mode="In" />
+          <Parameter Name="cod_tov" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Add_Personal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="surname" Type="varchar" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="patronymic" Type="varchar" Mode="In" />
+          <Parameter Name="position" Type="varchar" Mode="In" />
+          <Parameter Name="phone" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Add_Provider" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="organization" Type="varchar" Mode="In" />
+          <Parameter Name="address" Type="varchar" Mode="In" />
+          <Parameter Name="phone" Type="varchar" Mode="In" />
+          <Parameter Name="contact_person" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Add_Remont" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="act" Type="int" Mode="In" />
+          <Parameter Name="date" Type="datetime" Mode="In" />
+          <Parameter Name="ready" Type="varchar" Mode="In" />
+          <Parameter Name="date_vydachi" Type="datetime" Mode="In" />
+          <Parameter Name="code_cl" Type="int" Mode="In" />
+          <Parameter Name="cod_tov" Type="int" Mode="In" />
+          <Parameter Name="stoim" Type="money" Mode="In" />
+          <Parameter Name="zakl" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Add_Zakaz_NEW" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+          <Parameter Name="Price_dostavki" Type="money" Mode="In" />
+          <Parameter Name="Kolichestvo" Type="int" Mode="In" />
+          <Parameter Name="Skidka" Type="money" Mode="In" />
+          <Parameter Name="Oplata" Type="varchar" Mode="In" />
+          <Parameter Name="Cod_kl" Type="int" Mode="In" />
+          <Parameter Name="Cod_sotr" Type="int" Mode="In" />
+          <Parameter Name="Cod_tovara" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="Otchet_po_vsem_sotr_period" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="data_n" Type="datetime" Mode="In" />
+          <Parameter Name="data_end" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Otchet_ST_Interval" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="data_n" Type="datetime" Mode="In" />
+          <Parameter Name="data_end" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Otric_oststki_NEW" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Prihod_Product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cod_post" Type="int" Mode="In" />
+          <Parameter Name="code_tovara" Type="int" Mode="In" />
+          <Parameter Name="kolichectvo" Type="int" Mode="In" />
+          <Parameter Name="new_price" Type="money" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="St" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="st" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Tovar_ostatok_money_NEW" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cod_tovara" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Zakaz_za_Period" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="data_nach" Type="datetime" Mode="In" />
+          <Parameter Name="data_okonch" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Вывести_из_ассортимента" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="code_tovara" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Выдача_ремонта" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Act" Type="int" Mode="In" />
+          <Parameter Name="Ready" Type="varchar" Mode="In" />
+          <Parameter Name="Data_v" Type="datetime" Mode="In" />
+          <Parameter Name="Stoim" Type="money" Mode="In" />
+          <Parameter Name="Zacluch" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Заказы_Клиента" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="data_nach" Type="datetime" Mode="In" />
+          <Parameter Name="data_okonch" Type="datetime" Mode="In" />
+          <Parameter Name="cod_clienta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Кол_и_сумма_заказов_клиента" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="data_n" Type="datetime" Mode="In" />
+          <Parameter Name="data_end" Type="datetime" Mode="In" />
+          <Parameter Name="code_kl" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Курсор_кол_товарных_позиций" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Курсор_просмотр_клиентов" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Курсор_сумма_продаж" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Поставщик_товар" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cod_post" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Работа_магазина_за_период" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="data_n" Type="datetime" Mode="In" />
+          <Parameter Name="data_end" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Удаление_клиента" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="code_klienta" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Хранилище StroitelModelContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Заказ" EntityType="Self.Заказ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Клиент" EntityType="Self.Клиент" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Поставщик" EntityType="Self.Поставщик" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ремонт" EntityType="Self.Ремонт" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сотрудник" EntityType="Self.Сотрудник" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Товар" EntityType="Self.Товар" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [user].[ID] AS [ID], 
+    [user].[login] AS [login], 
+    [user].[password] AS [password]
+    FROM [dbo].[user] AS [user]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Выведенный_ассортимент" EntityType="Self.Выведенный_ассортимент" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Выведенный_ассортимент].[Код_товара] AS [Код_товара], 
+    [Выведенный_ассортимент].[Наименование_товара] AS [Наименование_товара], 
+    [Выведенный_ассортимент].[Производитель] AS [Производитель], 
+    [Выведенный_ассортимент].[Ед_изм] AS [Ед_изм], 
+    [Выведенный_ассортимент].[Тов_остаток] AS [Тов_остаток], 
+    [Выведенный_ассортимент].[Цена] AS [Цена], 
+    [Выведенный_ассортимент].[Код_поставщика] AS [Код_поставщика], 
+    [Выведенный_ассортимент].[Новинка] AS [Новинка]
+    FROM [dbo].[Выведенный_ассортимент] AS [Выведенный_ассортимент]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Удаленные_клиенты" EntityType="Self.Удаленные_клиенты" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Удаленные_клиенты].[Код_клиента] AS [Код_клиента], 
+    [Удаленные_клиенты].[Фамилия] AS [Фамилия], 
+    [Удаленные_клиенты].[Имя] AS [Имя], 
+    [Удаленные_клиенты].[Отчество] AS [Отчество], 
+    [Удаленные_клиенты].[Организация] AS [Организация], 
+    [Удаленные_клиенты].[Адрес] AS [Адрес], 
+    [Удаленные_клиенты].[Номер_телефона] AS [Номер_телефона], 
+    [Удаленные_клиенты].[Канал_продаж] AS [Канал_продаж], 
+    [Удаленные_клиенты].[Дата_удаления] AS [Дата_удаления]
+    FROM [dbo].[Удаленные_клиенты] AS [Удаленные_клиенты]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Заказы_клиентов" EntityType="Self.Заказы_клиентов" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Заказы_клиентов].[Код_заказа] AS [Код_заказа], 
+    [Заказы_клиентов].[Дата_заказа] AS [Дата_заказа], 
+    [Заказы_клиентов].[Организация] AS [Организация], 
+    [Заказы_клиентов].[Наименование_товара] AS [Наименование_товара], 
+    [Заказы_клиентов].[Количество] AS [Количество], 
+    [Заказы_клиентов].[Цена] AS [Цена], 
+    [Заказы_клиентов].[Expr1] AS [Expr1], 
+    [Заказы_клиентов].[Фамилия] AS [Фамилия]
+    FROM [dbo].[Заказы_клиентов] AS [Заказы_клиентов]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Клиенты_купившие_новинки" EntityType="Self.Клиенты_купившие_новинки" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Клиенты_купившие_новинки].[Дата_заказа] AS [Дата_заказа], 
+    [Клиенты_купившие_новинки].[Наименование_товара] AS [Наименование_товара], 
+    [Клиенты_купившие_новинки].[Количество] AS [Количество], 
+    [Клиенты_купившие_новинки].[Фамилия] AS [Фамилия], 
+    [Клиенты_купившие_новинки].[Имя] AS [Имя], 
+    [Клиенты_купившие_новинки].[Организация] AS [Организация], 
+    [Клиенты_купившие_новинки].[Новинка] AS [Новинка]
+    FROM [dbo].[Клиенты_купившие_новинки] AS [Клиенты_купившие_новинки]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Клиенты_Могилёв" EntityType="Self.Клиенты_Могилёв" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Клиенты_Могилёв].[Фамилия] AS [Фамилия], 
+    [Клиенты_Могилёв].[Имя] AS [Имя], 
+    [Клиенты_Могилёв].[Организация] AS [Организация], 
+    [Клиенты_Могилёв].[Адрес] AS [Адрес], 
+    [Клиенты_Могилёв].[Номер_телефона] AS [Номер_телефона], 
+    [Клиенты_Могилёв].[Канал_продаж] AS [Канал_продаж]
+    FROM [dbo].[Клиенты_Могилёв] AS [Клиенты_Могилёв]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Клиенты_Область" EntityType="Self.Клиенты_Область" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Клиенты_Область].[Фамилия] AS [Фамилия], 
+    [Клиенты_Область].[Имя] AS [Имя], 
+    [Клиенты_Область].[Организация] AS [Организация], 
+    [Клиенты_Область].[Адрес] AS [Адрес], 
+    [Клиенты_Область].[Номер_телефона] AS [Номер_телефона], 
+    [Клиенты_Область].[Канал_продаж] AS [Канал_продаж]
+    FROM [dbo].[Клиенты_Область] AS [Клиенты_Область]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Обзор_новинок" EntityType="Self.Обзор_новинок" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Обзор_новинок].[Код_товара] AS [Код_товара], 
+    [Обзор_новинок].[Наименование_товара] AS [Наименование_товара], 
+    [Обзор_новинок].[Тов_остаток] AS [Тов_остаток], 
+    [Обзор_новинок].[Цена] AS [Цена], 
+    [Обзор_новинок].[Новинка] AS [Новинка]
+    FROM [dbo].[Обзор_новинок] AS [Обзор_новинок]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Оптовые_клиенты" EntityType="Self.Оптовые_клиенты" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Оптовые_клиенты].[Код_клиента] AS [Код_клиента], 
+    [Оптовые_клиенты].[Фамилия] AS [Фамилия], 
+    [Оптовые_клиенты].[Имя] AS [Имя], 
+    [Оптовые_клиенты].[Организация] AS [Организация], 
+    [Оптовые_клиенты].[Адрес] AS [Адрес], 
+    [Оптовые_клиенты].[Номер_телефона] AS [Номер_телефона]
+    FROM [dbo].[Оптовые_клиенты] AS [Оптовые_клиенты]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Отчет_по_ремонту" EntityType="Self.Отчет_по_ремонту" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Отчет_по_ремонту].[Дата_приемки] AS [Дата_приемки], 
+    [Отчет_по_ремонту].[Фамилия] AS [Фамилия], 
+    [Отчет_по_ремонту].[Имя] AS [Имя], 
+    [Отчет_по_ремонту].[Организация] AS [Организация], 
+    [Отчет_по_ремонту].[Номер_телефона] AS [Номер_телефона], 
+    [Отчет_по_ремонту].[Наименование_товара] AS [Наименование_товара], 
+    [Отчет_по_ремонту].[Стоимость] AS [Стоимость], 
+    [Отчет_по_ремонту].[Заключение] AS [Заключение]
+    FROM [dbo].[Отчет_по_ремонту] AS [Отчет_по_ремонту]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Продажи_ОПТ_за_день" EntityType="Self.Продажи_ОПТ_за_день" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Продажи_ОПТ_за_день].[Количество_заказов_опт] AS [Количество_заказов_опт], 
+    [Продажи_ОПТ_за_день].[Сумма_продаж] AS [Сумма_продаж], 
+    [Продажи_ОПТ_за_день].[Канал_продаж] AS [Канал_продаж]
+    FROM [dbo].[Продажи_ОПТ_за_день] AS [Продажи_ОПТ_за_день]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Продажи_РОЗНИЦА_за_день" EntityType="Self.Продажи_РОЗНИЦА_за_день" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Продажи_РОЗНИЦА_за_день].[Количество_заказов_розница] AS [Количество_заказов_розница], 
+    [Продажи_РОЗНИЦА_за_день].[Сумма_продаж] AS [Сумма_продаж], 
+    [Продажи_РОЗНИЦА_за_день].[Канал_продаж] AS [Канал_продаж]
+    FROM [dbo].[Продажи_РОЗНИЦА_за_день] AS [Продажи_РОЗНИЦА_за_день]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Результат_сотрудников_за_день" EntityType="Self.Результат_сотрудников_за_день" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Результат_сотрудников_за_день].[Фамилия] AS [Фамилия], 
+    [Результат_сотрудников_за_день].[Имя] AS [Имя], 
+    [Результат_сотрудников_за_день].[Отчество] AS [Отчество], 
+    [Результат_сотрудников_за_день].[Должность] AS [Должность], 
+    [Результат_сотрудников_за_день].[Заказы_сотрудников] AS [Заказы_сотрудников], 
+    [Результат_сотрудников_за_день].[Cумма] AS [Cумма], 
+    [Результат_сотрудников_за_день].[Дата_заказа] AS [Дата_заказа]
+    FROM [dbo].[Результат_сотрудников_за_день] AS [Результат_сотрудников_за_день]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Розничные_клиенты" EntityType="Self.Розничные_клиенты" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Розничные_клиенты].[Код_клиента] AS [Код_клиента], 
+    [Розничные_клиенты].[Фамилия] AS [Фамилия], 
+    [Розничные_клиенты].[Имя] AS [Имя], 
+    [Розничные_клиенты].[Организация] AS [Организация], 
+    [Розничные_клиенты].[Адрес] AS [Адрес], 
+    [Розничные_клиенты].[Номер_телефона] AS [Номер_телефона]
+    FROM [dbo].[Розничные_клиенты] AS [Розничные_клиенты]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Товарные_остатки" EntityType="Self.Товарные_остатки" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Товарные_остатки].[Код_товара] AS [Код_товара], 
+    [Товарные_остатки].[Наименование_товара] AS [Наименование_товара], 
+    [Товарные_остатки].[Тов_остаток] AS [Тов_остаток], 
+    [Товарные_остатки].[Цена] AS [Цена]
+    FROM [dbo].[Товарные_остатки] AS [Товарные_остатки]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Заказ__Код_клиен__1BFD2C07" Association="Self.FK__Заказ__Код_клиен__1BFD2C07">
+            <End Role="Клиент" EntitySet="Клиент" />
+            <End Role="Заказ" EntitySet="Заказ" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Заказ__Код_сотру__1B0907CE" Association="Self.FK__Заказ__Код_сотру__1B0907CE">
+            <End Role="Сотрудник" EntitySet="Сотрудник" />
+            <End Role="Заказ" EntitySet="Заказ" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Заказ__Код_товар__1A14E395" Association="Self.FK__Заказ__Код_товар__1A14E395">
+            <End Role="Товар" EntitySet="Товар" />
+            <End Role="Заказ" EntitySet="Заказ" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Товар__Код_поста__1ED998B2" Association="Self.FK__Товар__Код_поста__1ED998B2">
+            <End Role="Поставщик" EntitySet="Поставщик" />
+            <End Role="Товар" EntitySet="Товар" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ремонт_Клиент" Association="Self.FK_Ремонт_Клиент">
+            <End Role="Клиент" EntitySet="Клиент" />
+            <End Role="Ремонт" EntitySet="Ремонт" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ремонт_Товар" Association="Self.FK_Ремонт_Товар">
+            <End Role="Товар" EntitySet="Товар" />
+            <End Role="Ремонт" EntitySet="Ремонт" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StroitelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Клиент">
+          <Key>
+            <PropertyRef Name="Код_клиента" />
+          </Key>
+          <Property Name="Код_клиента" Type="Int32" Nullable="false" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Организация" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Адрес" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Номер_телефона" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Канал_продаж" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Ремонт" Relationship="Self.FK__Ремонт__Код_клие__1DE57479" FromRole="Клиент" ToRole="Ремонт" />
+          <NavigationProperty Name="Заказ" Relationship="StroitelModel.FK__Заказ__Код_клиен__1BFD2C07" FromRole="Клиент" ToRole="Заказ" />
+        </EntityType>
+        <EntityType Name="Поставщик">
+          <Key>
+            <PropertyRef Name="Код_поставщика" />
+          </Key>
+          <Property Name="Код_поставщика" Type="Int32" Nullable="false" />
+          <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Адрес" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Телефон" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Контактное_лицо" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Товар" Relationship="Self.FK__Товар__Код_поста__1ED998B2" FromRole="Поставщик" ToRole="Товар" />
+        </EntityType>
+        <EntityType Name="Ремонт">
+          <Key>
+            <PropertyRef Name="Номер_акта" />
+          </Key>
+          <Property Name="Номер_акта" Type="Int32" Nullable="false" />
+          <Property Name="Дата_приемки" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Готовность" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Дата_выдачи" Type="DateTime" Precision="0" />
+          <Property Name="Код_клиента" Type="Int32" />
+          <Property Name="Код_товара" Type="Int32" />
+          <Property Name="Стоимость" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Заключение" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Клиент" Relationship="Self.FK__Ремонт__Код_клие__1DE57479" FromRole="Ремонт" ToRole="Клиент" />
+          <NavigationProperty Name="Товар" Relationship="Self.FK__Ремонт__Код_това__1CF15040" FromRole="Ремонт" ToRole="Товар" />
+        </EntityType>
+        <EntityType Name="Товар">
+          <Key>
+            <PropertyRef Name="Код_товара" />
+          </Key>
+          <Property Name="Код_товара" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_товара" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Производитель" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ед_изм" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Тов_остаток" Type="Int32" Nullable="false" />
+          <Property Name="Цена" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Код_поставщика" Type="Int32" Nullable="false" />
+          <Property Name="Новинка" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Поставщик" Relationship="Self.FK__Товар__Код_поста__1ED998B2" FromRole="Товар" ToRole="Поставщик" />
+          <NavigationProperty Name="Ремонт" Relationship="Self.FK__Ремонт__Код_това__1CF15040" FromRole="Товар" ToRole="Ремонт" />
+          <NavigationProperty Name="Заказ" Relationship="StroitelModel.FK__Заказ__Код_товар__1A14E395" FromRole="Товар" ToRole="Заказ" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="login" />
+            <PropertyRef Name="password" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Клиенты_купившие_новинки">
+          <Key>
+            <PropertyRef Name="Дата_заказа" />
+            <PropertyRef Name="Наименование_товара" />
+            <PropertyRef Name="Количество" />
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Имя" />
+          </Key>
+          <Property Name="Дата_заказа" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Наименование_товара" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Количество" Type="Int32" Nullable="false" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Организация" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Новинка" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Клиенты_Могилёв">
+          <Key>
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Имя" />
+            <PropertyRef Name="Номер_телефона" />
+            <PropertyRef Name="Канал_продаж" />
+          </Key>
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Организация" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Адрес" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Номер_телефона" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Канал_продаж" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Клиенты_Область">
+          <Key>
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Имя" />
+            <PropertyRef Name="Номер_телефона" />
+            <PropertyRef Name="Канал_продаж" />
+          </Key>
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Организация" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Адрес" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Номер_телефона" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Канал_продаж" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Обзор_новинок">
+          <Key>
+            <PropertyRef Name="Код_товара" />
+            <PropertyRef Name="Наименование_товара" />
+            <PropertyRef Name="Тов_остаток" />
+            <PropertyRef Name="Цена" />
+          </Key>
+          <Property Name="Код_товара" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_товара" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Тов_остаток" Type="Int32" Nullable="false" />
+          <Property Name="Цена" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Новинка" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Отчет_по_ремонту">
+          <Key>
+            <PropertyRef Name="Дата_приемки" />
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Имя" />
+            <PropertyRef Name="Номер_телефона" />
+            <PropertyRef Name="Наименование_товара" />
+          </Key>
+          <Property Name="Дата_приемки" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Организация" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Номер_телефона" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Наименование_товара" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Стоимость" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Заключение" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Результат_сотрудников_за_день">
+          <Key>
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Имя" />
+            <PropertyRef Name="Отчество" />
+            <PropertyRef Name="Должность" />
+            <PropertyRef Name="Дата_заказа" />
+          </Key>
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Должность" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Заказы_сотрудников" Type="Int32" />
+          <Property Name="Cумма" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Дата_заказа" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Товарные_остатки">
+          <Key>
+            <PropertyRef Name="Код_товара" />
+            <PropertyRef Name="Наименование_товара" />
+            <PropertyRef Name="Тов_остаток" />
+            <PropertyRef Name="Цена" />
+          </Key>
+          <Property Name="Код_товара" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_товара" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Тов_остаток" Type="Int32" Nullable="false" />
+          <Property Name="Цена" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Ремонт__Код_клие__1DE57479">
+          <End Role="Клиент" Type="Self.Клиент" Multiplicity="0..1" />
+          <End Role="Ремонт" Type="Self.Ремонт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Клиент">
+              <PropertyRef Name="Код_клиента" />
+            </Principal>
+            <Dependent Role="Ремонт">
+              <PropertyRef Name="Код_клиента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Товар__Код_поста__1ED998B2">
+          <End Role="Поставщик" Type="Self.Поставщик" Multiplicity="1" />
+          <End Role="Товар" Type="Self.Товар" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поставщик">
+              <PropertyRef Name="Код_поставщика" />
+            </Principal>
+            <Dependent Role="Товар">
+              <PropertyRef Name="Код_поставщика" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ремонт__Код_това__1CF15040">
+          <End Role="Товар" Type="Self.Товар" Multiplicity="0..1" />
+          <End Role="Ремонт" Type="Self.Ремонт" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Товар">
+              <PropertyRef Name="Код_товара" />
+            </Principal>
+            <Dependent Role="Ремонт">
+              <PropertyRef Name="Код_товара" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StroitelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Клиент" EntityType="Self.Клиент" />
+          <EntitySet Name="Поставщик" EntityType="Self.Поставщик" />
+          <EntitySet Name="Ремонт" EntityType="Self.Ремонт" />
+          <EntitySet Name="Товар" EntityType="Self.Товар" />
+          <EntitySet Name="user" EntityType="Self.user" />
+          <EntitySet Name="Клиенты_купившие_новинки" EntityType="Self.Клиенты_купившие_новинки" />
+          <EntitySet Name="Клиенты_Могилёв" EntityType="Self.Клиенты_Могилёв" />
+          <EntitySet Name="Клиенты_Область" EntityType="Self.Клиенты_Область" />
+          <EntitySet Name="Обзор_новинок" EntityType="Self.Обзор_новинок" />
+          <EntitySet Name="Отчет_по_ремонту" EntityType="Self.Отчет_по_ремонту" />
+          <EntitySet Name="Результат_сотрудников_за_день" EntityType="Self.Результат_сотрудников_за_день" />
+          <EntitySet Name="Товарные_остатки" EntityType="Self.Товарные_остатки" />
+          <AssociationSet Name="FK__Ремонт__Код_клие__1DE57479" Association="Self.FK__Ремонт__Код_клие__1DE57479">
+            <End Role="Клиент" EntitySet="Клиент" />
+            <End Role="Ремонт" EntitySet="Ремонт" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Товар__Код_поста__1ED998B2" Association="Self.FK__Товар__Код_поста__1ED998B2">
+            <End Role="Поставщик" EntitySet="Поставщик" />
+            <End Role="Товар" EntitySet="Товар" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ремонт__Код_това__1CF15040" Association="Self.FK__Ремонт__Код_това__1CF15040">
+            <End Role="Товар" EntitySet="Товар" />
+            <End Role="Ремонт" EntitySet="Ремонт" />
+          </AssociationSet>
+          <FunctionImport Name="Add_Client">
+            <Parameter Name="Surname" Mode="In" Type="String" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Middle_name" Mode="In" Type="String" />
+            <Parameter Name="Organization" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="sales_channel" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Add_New_Product">
+            <Parameter Name="name_product" Mode="In" Type="String" />
+            <Parameter Name="manufacturer" Mode="In" Type="String" />
+            <Parameter Name="unit" Mode="In" Type="String" />
+            <Parameter Name="balance" Mode="In" Type="Int32" />
+            <Parameter Name="price" Mode="In" Type="Decimal" />
+            <Parameter Name="code_provider" Mode="In" Type="Int32" />
+            <Parameter Name="new" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Add_Personal">
+            <Parameter Name="surname" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="patronymic" Mode="In" Type="String" />
+            <Parameter Name="position" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Add_Provider">
+            <Parameter Name="organization" Mode="In" Type="String" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="contact_person" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Add_Remont">
+            <Parameter Name="act" Mode="In" Type="Int32" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+            <Parameter Name="ready" Mode="In" Type="String" />
+            <Parameter Name="date_vydachi" Mode="In" Type="DateTime" />
+            <Parameter Name="code_cl" Mode="In" Type="Int32" />
+            <Parameter Name="cod_tov" Mode="In" Type="Int32" />
+            <Parameter Name="stoim" Mode="In" Type="Decimal" />
+            <Parameter Name="zakl" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Add_Zakaz_NEW">
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Price_dostavki" Mode="In" Type="Decimal" />
+            <Parameter Name="Kolichestvo" Mode="In" Type="Int32" />
+            <Parameter Name="Skidka" Mode="In" Type="Decimal" />
+            <Parameter Name="Oplata" Mode="In" Type="String" />
+            <Parameter Name="Cod_kl" Mode="In" Type="Int32" />
+            <Parameter Name="Cod_sotr" Mode="In" Type="Int32" />
+            <Parameter Name="Cod_tovara" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Otric_oststki_NEW" ReturnType="Collection(StroitelModel.Otric_oststki_NEW_Result)" />
+          <FunctionImport Name="Prihod_Product">
+            <Parameter Name="cod_post" Mode="In" Type="Int32" />
+            <Parameter Name="code_tovara" Mode="In" Type="Int32" />
+            <Parameter Name="kolichectvo" Mode="In" Type="Int32" />
+            <Parameter Name="new_price" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(StroitelModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(StroitelModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="Tovar_ostatok_money_NEW" ReturnType="Collection(StroitelModel.Tovar_ostatok_money_NEW_Result)">
+          <Parameter Name="cod_tovara" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Вывести_из_ассортимента">
+          <Parameter Name="code_tovara" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Выдача_ремонта">
+            <Parameter Name="Act" Mode="In" Type="Int32" />
+            <Parameter Name="Ready" Mode="In" Type="String" />
+            <Parameter Name="Data_v" Mode="In" Type="DateTime" />
+            <Parameter Name="Stoim" Mode="In" Type="Decimal" />
+            <Parameter Name="Zacluch" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Заказы_Клиента" ReturnType="Collection(StroitelModel.Заказы_Клиента_Result)">
+            <Parameter Name="data_nach" Mode="In" Type="DateTime" />
+            <Parameter Name="data_okonch" Mode="In" Type="DateTime" />
+            <Parameter Name="cod_clienta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Кол_и_сумма_заказов_клиента" ReturnType="Collection(StroitelModel.Кол_и_сумма_заказов_клиента_Result)">
+            <Parameter Name="data_n" Mode="In" Type="DateTime" />
+            <Parameter Name="data_end" Mode="In" Type="DateTime" />
+            <Parameter Name="code_kl" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Курсор_кол_товарных_позиций" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="Курсор_просмотр_клиентов" ReturnType="Collection(StroitelModel.Курсор_просмотр_клиентов_Result)" />
+          <FunctionImport Name="Курсор_сумма_продаж" ReturnType="Collection(StroitelModel.Курсор_сумма_продаж_Result)" />
+          <FunctionImport Name="Поставщик_товар" ReturnType="Collection(StroitelModel.Поставщик_товар_Result)">
+          <Parameter Name="cod_post" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Работа_магазина_за_период" ReturnType="Collection(StroitelModel.Работа_магазина_за_период_Result)">
+            <Parameter Name="data_n" Mode="In" Type="DateTime" />
+            <Parameter Name="data_end" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Удаление_клиента">
+          <Parameter Name="code_klienta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Заказ" EntityType="StroitelModel.Заказ" />
+          <EntitySet Name="Сотрудник" EntityType="StroitelModel.Сотрудник" />
+          <AssociationSet Name="FK__Заказ__Код_клиен__1BFD2C07" Association="StroitelModel.FK__Заказ__Код_клиен__1BFD2C07">
+            <End Role="Клиент" EntitySet="Клиент" />
+            <End Role="Заказ" EntitySet="Заказ" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Заказ__Код_сотру__1B0907CE" Association="StroitelModel.FK__Заказ__Код_сотру__1B0907CE">
+            <End Role="Сотрудник" EntitySet="Сотрудник" />
+            <End Role="Заказ" EntitySet="Заказ" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Заказ__Код_товар__1A14E395" Association="StroitelModel.FK__Заказ__Код_товар__1A14E395">
+            <End Role="Товар" EntitySet="Товар" />
+            <End Role="Заказ" EntitySet="Заказ" />
+          </AssociationSet>
+          <FunctionImport Name="Zakaz_za_Period" ReturnType="Collection(StroitelModel.Zakaz_za_Period_Result)">
+            <Parameter Name="data_nach" Mode="In" Type="DateTime" />
+            <Parameter Name="data_okonch" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="St" ReturnType="Collection(StroitelModel.St_Result)">
+          <Parameter Name="st" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ADD_NEW_REMONT">
+            <Parameter Name="code_cl" Mode="In" Type="Int32" />
+            <Parameter Name="cod_tov" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Выведенный_ассортимент" EntityType="StroitelModel.Выведенный_ассортимент" />
+          <EntitySet Name="Удаленные_клиенты" EntityType="StroitelModel.Удаленные_клиенты" />
+          <EntitySet Name="Заказы_клиентов" EntityType="StroitelModel.Заказы_клиентов" />
+          <EntitySet Name="Оптовые_клиенты" EntityType="StroitelModel.Оптовые_клиенты" />
+          <EntitySet Name="Продажи_ОПТ_за_день" EntityType="StroitelModel.Продажи_ОПТ_за_день" />
+          <EntitySet Name="Продажи_РОЗНИЦА_за_день" EntityType="StroitelModel.Продажи_РОЗНИЦА_за_день" />
+          <EntitySet Name="Розничные_клиенты" EntityType="StroitelModel.Розничные_клиенты" />
+          <FunctionImport Name="Otchet_po_vsem_sotr_period" ReturnType="Collection(StroitelModel.Otchet_po_vsem_sotr_period_Result)">
+            <Parameter Name="data_n" Mode="In" Type="DateTime" />
+            <Parameter Name="data_end" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Otchet_ST_Interval" ReturnType="Collection(StroitelModel.Otchet_ST_Interval_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="data_n" Mode="In" Type="DateTime" />
+            <Parameter Name="data_end" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          </EntityContainer>
+        <ComplexType Name="Otric_oststki_NEW_Result">
+          <Property Type="Int32" Name="Код_поставщика" Nullable="false" />
+          <Property Type="Int32" Name="Код_товара" Nullable="false" />
+          <Property Type="String" Name="Наименование_товара" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Тов_остаток" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Tovar_ostatok_money_NEW_Result">
+          <Property Type="String" Name="Наименование_товара" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Тов_остаток" Nullable="false" />
+          <Property Type="Decimal" Name="Цена" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Стоимость_запаса" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="Заказы_Клиента_Result">
+          <Property Type="Int32" Name="Код_заказа" Nullable="false" />
+          <Property Type="DateTime" Name="Дата_заказа" Nullable="false" />
+          <Property Type="String" Name="Фамилия" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Имя" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Организация" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Наименование_товара" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Количество" Nullable="false" />
+          <Property Type="Decimal" Name="Цена" Nullable="false" Precision="19" />
+          <Property Type="String" Name="Оплата" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Канал_продаж" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Скидка" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Сумма_заказа" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="Курсор_просмотр_клиентов_Result">
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+          <Property Type="String" Name="Column2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Column3" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Column4" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Column5" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Column6" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Column7" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Column8" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Курсор_сумма_продаж_Result">
+          <Property Type="Int32" Name="Number" Nullable="true" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="Работа_магазина_за_период_Result">
+          <Property Type="Int32" Name="Количество_заказов" Nullable="true" />
+          <Property Type="Decimal" Name="Cумма_Заказов" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Сумма_доставок" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Сумма_скидок" Nullable="true" Precision="19" />
+        </ComplexType>
+        <EntityType Name="Заказ">
+          <Key>
+            <PropertyRef Name="Код_заказа" />
+          </Key>
+          <Property Name="Код_заказа" Type="Int32" Nullable="false" />
+          <Property Name="Дата_заказа" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Стоимость_доставки" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Количество" Type="Int32" Nullable="false" />
+          <Property Name="Скидка" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Оплата" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Код_клиента" Type="Int32" Nullable="false" />
+          <Property Name="Код_сотрудника" Type="Int32" Nullable="false" />
+          <Property Name="Код_товара" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Клиент" Relationship="StroitelModel.FK__Заказ__Код_клиен__1BFD2C07" FromRole="Заказ" ToRole="Клиент" />
+          <NavigationProperty Name="Сотрудник" Relationship="StroitelModel.FK__Заказ__Код_сотру__1B0907CE" FromRole="Заказ" ToRole="Сотрудник" />
+          <NavigationProperty Name="Товар" Relationship="StroitelModel.FK__Заказ__Код_товар__1A14E395" FromRole="Заказ" ToRole="Товар" />
+          <Property Name="Сумма_заказа" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="Сотрудник">
+          <Key>
+            <PropertyRef Name="Код_сотрудника" />
+          </Key>
+          <Property Name="Код_сотрудника" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Фамилия" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Имя" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Отчество" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Должность" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Телефон" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Заказ" Relationship="StroitelModel.FK__Заказ__Код_сотру__1B0907CE" FromRole="Сотрудник" ToRole="Заказ" />
+        </EntityType>
+        <Association Name="FK__Заказ__Код_клиен__1BFD2C07">
+          <End Type="StroitelModel.Клиент" Role="Клиент" Multiplicity="1" />
+          <End Type="StroitelModel.Заказ" Role="Заказ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Клиент">
+              <PropertyRef Name="Код_клиента" />
+            </Principal>
+            <Dependent Role="Заказ">
+              <PropertyRef Name="Код_клиента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Заказ__Код_сотру__1B0907CE">
+          <End Type="StroitelModel.Сотрудник" Role="Сотрудник" Multiplicity="1" />
+          <End Type="StroitelModel.Заказ" Role="Заказ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудник">
+              <PropertyRef Name="Код_сотрудника" />
+            </Principal>
+            <Dependent Role="Заказ">
+              <PropertyRef Name="Код_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Заказ__Код_товар__1A14E395">
+          <End Type="StroitelModel.Товар" Role="Товар" Multiplicity="1" />
+          <End Type="StroitelModel.Заказ" Role="Заказ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Товар">
+              <PropertyRef Name="Код_товара" />
+            </Principal>
+            <Dependent Role="Заказ">
+              <PropertyRef Name="Код_товара" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Zakaz_za_Period_Result">
+          <Property Type="Int32" Name="Код_заказа" Nullable="false" />
+          <Property Type="DateTime" Name="Дата_заказа" Nullable="false" />
+          <Property Type="String" Name="Фамилия" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Имя" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Организация" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Наименование_товара" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Количество" Nullable="false" />
+          <Property Type="Decimal" Name="Цена" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Сумма_заказа" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="St_Result">
+          <Property Type="Int32" Name="Код_товара" Nullable="false" />
+          <Property Type="String" Name="Наименование_товара" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Производитель" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Ед_изм" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Тов_остаток" Nullable="false" />
+          <Property Type="Decimal" Name="Цена" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="Код_поставщика" Nullable="false" />
+          <Property Type="String" Name="Новинка" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="Выведенный_ассортимент">
+          <Key>
+            <PropertyRef Name="Код_товара" />
+            <PropertyRef Name="Наименование_товара" />
+            <PropertyRef Name="Производитель" />
+            <PropertyRef Name="Ед_изм" />
+            <PropertyRef Name="Тов_остаток" />
+            <PropertyRef Name="Цена" />
+            <PropertyRef Name="Код_поставщика" />
+            <PropertyRef Name="Новинка" />
+          </Key>
+          <Property Name="Код_товара" Type="Int32" Nullable="false" />
+          <Property Name="Наименование_товара" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Производитель" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ед_изм" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Тов_остаток" Type="Int32" Nullable="false" />
+          <Property Name="Цена" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Код_поставщика" Type="Int32" Nullable="false" />
+          <Property Name="Новинка" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Удаленные_клиенты">
+          <Key>
+            <PropertyRef Name="Код_клиента" />
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Имя" />
+            <PropertyRef Name="Отчество" />
+            <PropertyRef Name="Адрес" />
+            <PropertyRef Name="Номер_телефона" />
+            <PropertyRef Name="Канал_продаж" />
+            <PropertyRef Name="Дата_удаления" />
+          </Key>
+          <Property Name="Код_клиента" Type="Int32" Nullable="false" />
+          <Property Name="Фамилия" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Имя" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Отчество" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Организация" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Адрес" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Номер_телефона" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Канал_продаж" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Дата_удаления" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Заказы_клиентов">
+          <Key>
+            <PropertyRef Name="Код_заказа" />
+            <PropertyRef Name="Дата_заказа" />
+            <PropertyRef Name="Наименование_товара" />
+            <PropertyRef Name="Количество" />
+            <PropertyRef Name="Цена" />
+            <PropertyRef Name="Фамилия" />
+          </Key>
+          <Property Name="Код_заказа" Type="Int32" Nullable="false" />
+          <Property Name="Дата_заказа" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Организация" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Наименование_товара" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Количество" Type="Int32" Nullable="false" />
+          <Property Name="Цена" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Expr1" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Фамилия" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Оптовые_клиенты">
+          <Key>
+            <PropertyRef Name="Код_клиента" />
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Имя" />
+            <PropertyRef Name="Номер_телефона" />
+          </Key>
+          <Property Name="Код_клиента" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Фамилия" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Имя" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Организация" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Адрес" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Номер_телефона" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Продажи_ОПТ_за_день">
+          <Key>
+            <PropertyRef Name="Канал_продаж" />
+          </Key>
+          <Property Name="Количество_заказов_опт" Type="Int32" />
+          <Property Name="Сумма_продаж" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Канал_продаж" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Продажи_РОЗНИЦА_за_день">
+          <Key>
+            <PropertyRef Name="Канал_продаж" />
+          </Key>
+          <Property Name="Количество_заказов_розница" Type="Int32" />
+          <Property Name="Сумма_продаж" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Канал_продаж" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Розничные_клиенты">
+          <Key>
+            <PropertyRef Name="Код_клиента" />
+            <PropertyRef Name="Фамилия" />
+            <PropertyRef Name="Имя" />
+            <PropertyRef Name="Номер_телефона" />
+          </Key>
+          <Property Name="Код_клиента" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Фамилия" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Имя" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Организация" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Адрес" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Номер_телефона" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="Otchet_po_vsem_sotr_period_Result">
+          <Property Type="String" Name="Фамилия" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Имя" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Отчество" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Должность" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Количество_заказов" Nullable="true" />
+          <Property Type="Decimal" Name="Cумма_Заказов" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="Otchet_ST_Interval_Result">
+          <Property Type="String" Name="Фамилия" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Имя" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Отчество" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Должность" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Количество_заказов" Nullable="true" />
+          <Property Type="Decimal" Name="Cумма_Заказов" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="Кол_и_сумма_заказов_клиента_Result">
+          <Property Type="String" Name="Фамилия" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Имя" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Организация" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Канал_продаж" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Заказы_клиента" Nullable="true" />
+          <Property Type="Decimal" Name="Cумма" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="Поставщик_товар_Result">
+          <Property Type="String" Name="Наименование_товара" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Тов_остаток" Nullable="false" />
+          <Property Type="Decimal" Name="Цена" Nullable="false" Precision="19" />
+        </ComplexType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище StroitelModelContainer" CdmEntityContainer="StroitelEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="StroitelModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Клиент">
+            <EntityTypeMapping TypeName="StroitelModel.Клиент">
+              <MappingFragment StoreEntitySet="Клиент">
+                <ScalarProperty Name="Код_клиента" ColumnName="Код_клиента" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Организация" ColumnName="Организация" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+                <ScalarProperty Name="Номер_телефона" ColumnName="Номер_телефона" />
+                <ScalarProperty Name="Канал_продаж" ColumnName="Канал_продаж" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Поставщик">
+            <EntityTypeMapping TypeName="StroitelModel.Поставщик">
+              <MappingFragment StoreEntitySet="Поставщик">
+                <ScalarProperty Name="Код_поставщика" ColumnName="Код_поставщика" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="Контактное_лицо" ColumnName="Контактное_лицо" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ремонт">
+            <EntityTypeMapping TypeName="StroitelModel.Ремонт">
+              <MappingFragment StoreEntitySet="Ремонт">
+                <ScalarProperty Name="Номер_акта" ColumnName="Номер_акта" />
+                <ScalarProperty Name="Дата_приемки" ColumnName="Дата_приемки" />
+                <ScalarProperty Name="Готовность" ColumnName="Готовность" />
+                <ScalarProperty Name="Дата_выдачи" ColumnName="Дата_выдачи" />
+                <ScalarProperty Name="Код_клиента" ColumnName="Код_клиента" />
+                <ScalarProperty Name="Код_товара" ColumnName="Код_товара" />
+                <ScalarProperty Name="Стоимость" ColumnName="Стоимость" />
+                <ScalarProperty Name="Заключение" ColumnName="Заключение" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Товар">
+            <EntityTypeMapping TypeName="StroitelModel.Товар">
+              <MappingFragment StoreEntitySet="Товар">
+                <ScalarProperty Name="Код_товара" ColumnName="Код_товара" />
+                <ScalarProperty Name="Наименование_товара" ColumnName="Наименование_товара" />
+                <ScalarProperty Name="Производитель" ColumnName="Производитель" />
+                <ScalarProperty Name="Ед_изм" ColumnName="Ед_изм" />
+                <ScalarProperty Name="Тов_остаток" ColumnName="Тов_остаток" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="Код_поставщика" ColumnName="Код_поставщика" />
+                <ScalarProperty Name="Новинка" ColumnName="Новинка" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user">
+            <EntityTypeMapping TypeName="StroitelModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Клиенты_купившие_новинки">
+            <EntityTypeMapping TypeName="StroitelModel.Клиенты_купившие_новинки">
+              <MappingFragment StoreEntitySet="Клиенты_купившие_новинки">
+                <ScalarProperty Name="Дата_заказа" ColumnName="Дата_заказа" />
+                <ScalarProperty Name="Наименование_товара" ColumnName="Наименование_товара" />
+                <ScalarProperty Name="Количество" ColumnName="Количество" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Организация" ColumnName="Организация" />
+                <ScalarProperty Name="Новинка" ColumnName="Новинка" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Клиенты_Могилёв">
+            <EntityTypeMapping TypeName="StroitelModel.Клиенты_Могилёв">
+              <MappingFragment StoreEntitySet="Клиенты_Могилёв">
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Организация" ColumnName="Организация" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+                <ScalarProperty Name="Номер_телефона" ColumnName="Номер_телефона" />
+                <ScalarProperty Name="Канал_продаж" ColumnName="Канал_продаж" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Клиенты_Область">
+            <EntityTypeMapping TypeName="StroitelModel.Клиенты_Область">
+              <MappingFragment StoreEntitySet="Клиенты_Область">
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Организация" ColumnName="Организация" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+                <ScalarProperty Name="Номер_телефона" ColumnName="Номер_телефона" />
+                <ScalarProperty Name="Канал_продаж" ColumnName="Канал_продаж" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Обзор_новинок">
+            <EntityTypeMapping TypeName="StroitelModel.Обзор_новинок">
+              <MappingFragment StoreEntitySet="Обзор_новинок">
+                <ScalarProperty Name="Код_товара" ColumnName="Код_товара" />
+                <ScalarProperty Name="Наименование_товара" ColumnName="Наименование_товара" />
+                <ScalarProperty Name="Тов_остаток" ColumnName="Тов_остаток" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="Новинка" ColumnName="Новинка" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Отчет_по_ремонту">
+            <EntityTypeMapping TypeName="StroitelModel.Отчет_по_ремонту">
+              <MappingFragment StoreEntitySet="Отчет_по_ремонту">
+                <ScalarProperty Name="Дата_приемки" ColumnName="Дата_приемки" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Организация" ColumnName="Организация" />
+                <ScalarProperty Name="Номер_телефона" ColumnName="Номер_телефона" />
+                <ScalarProperty Name="Наименование_товара" ColumnName="Наименование_товара" />
+                <ScalarProperty Name="Стоимость" ColumnName="Стоимость" />
+                <ScalarProperty Name="Заключение" ColumnName="Заключение" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Результат_сотрудников_за_день">
+            <EntityTypeMapping TypeName="StroitelModel.Результат_сотрудников_за_день">
+              <MappingFragment StoreEntitySet="Результат_сотрудников_за_день">
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Должность" ColumnName="Должность" />
+                <ScalarProperty Name="Заказы_сотрудников" ColumnName="Заказы_сотрудников" />
+                <ScalarProperty Name="Cумма" ColumnName="Cумма" />
+                <ScalarProperty Name="Дата_заказа" ColumnName="Дата_заказа" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Товарные_остатки">
+            <EntityTypeMapping TypeName="StroitelModel.Товарные_остатки">
+              <MappingFragment StoreEntitySet="Товарные_остатки">
+                <ScalarProperty Name="Код_товара" ColumnName="Код_товара" />
+                <ScalarProperty Name="Наименование_товара" ColumnName="Наименование_товара" />
+                <ScalarProperty Name="Тов_остаток" ColumnName="Тов_остаток" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Add_Client" FunctionName="Хранилище StroitelModel.Add_Client" />
+          <FunctionImportMapping FunctionImportName="Add_New_Product" FunctionName="Хранилище StroitelModel.Add_New_Product" />
+          <FunctionImportMapping FunctionImportName="Add_Personal" FunctionName="Хранилище StroitelModel.Add_Personal" />
+          <FunctionImportMapping FunctionImportName="Add_Provider" FunctionName="Хранилище StroitelModel.Add_Provider" />
+          <FunctionImportMapping FunctionImportName="Add_Remont" FunctionName="Хранилище StroitelModel.Add_Remont" />
+          <FunctionImportMapping FunctionImportName="Add_Zakaz_NEW" FunctionName="Хранилище StroitelModel.Add_Zakaz_NEW" />
+          <FunctionImportMapping FunctionImportName="Otric_oststki_NEW" FunctionName="Хранилище StroitelModel.Otric_oststki_NEW">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StroitelModel.Otric_oststki_NEW_Result">
+                <ScalarProperty Name="Код_поставщика" ColumnName="Код_поставщика" />
+                <ScalarProperty Name="Код_товара" ColumnName="Код_товара" />
+                <ScalarProperty Name="Наименование_товара" ColumnName="Наименование_товара" />
+                <ScalarProperty Name="Тов_остаток" ColumnName="Тов_остаток" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Prihod_Product" FunctionName="Хранилище StroitelModel.Prihod_Product" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище StroitelModel.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище StroitelModel.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище StroitelModel.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище StroitelModel.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StroitelModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище StroitelModel.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StroitelModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище StroitelModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище StroitelModel.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="Tovar_ostatok_money_NEW" FunctionName="Хранилище StroitelModel.Tovar_ostatok_money_NEW">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StroitelModel.Tovar_ostatok_money_NEW_Result">
+                <ScalarProperty Name="Наименование_товара" ColumnName="Наименование_товара" />
+                <ScalarProperty Name="Тов_остаток" ColumnName="Тов_остаток" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="Стоимость_запаса" ColumnName="Стоимость_запаса" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Вывести_из_ассортимента" FunctionName="Хранилище StroitelModel.Вывести_из_ассортимента" />
+          <FunctionImportMapping FunctionImportName="Выдача_ремонта" FunctionName="Хранилище StroitelModel.Выдача_ремонта" />
+          <FunctionImportMapping FunctionImportName="Заказы_Клиента" FunctionName="Хранилище StroitelModel.Заказы_Клиента">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StroitelModel.Заказы_Клиента_Result">
+                <ScalarProperty Name="Код_заказа" ColumnName="Код_заказа" />
+                <ScalarProperty Name="Дата_заказа" ColumnName="Дата_заказа" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Организация" ColumnName="Организация" />
+                <ScalarProperty Name="Наименование_товара" ColumnName="Наименование_товара" />
+                <ScalarProperty Name="Количество" ColumnName="Количество" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="Оплата" ColumnName="Оплата" />
+                <ScalarProperty Name="Канал_продаж" ColumnName="Канал_продаж" />
+                <ScalarProperty Name="Скидка" ColumnName="Скидка" />
+                <ScalarProperty Name="Сумма_заказа" ColumnName="Сумма_заказа" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Кол_и_сумма_заказов_клиента" FunctionName="Хранилище StroitelModel.Кол_и_сумма_заказов_клиента">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StroitelModel.Кол_и_сумма_заказов_клиента_Result">
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Организация" ColumnName="Организация" />
+                <ScalarProperty Name="Канал_продаж" ColumnName="Канал_продаж" />
+                <ScalarProperty Name="Заказы_клиента" ColumnName="Заказы_клиента" />
+                <ScalarProperty Name="Cумма" ColumnName="Cумма" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Курсор_кол_товарных_позиций" FunctionName="Хранилище StroitelModel.Курсор_кол_товарных_позиций" />
+          <FunctionImportMapping FunctionImportName="Курсор_просмотр_клиентов" FunctionName="Хранилище StroitelModel.Курсор_просмотр_клиентов">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StroitelModel.Курсор_просмотр_клиентов_Result">
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="Column2" ColumnName="Column2" />
+                <ScalarProperty Name="Column3" ColumnName="Column3" />
+                <ScalarProperty Name="Column4" ColumnName="Column4" />
+                <ScalarProperty Name="Column5" ColumnName="Column5" />
+                <ScalarProperty Name="Column6" ColumnName="Column6" />
+                <ScalarProperty Name="Column7" ColumnName="Column7" />
+                <ScalarProperty Name="Column8" ColumnName="Column8" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Курсор_сумма_продаж" FunctionName="Хранилище StroitelModel.Курсор_сумма_продаж">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StroitelModel.Курсор_сумма_продаж_Result">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Поставщик_товар" FunctionName="Хранилище StroitelModel.Поставщик_товар">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StroitelModel.Поставщик_товар_Result">
+                <ScalarProperty Name="Наименование_товара" ColumnName="Наименование_товара" />
+                <ScalarProperty Name="Тов_остаток" ColumnName="Тов_остаток" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Работа_магазина_за_период" FunctionName="Хранилище StroitelModel.Работа_магазина_за_период">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StroitelModel.Работа_магазина_за_период_Result">
+                <ScalarProperty Name="Количество_заказов" ColumnName="Количество_заказов" />
+                <ScalarProperty Name="Cумма_Заказов" ColumnName="Cумма_Заказов" />
+                <ScalarProperty Name="Сумма_доставок" ColumnName="Сумма_доставок" />
+                <ScalarProperty Name="Сумма_скидок" ColumnName="Сумма_скидок" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Удаление_клиента" FunctionName="Хранилище StroitelModel.Удаление_клиента" />
+          <EntitySetMapping Name="Заказ">
+            <EntityTypeMapping TypeName="StroitelModel.Заказ">
+              <MappingFragment StoreEntitySet="Заказ">
+                <ScalarProperty Name="Сумма_заказа" ColumnName="Сумма_заказа" />
+                <ScalarProperty Name="Код_товара" ColumnName="Код_товара" />
+                <ScalarProperty Name="Код_сотрудника" ColumnName="Код_сотрудника" />
+                <ScalarProperty Name="Код_клиента" ColumnName="Код_клиента" />
+                <ScalarProperty Name="Оплата" ColumnName="Оплата" />
+                <ScalarProperty Name="Скидка" ColumnName="Скидка" />
+                <ScalarProperty Name="Количество" ColumnName="Количество" />
+                <ScalarProperty Name="Стоимость_доставки" ColumnName="Стоимость_доставки" />
+                <ScalarProperty Name="Дата_заказа" ColumnName="Дата_заказа" />
+                <ScalarProperty Name="Код_заказа" ColumnName="Код_заказа" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сотрудник">
+            <EntityTypeMapping TypeName="StroitelModel.Сотрудник">
+              <MappingFragment StoreEntitySet="Сотрудник">
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="Должность" ColumnName="Должность" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Код_сотрудника" ColumnName="Код_сотрудника" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Zakaz_za_Period" FunctionName="Хранилище StroitelModel.Zakaz_za_Period">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StroitelModel.Zakaz_za_Period_Result">
+                <ScalarProperty Name="Код_заказа" ColumnName="Код_заказа" />
+                <ScalarProperty Name="Дата_заказа" ColumnName="Дата_заказа" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Организация" ColumnName="Организация" />
+                <ScalarProperty Name="Наименование_товара" ColumnName="Наименование_товара" />
+                <ScalarProperty Name="Количество" ColumnName="Количество" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="Сумма_заказа" ColumnName="Сумма_заказа" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="St" FunctionName="Хранилище StroitelModel.St" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StroitelModel.St_Result">
+                <ScalarProperty Name="Код_товара" ColumnName="Код_товара" />
+                <ScalarProperty Name="Наименование_товара" ColumnName="Наименование_товара" />
+                <ScalarProperty Name="Производитель" ColumnName="Производитель" />
+                <ScalarProperty Name="Ед_изм" ColumnName="Ед_изм" />
+                <ScalarProperty Name="Тов_остаток" ColumnName="Тов_остаток" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="Код_поставщика" ColumnName="Код_поставщика" />
+                <ScalarProperty Name="Новинка" ColumnName="Новинка" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ADD_NEW_REMONT" FunctionName="Хранилище StroitelModel.ADD_NEW_REMONT" />
+          <EntitySetMapping Name="Выведенный_ассортимент">
+            <EntityTypeMapping TypeName="StroitelModel.Выведенный_ассортимент">
+              <MappingFragment StoreEntitySet="Выведенный_ассортимент">
+                <ScalarProperty Name="Новинка" ColumnName="Новинка" />
+                <ScalarProperty Name="Код_поставщика" ColumnName="Код_поставщика" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="Тов_остаток" ColumnName="Тов_остаток" />
+                <ScalarProperty Name="Ед_изм" ColumnName="Ед_изм" />
+                <ScalarProperty Name="Производитель" ColumnName="Производитель" />
+                <ScalarProperty Name="Наименование_товара" ColumnName="Наименование_товара" />
+                <ScalarProperty Name="Код_товара" ColumnName="Код_товара" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Удаленные_клиенты">
+            <EntityTypeMapping TypeName="StroitelModel.Удаленные_клиенты">
+              <MappingFragment StoreEntitySet="Удаленные_клиенты">
+                <ScalarProperty Name="Дата_удаления" ColumnName="Дата_удаления" />
+                <ScalarProperty Name="Канал_продаж" ColumnName="Канал_продаж" />
+                <ScalarProperty Name="Номер_телефона" ColumnName="Номер_телефона" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+                <ScalarProperty Name="Организация" ColumnName="Организация" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Код_клиента" ColumnName="Код_клиента" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Заказы_клиентов">
+            <EntityTypeMapping TypeName="StroitelModel.Заказы_клиентов">
+              <MappingFragment StoreEntitySet="Заказы_клиентов">
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="Количество" ColumnName="Количество" />
+                <ScalarProperty Name="Наименование_товара" ColumnName="Наименование_товара" />
+                <ScalarProperty Name="Организация" ColumnName="Организация" />
+                <ScalarProperty Name="Дата_заказа" ColumnName="Дата_заказа" />
+                <ScalarProperty Name="Код_заказа" ColumnName="Код_заказа" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Оптовые_клиенты">
+            <EntityTypeMapping TypeName="StroitelModel.Оптовые_клиенты">
+              <MappingFragment StoreEntitySet="Оптовые_клиенты">
+                <ScalarProperty Name="Номер_телефона" ColumnName="Номер_телефона" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+                <ScalarProperty Name="Организация" ColumnName="Организация" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Код_клиента" ColumnName="Код_клиента" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Продажи_ОПТ_за_день">
+            <EntityTypeMapping TypeName="StroitelModel.Продажи_ОПТ_за_день">
+              <MappingFragment StoreEntitySet="Продажи_ОПТ_за_день">
+                <ScalarProperty Name="Канал_продаж" ColumnName="Канал_продаж" />
+                <ScalarProperty Name="Сумма_продаж" ColumnName="Сумма_продаж" />
+                <ScalarProperty Name="Количество_заказов_опт" ColumnName="Количество_заказов_опт" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Продажи_РОЗНИЦА_за_день">
+            <EntityTypeMapping TypeName="StroitelModel.Продажи_РОЗНИЦА_за_день">
+              <MappingFragment StoreEntitySet="Продажи_РОЗНИЦА_за_день">
+                <ScalarProperty Name="Канал_продаж" ColumnName="Канал_продаж" />
+                <ScalarProperty Name="Сумма_продаж" ColumnName="Сумма_продаж" />
+                <ScalarProperty Name="Количество_заказов_розница" ColumnName="Количество_заказов_розница" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Розничные_клиенты">
+            <EntityTypeMapping TypeName="StroitelModel.Розничные_клиенты">
+              <MappingFragment StoreEntitySet="Розничные_клиенты">
+                <ScalarProperty Name="Номер_телефона" ColumnName="Номер_телефона" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+                <ScalarProperty Name="Организация" ColumnName="Организация" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Код_клиента" ColumnName="Код_клиента" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Otchet_po_vsem_sotr_period" FunctionName="Хранилище StroitelModel.Otchet_po_vsem_sotr_period">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StroitelModel.Otchet_po_vsem_sotr_period_Result">
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Должность" ColumnName="Должность" />
+                <ScalarProperty Name="Количество_заказов" ColumnName="Количество_заказов" />
+                <ScalarProperty Name="Cумма_Заказов" ColumnName="Cумма_Заказов" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Otchet_ST_Interval" FunctionName="Хранилище StroitelModel.Otchet_ST_Interval">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StroitelModel.Otchet_ST_Interval_Result">
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Должность" ColumnName="Должность" />
+                <ScalarProperty Name="Количество_заказов" ColumnName="Количество_заказов" />
+                <ScalarProperty Name="Cумма_Заказов" ColumnName="Cумма_Заказов" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

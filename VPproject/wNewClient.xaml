@@ -1,0 +1,354 @@
+﻿<Window x:Class="VPproject.wNewClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VPproject"
+        mc:Ignorable="d"
+        Title="Карточка нового клиента" Height="500" Width="500" Icon="Images/drill.ico">
+    
+    <StackPanel Background="{StaticResource LGB}" Margin="0,0,0,-3" >
+
+        <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
+            <Label x:Name="FamСl" 
+                   Content="Фамилия" 
+                   Height="28" Margin="0,14,200,15" 
+                   Background="Transparent" 
+                   Foreground="White"
+                   FontStyle="Italic"
+                   Width="187" 
+                   FontSize="14"/>
+
+            <TextBox 
+                x:Name="tbFamCl"  
+                Height="30"  
+                Margin="-170,0,0,0"  
+                Width="190" 
+                VerticalContentAlignment="Center" 
+                Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14">
+
+                <TextBox.Text>
+                    <Binding Path="Surname" >
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Validation.ErrorTemplate">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <DockPanel LastChildFill="True">
+                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
+                                                       Text="**"/>
+                                        <Border BorderBrush="Red" BorderThickness="2">
+                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
+                                        </Border>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                                <Setter Property="ToolTip" Value="Недопустимое значение в поле"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
+            <Label x:Name="NameCl"
+                   Foreground="White"
+                   FontStyle="Italic"
+                   Content="Имя" Height="28" 
+                   Margin="0,14,200,15" 
+                   Background="Transparent"  
+                   Width="187" FontSize="14"/>
+            <TextBox x:Name="tbNameCl"  
+                     Height="30"  
+                     Margin="-170,0,0,0"  
+                     Width="190" 
+                     VerticalContentAlignment="Center" 
+                     Padding="5,0,0,0" 
+                     ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14">
+
+                <TextBox.Text>
+                    <Binding Path="Name" >
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Validation.ErrorTemplate">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <DockPanel LastChildFill="True">
+                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
+                                                       Text="**"/>
+                                        <Border BorderBrush="Red" BorderThickness="2">
+                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
+                                        </Border>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                                <Setter Property="ToolTip" Value="Недопустимое значение в поле"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
+            <Label x:Name="PatCl"
+                    Foreground="White"
+                   FontStyle="Italic"
+                   Content="Отчество" 
+                   Height="28" 
+                   Margin="0,14,200,15" 
+                   Background="Transparent"  
+                   Width="187" FontSize="14"/>
+            
+            <TextBox x:Name="tbPatCl"  
+                    Height="30"  
+                    Margin="-170,0,0,0"  
+                    Width="190" 
+                    VerticalContentAlignment="Center" 
+                    Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14">
+
+                <TextBox.Text>
+                    <Binding Path="Patronymic" >
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Validation.ErrorTemplate">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <DockPanel LastChildFill="True">
+                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
+                                                       Text="**"/>
+                                        <Border BorderBrush="Red" BorderThickness="2">
+                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
+                                        </Border>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                                <Setter Property="ToolTip" Value="Недопустимое значение в поле"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
+            <Label x:Name="ClOrg"
+                    Foreground="White"
+                   FontStyle="Italic"
+                   Content="Организация" 
+                   Height="28" 
+                   Margin="0,14,200,15" 
+                   Background="Transparent"  
+                   Width="187" FontSize="14"/>
+
+            <TextBox x:Name="tbOrgCl"  
+                     Height="30"  
+                     Margin="-170,0,0,0"  
+                     Width="190" 
+                     VerticalContentAlignment="Center" 
+                     Padding="5,0,0,0" 
+                     ScrollViewer.CanContentScroll="True" 
+                     AcceptsReturn="True" FontSize="14">
+
+                <TextBox.Text>
+                    <Binding Path="Company" >
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Validation.ErrorTemplate">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <DockPanel LastChildFill="True">
+                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
+                                                       Text="**"/>
+                                        <Border BorderBrush="Red" BorderThickness="2">
+                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
+                                        </Border>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                                <Setter Property="ToolTip" Value="Недопустимое значение в поле"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+
+            </TextBox>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
+            <Label x:Name="AdressCl"
+                    Foreground="White"
+                   FontStyle="Italic"
+                   Content="Адрес клиента" 
+                   Height="28" 
+                   Margin="0,14,200,15" 
+                   Background="Transparent"  
+                   Width="187" FontSize="14"/>
+
+            <TextBox x:Name="tbAdCl"  
+                     Height="30"  
+                     Margin="-170,0,0,0"  
+                     Width="190" 
+                     VerticalContentAlignment="Center" 
+                     Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" AcceptsReturn="True" FontSize="14">
+
+                <TextBox.Text>
+                    <Binding Path="Adress" >
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Validation.ErrorTemplate">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <DockPanel LastChildFill="True">
+                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
+                                                       Text="**"/>
+                                        <Border BorderBrush="Red" BorderThickness="2">
+                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
+                                        </Border>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                                <Setter Property="ToolTip" Value="Недопустимое значение в поле"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+
+            </TextBox>
+        </StackPanel>
+
+
+        <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
+            <Label x:Name="TelephoneCl"
+                    Foreground="White"
+                   FontStyle="Italic"
+                   Content="Телефон" 
+                   Height="28" 
+                   Margin="0,14,200,15" 
+                   Background="Transparent"  
+                   Width="187" FontSize="14"/>
+            <TextBox x:Name="tbTelephoneCl"  
+                     Height="30"  
+                     Margin="-170,0,0,0" 
+                     Width="190" 
+                     VerticalContentAlignment="Center" 
+                     Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14">
+
+                <TextBox.Text>
+                    <Binding Path="Phone" >
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Validation.ErrorTemplate">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <DockPanel LastChildFill="True">
+                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
+                                                       Text="**"/>
+                                        <Border BorderBrush="Red" BorderThickness="2">
+                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
+                                        </Border>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                                <Setter Property="ToolTip" Value="Недопустимое значение в поле"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+
+            </TextBox>
+        </StackPanel>
+
+
+        <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
+            <Label x:Name="CanalCl" 
+                    Foreground="White"
+                   FontStyle="Italic"
+                   Content="Канал продаж" 
+                   Height="28" 
+                   Margin="0,14,200,15" 
+                   Background="Transparent"  
+                   Width="187" FontSize="14"/>
+
+            <ComboBox x:Name="tbCanalCl" Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True"  FontSize="14">
+                <TextBlock>опт</TextBlock>
+                <TextBlock>розница</TextBlock>
+            </ComboBox>
+            
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center" Margin="42,0,28,0" Width="422">
+
+            <Button Content="Добавить" Width="100" Height="30" Margin="156,0,0,0" Background="Green" FontStyle="Italic" Click="AddNewClient" />
+
+            <Button Content="Очистить" Width="100" Height="30" Margin="50,0,0,0" Background="Red" FontStyle="Italic" Click="ClearNewCl" />
+
+        </StackPanel>
+
+    </StackPanel>
+</Window>
