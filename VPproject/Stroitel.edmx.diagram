@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="38fecff652de4d62ae66c7e1bfd8d161" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="StroitelModel.sysdiagrams" Width="1.5" PointX="0.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StroitelModel.Клиент" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StroitelModel.Поставщик" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StroitelModel.Ремонт" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StroitelModel.Товар" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StroitelModel.user" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StroitelModel.Клиенты_купившие_новинки" Width="2.75" PointX="10.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StroitelModel.Клиенты_Могилёв" Width="1.75" PointX="14.125" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StroitelModel.Клиенты_Область" Width="1.5" PointX="16" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StroitelModel.Обзор_новинок" Width="1.75" PointX="10.375" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StroitelModel.Отчет_по_ремонту" Width="1.75" PointX="10.375" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StroitelModel.Результат_сотрудников_за_день" Width="2.625" PointX="12.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StroitelModel.Товарные_остатки" Width="1.75" PointX="12.25" PointY="8.875" IsExpanded="true" />
+        <AssociationConnector Association="StroitelModel.FK__Ремонт__Код_клие__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="StroitelModel.FK__Товар__Код_поста__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="StroitelModel.FK__Ремонт__Код_това__1CF15040" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="StroitelModel.Заказ" Width="1.5" PointX="5.25" PointY="2.875" />
+        <EntityTypeShape EntityType="StroitelModel.Сотрудник" Width="1.5" PointX="3" PointY="9.375" />
+        <AssociationConnector Association="StroitelModel.FK__Заказ__Код_клиен__1BFD2C07" />
+        <AssociationConnector Association="StroitelModel.FK__Заказ__Код_сотру__1B0907CE" />
+        <AssociationConnector Association="StroitelModel.FK__Заказ__Код_товар__1A14E395" />
+        <EntityTypeShape EntityType="StroitelModel.Выведенный_ассортимент" Width="2.5" PointX="13" PointY="3.25" />
+        <EntityTypeShape EntityType="StroitelModel.Удаленные_клиенты" Width="2.5" PointX="10.375" PointY="3.25" />
+        <EntityTypeShape EntityType="StroitelModel.Заказы_клиентов" Width="1.75" PointX="15" PointY="6.125" />
+        <EntityTypeShape EntityType="StroitelModel.Оптовые_клиенты" Width="1.75" PointX="15.625" PointY="3.25" />
+        <EntityTypeShape EntityType="StroitelModel.Продажи_ОПТ_за_день" Width="2.125" PointX="16.25" PointY="0.75" />
+        <EntityTypeShape EntityType="StroitelModel.Продажи_РОЗНИЦА_за_день" Width="2.5" PointX="13.5" PointY="0.75" />
+        <EntityTypeShape EntityType="StroitelModel.Розничные_клиенты" Width="1.875" PointX="17.5" PointY="3.25" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
