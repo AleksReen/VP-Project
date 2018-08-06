@@ -109,12 +109,8 @@
                 Width="100" 
                 Height="30" 
                 Margin="10,0,0,0"                
-                Background="Green"
-                Foreground="White"
-                BorderThickness="1"
-                BorderBrush="Black"
-                Click="clFindProvider"
-                FontStyle="Italic"/>
+                Style="{StaticResource ButtonGreen}"               
+                Click="clFindProvider"/>
 
         </ToolBar>
 

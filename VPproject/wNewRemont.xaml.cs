@@ -24,6 +24,7 @@ namespace VPproject
                 if (result == MessageBoxResult.OK)
                 {
                     dbContext.ADD_NEW_REMONT(cl, pr);
+                    Clear();
                     MessageBox.Show("Новый ремонт оформлен!", "Статус операции",MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
@@ -31,6 +32,17 @@ namespace VPproject
             {
                 MessageBox.Show("Добавление невозможно \n Проверьте заполнение полей!!!", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void ClearAll(object sender, RoutedEventArgs e)
+        {
+            Clear();
+        }
+
+        private void Clear()
+        {
+            cbCl.SelectedIndex = -1;
+            cbPr.SelectedIndex = -1;
         }
     }
 }

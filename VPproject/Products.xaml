@@ -102,16 +102,13 @@
             </TextBox>
 
             <Button 
-                Content="Найти" 
+                Content="Найти"
+                Name="btFind"
+                Style="{StaticResource ButtonGreen}"
                 Width="100" 
                 Height="30" 
-                Margin="10,0,0,0"                
-                Background="Green"
-                Foreground="White"
-                BorderThickness="1"
-                BorderBrush="Black"
-                Click="clFindProd"
-                FontStyle="Italic"/>
+                Margin="10,0,0,0"                                            
+                Click="clFindProd"/>
 
         </ToolBar>
         

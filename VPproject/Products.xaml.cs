@@ -21,7 +21,7 @@ namespace VPproject
 
         private void Page_LoadedProducts(object sender, RoutedEventArgs e)
         {
-            GetData();
+            GetData();         
             tbDate.Text = Convert.ToString(DateTime.Today.ToString("dd MMMM yyyy"));
             tbSt.Text = "ЗАГРУЖЕНО";
         }
