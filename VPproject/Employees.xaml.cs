@@ -2,44 +2,41 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Collections.ObjectModel;
 using System.Data;
-
+using System.Collections.Generic;
 
 namespace VPproject
 {
     public partial class Employees : Page
     {
-        public static StroitelEntities DataEntitiesEmployees { get; set; }
-        private ObservableCollection<Сотрудник> ListEmployees;
+        public static StroitelEntities dbContext { get; set; }
+        private List<Сотрудник> ListEmployees { get; set; }
 
         public Employees()
         {
-            DataEntitiesEmployees = new StroitelEntities();
+            dbContext = new StroitelEntities();
             InitializeComponent();
-            ListEmployees = new ObservableCollection<Сотрудник>();
+            ListEmployees = new List<Сотрудник>();
         }
   
         private void Page_LoadedEmployees(object sender, RoutedEventArgs e)
         {
             GetData();
+            tbDate.Text = Convert.ToString(DateTime.Today.ToString("dd MMMM yyyy"));
             tbSt.Text = "ЗАГРУЖЕНО";
         }
 
         private void GetData()
         {
-            ListEmployees.Clear();
-            var employees = DataEntitiesEmployees.Сотрудник;
-            var queryEmployee = from employee in employees
-                                orderby employee.Код_сотрудника
-                                select employee;
-            foreach (Сотрудник employee in queryEmployee)
+            if (ListEmployees.Any())
             {
-                ListEmployees.Add(employee);
+                ListEmployees.Clear();
             }
+
+            ListEmployees = dbContext.Сотрудник.OrderBy(e => e.Фамилия).ToList();
+
             dgEmployees.ItemsSource = ListEmployees;
             tbCount.Text = Convert.ToString(ListEmployees.Count());
-            tbDate.Text = Convert.ToString(DateTime.Today.ToString("dd MMMM yyyy"));
         }
 
         private void clNewEmployee(object sender, RoutedEventArgs e)
@@ -57,24 +54,25 @@ namespace VPproject
         private void clDeleteEmployee(object sender, RoutedEventArgs e)
         {
             Сотрудник emp = dgEmployees.SelectedItem as Сотрудник;
+
             if (emp != null)
             {
-                MessageBoxResult result = MessageBox.Show("Удалить данные", "Предупреждение", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Удалить данные?", "Предупреждение", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+
                 if (result == MessageBoxResult.OK)
                 {
                     try
                     {
-                        DataEntitiesEmployees.Сотрудник.Remove(emp);
-                        DataEntitiesEmployees.SaveChanges();
+                        dbContext.Сотрудник.Remove(emp);
+                        dbContext.SaveChanges();
 
-                        dgEmployees.SelectedIndex = dgEmployees.SelectedIndex == 0 ? 1 : dgEmployees.SelectedIndex - 1;
-                        ListEmployees.Remove(emp);
-                        tbCount.Text = Convert.ToString(ListEmployees.Count());
-                        MessageBox.Show("Выбранная вами запись удалена!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
+                        GetData();
+                        
+                        MessageBox.Show("Выбранная запись удалена!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Сотрудник имеет связанные данные, удаление не возможно", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Удаление не возможно, есть связанные данные с этой записью", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
@@ -86,7 +84,7 @@ namespace VPproject
 
         private void clSaveEmployee(object sender, RoutedEventArgs e)
         {
-            DataEntitiesEmployees.SaveChanges();
+            dbContext.SaveChanges();
             dgEmployees.IsReadOnly = true;
             tbSt.Text = "СОХРАНЕНО";
         }
@@ -106,23 +104,23 @@ namespace VPproject
         private void clFindEmployee(object sender, RoutedEventArgs e)
         {
             string surname = tbFamily.Text;
-            DataEntitiesEmployees = new StroitelEntities();
-            ListEmployees.Clear();
-            var employees = DataEntitiesEmployees.Сотрудник;
-            var queryEmployee = from employee in employees
-                                where employee.Фамилия == surname
-                                select employee;
-            foreach (Сотрудник emp in queryEmployee)
+
+            if (ListEmployees.Any())
             {
-                ListEmployees.Add(emp);
+                ListEmployees.Clear();
             }
+            
+            ListEmployees = dbContext.Сотрудник.Where(em => em.Фамилия.Contains(surname)).ToList();
+
             if (ListEmployees.Count > 0)
             {
                 dgEmployees.ItemsSource = ListEmployees;
-                tbCount.Text = Convert.ToString(ListEmployees.Count());
+                tbCount.Text = Convert.ToString(ListEmployees.Count);
             }
             else
+            {
                 MessageBox.Show("Сотрудник с фамилией \n" + surname + "\n не найден !", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }             
         }
 
         private void clExit(object sender, RoutedEventArgs e)

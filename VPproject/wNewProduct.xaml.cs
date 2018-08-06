@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using WpfDiplom.Models;
+using VPproject.Models;
 
 namespace VPproject
 {  

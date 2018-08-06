@@ -1,21 +1,17 @@
-﻿
-using System.Windows;
-
+﻿using System.Windows;
+using VPproject.Models;
 
 namespace VPproject
 {
-    /// <summary>
-    /// Логика взаимодействия для wNewProviders.xaml
-    /// </summary>
     public partial class wNewProviders : Window
     {
-        public static StroitelEntities NewPr { get; set; }
+        public static StroitelEntities dbContext { get; set; }
 
         public wNewProviders(Providers newPr)
         {
-            NewPr = new StroitelEntities();
+            dbContext = new StroitelEntities();
             InitializeComponent();
-
+            this.DataContext = new ProviderValidationModel();
         }
         private void AddNewPr(object sender, RoutedEventArgs e)
         {
@@ -24,32 +20,36 @@ namespace VPproject
             string tel = tbTelProv.Text;
             string cont = tbContact.Text;
 
-            if (! string.IsNullOrWhiteSpace(name) & ! string.IsNullOrWhiteSpace(adress) )
-            {
-                try
-                {
-                    MessageBoxResult result =
-                            MessageBox.Show("Добавить нового поставщика?", "Проверка данных", MessageBoxButton.OKCancel);
-                    if (result == MessageBoxResult.OK)
-                    {
-                        NewPr.Add_Provider(name, adress, tel, cont);
-                        MessageBox.Show("Новый поставщик добавлен!", "Статус операции");
+            if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(adress) )
+            {              
+                MessageBoxResult result = MessageBox.Show("Добавить нового поставщика?", "Проверка данных", MessageBoxButton.OKCancel, MessageBoxImage.Question);
 
-                        TbClear();
-                    }
-                }
-                catch
+                if (result == MessageBoxResult.OK)
                 {
-                    MessageBox.Show(" Добавление невозможно \n Проверьте заполнение полей!!!", "Ошибка добавления");
-                }
+                    try
+                    {
+                        dbContext.Add_Provider(name, adress, tel, cont);                      
+                        MessageBox.Show("Новый поставщик добавлен!", "Статус операции", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        Clear();
+                    }
+                    catch
+                    {
+                        MessageBox.Show(" Добавление невозможно \n Проверьте заполнение полей!", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }            
             }
-            else { MessageBox.Show("Заполните наименование и адресс поставщика", "Ошибка добавления"); }
+            else
+            {
+                MessageBox.Show("Заполните наименование и адрес поставщика", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
         private void ClearNewPr(object sender, RoutedEventArgs e)
         {
-            TbClear();
+            Clear();
         }
-        private void TbClear()
+        private void Clear()
         {
             tbNameProv.Clear();
             tbAdressProv.Clear();

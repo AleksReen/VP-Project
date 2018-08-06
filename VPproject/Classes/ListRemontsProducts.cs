@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Collections.ObjectModel;
 
 namespace VPproject.Classes
@@ -12,7 +8,7 @@ namespace VPproject.Classes
         public ListRemontsProducts()
         {
 
-            var listRemProd = Remonts.DataEntitiesRemonts.Товар;
+            var listRemProd = Remonts.dbContext.Товар;
             var queryRemProd = from rp in listRemProd
                                orderby rp.Наименование_товара
                                select rp ;

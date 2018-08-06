@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using VPproject.Models;
 
 namespace VPproject
 {
@@ -10,6 +11,7 @@ namespace VPproject
         {
             dbContext = new StroitelEntities();
             InitializeComponent();
+            this.DataContext = new OrderValidationModel();
         }
 
         private void AddNewOrder(object sender, RoutedEventArgs e)

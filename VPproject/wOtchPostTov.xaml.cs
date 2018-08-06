@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.IO;
-using Microsoft.Win32;
 
 namespace VPproject
 {
-    /// <summary>
-    /// Логика взаимодействия для wOtchPostTov.xaml
-    /// </summary>
     public partial class wOtchPostTov : Window
     {
-        private readonly StroitelEntities OtchPostTov;
+        private readonly StroitelEntities dbContext;
         public wOtchPostTov()
         {
             InitializeComponent();
-            OtchPostTov = new StroitelEntities();
+            dbContext = new StroitelEntities();
             tbSt.Text = "Сформируйте отчет";
             tbCount.Text = "0";
             tbDate.Text = Convert.ToString(DateTime.Today.ToString("dd MMMM yyyy"));
@@ -27,15 +19,16 @@ namespace VPproject
         private void Start(object sender, RoutedEventArgs e)
         {
             int post = Convert.ToInt32(cb.SelectedValue);
+
             if (post != 0)
             {
-                DG.DataContext = OtchPostTov.Поставщик_товар(post);
-                tbSt.Text = "Отчет сформирован";
-                tbCount.Text = OtchPostTov.Поставщик_товар(post).Count().ToString();
+                DG.DataContext = dbContext.Поставщик_товар(post);
+                tbSt.Text = "Cформирован";
+                tbCount.Text = dbContext.Поставщик_товар(post).Count().ToString();
             }
             else
             {
-                MessageBox.Show("Проверьте заполнение полей!!!", "Ошибка");
+                MessageBox.Show("Проверьте заполнение полей!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);              
             }
         }
 
@@ -46,7 +39,7 @@ namespace VPproject
        
         private void Export(object sender, RoutedEventArgs e)
         {
-            string name = "Отчет Поставщик - товар ";
+            string name = "Отчет Поставщик-Tовар ";
             Other.Exports(DG, name);
         }
 

@@ -7,7 +7,7 @@ namespace VPproject.Classes
     {
         public ListPostPost()
         {
-            var listPP = Providers.DataEntitiesProviders.Поставщик;
+            var listPP = Providers.dbContext.Поставщик;
 
             var queryPP = from p in listPP
                           orderby p.Наименование

@@ -1,4 +1,4 @@
-﻿namespace WpfDiplom.Models
+﻿namespace VPproject.Models
 {
     public class ClientValidationModel
     {

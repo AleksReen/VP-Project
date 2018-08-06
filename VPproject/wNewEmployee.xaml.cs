@@ -1,20 +1,17 @@
-﻿
-using System.Windows;
+﻿using System.Windows;
+using WpfDiplom.Models;
 
 namespace VPproject
 {
-    /// <summary>
-    /// Логика взаимодействия для wNewEmployee.xaml
-    /// </summary>
     public partial class wNewEmployee : Window
     {
-        public static StroitelEntities NewE { get; set; }
+        public static StroitelEntities dbContext { get; set; }
 
         public wNewEmployee(Employees newEmp)
         {
-            NewE = new StroitelEntities();
+            dbContext = new StroitelEntities();
             InitializeComponent();
-            
+            this.DataContext = new EmployerValidationModel();            
         }
         private void AddNewEmployee(object sender, RoutedEventArgs e)
         {
@@ -25,30 +22,40 @@ namespace VPproject
             string tel = tbTelEmp.Text;
 
             if (!string.IsNullOrEmpty(f)
-                & !string.IsNullOrEmpty(i)
-                & !string.IsNullOrEmpty(p)
-                & !string.IsNullOrEmpty(t)
-                & !string.IsNullOrEmpty(tel))
+                && !string.IsNullOrEmpty(i)
+                && !string.IsNullOrEmpty(p)
+                && !string.IsNullOrEmpty(t)
+                && !string.IsNullOrEmpty(tel))
             {
+                MessageBoxResult result = MessageBox.Show("Добавить новый товар?", "Проверка данных", MessageBoxButton.OKCancel, MessageBoxImage.Question);
 
-                try
+                if (result == MessageBoxResult.OK)
                 {
-                    NewE.Add_Personal(f, i, p, t, tel);
-                    MessageBox.Show("Новый сотрудник добавлен, Статус операции");
-                }
-                catch
-                {
-                    MessageBox.Show(" Добавление невозможно \n Проверьте заполнение полей!!!", "Ошибка добавления");
-                }
+                    try
+                    {
+                        dbContext.Add_Personal(f, i, p, t, tel);
+                        Clear();
 
+                        MessageBox.Show("Новый сотрудник добавлен!", "Статус операции", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch
+                    {
+                        MessageBox.Show(" Добавление невозможно \n Ошибка базы данных!", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }                  
             }
             else
             {
-                MessageBox.Show("Все поля должны быть заполнены!", "Ошибка добавления");
+                MessageBox.Show("Добавление невозможно \n Все поля должны быть заполнены!", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
         private void ClearNewEmployee(object sender, RoutedEventArgs e)
+        {
+            Clear();
+        }
+
+        private void Clear()
         {
             tbFamEmp.Clear();
             tbNameEmp.Clear();

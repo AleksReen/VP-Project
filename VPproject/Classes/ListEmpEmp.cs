@@ -7,7 +7,7 @@ namespace VPproject.Classes
     {
         public ListEmpEmp()
         {
-            var listEmp = Employees.DataEntitiesEmployees.Сотрудник;
+            var listEmp = Employees.dbContext.Сотрудник;
 
             var queryEmp = from emp in listEmp
                            orderby emp.Фамилия

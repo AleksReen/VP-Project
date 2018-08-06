@@ -21,7 +21,7 @@ namespace VPproject
 
         private void Page_LoadedProducts(object sender, RoutedEventArgs e)
         {
-            GetData();
+            GetData();         
             tbDate.Text = Convert.ToString(DateTime.Today.ToString("dd MMMM yyyy"));
             tbSt.Text = "ЗАГРУЖЕНО";
         }
@@ -33,7 +33,7 @@ namespace VPproject
                 ListProducts.Clear();
             }
 
-            ListProducts = dbContext.Товар.OrderBy(p => p.Код_товара).ToList();
+            ListProducts = dbContext.Товар.OrderBy(p => p.Наименование_товара).ToList();
           
             dgProducts.ItemsSource = ListProducts;
             tbCount.Text = Convert.ToString(ListProducts.Count());          

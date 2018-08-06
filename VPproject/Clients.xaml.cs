@@ -33,7 +33,7 @@ namespace VPproject
                 ListClients.Clear();
             }
 
-            ListClients = dbContext.Клиент.OrderBy(cl => cl.Код_клиента).ToList();
+            ListClients = dbContext.Клиент.OrderBy(cl => cl.Организация).ToList();
 
             dgClients.ItemsSource = ListClients;
             tbCount.Text = Convert.ToString(ListClients.Count());          
@@ -71,7 +71,7 @@ namespace VPproject
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Удаление невозможно, клиент имеет связанные записи", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Удаление не возможно, есть связанные данные с этой записью", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
