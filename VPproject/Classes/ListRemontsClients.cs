@@ -7,7 +7,7 @@ namespace VPproject.Classes
     {
         public ListRemontsClients()
         {       
-            var listRemCl = Remonts.DataEntitiesRemonts.Клиент;
+            var listRemCl = Remonts.dbContext.Клиент;
             
 
             var queryRemCl = from rс in listRemCl

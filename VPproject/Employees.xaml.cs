@@ -74,7 +74,7 @@ namespace VPproject
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Сотрудник имеет связанные данные, удаление не возможно", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Удаление не возможно, есть связанные данные с этой записью", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }

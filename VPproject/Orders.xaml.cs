@@ -37,7 +37,6 @@ namespace VPproject
             tbDate.Text = Convert.ToString(DateTime.Today.ToString("dd MMMM yyyy"));
             tbSt.Text = "ЗАГРУЖЕНО";
         }
-
         private void GetData()
         {
             if (ListOrders.Any())
@@ -45,7 +44,7 @@ namespace VPproject
                 ListOrders.Clear();
             }
 
-            ListOrders = dbContext.Заказ.OrderBy(o => o.Код_заказа).ToList();
+            ListOrders = dbContext.Заказ.OrderByDescending(o => o.Дата_заказа).ToList();
          
             dgOrders.ItemsSource = ListOrders;
             tbCount.Text = Convert.ToString(ListOrders.Count());          
@@ -133,7 +132,7 @@ namespace VPproject
             }
             else
             {
-                MessageBox.Show("Заказы \n" + org + "\n не найден", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Заказ \n" + org + "\n не найден", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
             }             
         }
 

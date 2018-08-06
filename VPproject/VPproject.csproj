@@ -100,6 +100,7 @@
     <Compile Include="Models\ClientValidationModel.cs" />
     <Compile Include="Models\OrderValidationModel.cs" />
     <Compile Include="Models\ProductValidationModel.cs" />
+    <Compile Include="Models\ProviderValidationModel.cs" />
     <Compile Include="Orders.xaml.cs">
       <DependentUpon>Orders.xaml</DependentUpon>
     </Compile>

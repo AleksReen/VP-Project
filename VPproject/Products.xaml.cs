@@ -33,7 +33,7 @@ namespace VPproject
                 ListProducts.Clear();
             }
 
-            ListProducts = dbContext.Товар.OrderBy(p => p.Код_товара).ToList();
+            ListProducts = dbContext.Товар.OrderBy(p => p.Наименование_товара).ToList();
           
             dgProducts.ItemsSource = ListProducts;
             tbCount.Text = Convert.ToString(ListProducts.Count());          

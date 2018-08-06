@@ -25,7 +25,7 @@
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
 
-            <ComboBox x:Name="cbCl"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" 
+            <ComboBox x:Name="cbCl"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" 
                       FontSize="14" 
                       ItemsSource="{Binding Source={StaticResource LRClients}}"
                       DisplayMemberPath="Организация"
@@ -43,7 +43,7 @@
                    Background="Transparent"  
                    Width="187" FontSize="14"/>
 
-            <ComboBox x:Name="cbPr"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" 
+            <ComboBox x:Name="cbPr"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" 
                       FontSize="14" 
                       ItemsSource="{Binding Source={StaticResource LRProducts}}"
                       DisplayMemberPath="Наименование_товара"

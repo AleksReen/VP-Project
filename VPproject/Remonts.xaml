@@ -78,11 +78,13 @@
 
             <TextBox 
                 x:Name="tbRem" 
-                 Margin="250,0,0,0" 
+                Margin="250,0,0,0" 
+                VerticalContentAlignment="Center" Padding="5,0,0,0"
                 HorizontalAlignment="Left" 
                 Height ="30"  
                 Width="275" 
                 BorderThickness="1"
+                PreviewTextInput="tbRem_PreviewTextInput"
                 BorderBrush="{StaticResource LGB}">
 
                 <TextBox.Style>
@@ -90,7 +92,7 @@
                         <Style.Resources>
                             <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
                                 <VisualBrush.Visual>
-                                    <Label Content=" Поиск по номеру акта" Foreground="LightGray" Background="White" Width="275" Height="30" VerticalContentAlignment="Center" />
+                                    <Label Content=" Поиск по номеру акта (только цифры)" Foreground="LightGray" Background="White" Width="275" Height="30" VerticalContentAlignment="Center" />
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </Style.Resources>
