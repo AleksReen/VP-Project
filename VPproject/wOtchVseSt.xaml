@@ -24,9 +24,9 @@
             <StackPanel  Orientation="Horizontal" Height="68" HorizontalAlignment="Center">
                 <Label x:Name="IDem" Content="Выберите период" Height="40" Foreground="White" Background="Transparent" FontSize="14" FontStyle="Italic" VerticalContentAlignment="Center"/>
                 <Label  Content="с - " Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <DatePicker x:Name="dpDateN"  Height="30"    Width="100" Padding="0,2.5,0,0" ScrollViewer.CanContentScroll="True"  FontSize="14"/>
+                <DatePicker x:Name="dpDateN"  Height="30"    Width="100" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True"  FontSize="14"/>
                 <Label  Content="до - " Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <DatePicker x:Name="dpDateK"  Height="30"    Width="100" Padding="0,2.5,0,0" ScrollViewer.CanContentScroll="True"  FontSize="14"/>
+                <DatePicker x:Name="dpDateK"  Height="30"    Width="100" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True"  FontSize="14"/>
 
                 <Button Content="Сформировать" 
                         Width="110" Height="30" 
