@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
 using System.Windows.Input;
@@ -16,7 +13,7 @@ namespace VPproject
     {
         public static void Exit()
         {
-            MessageBoxResult result = MessageBox.Show("Вы действительно хотите завершить работу?", "Завершение работы АСУ Строитель", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("Вы действительно хотите завершить работу?", "Завершение работы АСУ СтройМир", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
                 Application.Current.Shutdown();

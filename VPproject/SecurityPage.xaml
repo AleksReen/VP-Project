@@ -9,8 +9,8 @@
 	Title="Проверка пользователя" Height="550" Width="900">
     <StackPanel Name="Stack"  Background="{StaticResource LGB}" >
         <StackPanel Margin="0,100,0,0">
-            <TextBlock Margin="-135,0,206,5" FontSize="24" HorizontalAlignment="Center" Height="45" FontWeight="Bold" Foreground="White">              
-            Вход в АСУ ОАО Строитель 
+            <TextBlock Margin="-135,0,170,5" FontSize="24" HorizontalAlignment="Center" Height="45" FontWeight="Bold" Foreground="White">              
+            АСУ ЧТУП магазин СтройМир 
             </TextBlock>
             <StackPanel Orientation="Horizontal" Margin="-450,0,0,0" Height="57" HorizontalAlignment="Center">
                 <Label x:Name="label" Content="Login " Height="28" Margin="80,0,200,0" Background="Transparent"  Width="70" FontSize="14" FontStyle="Italic" Foreground="White"/>

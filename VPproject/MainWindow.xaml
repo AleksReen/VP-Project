@@ -1,7 +1,7 @@
 ﻿<Window x:Class="VPproject.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="АСУ ОАО Строитель" Height="600" Width="925" Icon="Images/drill.ico" WindowStartupLocation="CenterScreen">
+        Title="АСУ ЧТУП магазин СтройМир" Height="600" Width="925" Icon="Images/drill.ico" WindowStartupLocation="CenterScreen">
     
     <Grid Name="grid">
         <Frame Name="frame1" Margin="3" 
