@@ -195,5 +195,51 @@
             </Setter>
         </Style>
 
+        <Style x:Key="LableStyle" TargetType="{x:Type Label}" BasedOn="{x:Null}">
+
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Margin" Value="0,14,200,15"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="187"/>
+            <Setter Property="FontSize" Value="14"/>
+
+        </Style>
+
+
+        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{x:Null}">
+            
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="-170,0,0,0"/>
+            <Setter Property="Width" Value="190"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="5,0,0,0"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="FontSize" Value="14"/>
+
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold" Text="**"/>
+                            <Border BorderBrush="Red" BorderThickness="2">
+                                <AdornedElementPlaceholder Name="adornerPlaceholder"/>
+                            </Border>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="Foreground" Value="Red"/>
+                    <Setter Property="ToolTip" Value="Недопустимое значение"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
     </Application.Resources>
 </Application>

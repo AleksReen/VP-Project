@@ -15,20 +15,8 @@
     <StackPanel Name="ProductPanel" Background="{StaticResource LGB}" Margin="0,0,0,-3" >
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
-            <Label x:Name="NameProd" 
-                   Content="Наименование товара" 
-                   Height="28" Margin="0,14,200,15" 
-                   Background="Transparent" 
-                   Width="187"
-                   Foreground="White"
-                   FontStyle="Italic"
-                   FontSize="14"/>
-            <TextBox x:Name="tbNameProd" 
-                     VerticalContentAlignment="Center" 
-                     Height="30"  Margin="-170,0,0,0"  
-                     Width="190" Padding="5,0,0,0" 
-                     ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14">
-
+            <Label x:Name="NameProd" Content="Наименование товара" Style="{StaticResource LableStyle }"/>
+            <TextBox x:Name="tbNameProd" Style="{StaticResource TextBoxStyle }" >
                 <TextBox.Text>
                     <Binding Path="ProductName" >
                         <Binding.ValidationRules>
@@ -36,50 +24,12 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
-
-                <TextBox.Style>
-                    <Style TargetType="{x:Type TextBox}">
-                        <Setter Property="Validation.ErrorTemplate">
-                            <Setter.Value>
-                                <ControlTemplate>
-                                    <DockPanel LastChildFill="True">
-                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
-                                                       Text="**"/>
-                                        <Border BorderBrush="Red" BorderThickness="2">
-                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
-                                        </Border>
-                                    </DockPanel>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="Validation.HasError" Value="True">
-                                <Setter Property="Foreground" Value="Red"/>
-                                <Setter Property="ToolTip" Value="Недопустимое значение в поле"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Style>
-
             </TextBox>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
-            <Label x:Name="ProProduct" 
-                   Content="Производитель" Height="28" 
-                   Foreground="White"
-                   FontStyle="Italic"
-                   Margin="0,14,200,15" 
-                   Background="Transparent"  
-                   Width="187" FontSize="14"/>
-            <TextBox x:Name="tbProProduct"  
-                     Height="30" 
-                     VerticalContentAlignment="Center"
-                     Margin="-170,0,0,0" 
-                     Width="190" 
-                     Padding="5,0,0,0" 
-                     ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14">
-
+            <Label x:Name="ProProduct"  Content="Производитель" Style="{StaticResource LableStyle}"/>
+            <TextBox x:Name="tbProProduct" Style="{StaticResource TextBoxStyle }">
                 <TextBox.Text>
                     <Binding Path="Producer" >
                         <Binding.ValidationRules>
@@ -87,50 +37,12 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
-
-                <TextBox.Style>
-                    <Style TargetType="{x:Type TextBox}">
-                        <Setter Property="Validation.ErrorTemplate">
-                            <Setter.Value>
-                                <ControlTemplate>
-                                    <DockPanel LastChildFill="True">
-                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
-                                                       Text="**"/>
-                                        <Border BorderBrush="Red" BorderThickness="2">
-                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
-                                        </Border>
-                                    </DockPanel>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="Validation.HasError" Value="True">
-                                <Setter Property="Foreground" Value="Red"/>
-                                <Setter Property="ToolTip" Value="Недопустимое значение в поле"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Style>
-
             </TextBox>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center" Margin="42,0">
-            <Label x:Name="EdIzm" 
-                   Content="Ед. измерения" 
-                   Foreground="White"
-                   FontStyle="Italic"
-                   Height="28" 
-                   Margin="0,14,200,15" 
-                   Background="Transparent"  
-                   Width="187" FontSize="14"/>
-            <TextBox x:Name="tbEdIzmProduct"  
-                     Height="30" 
-                     VerticalContentAlignment="Center" 
-                     Margin="-170,0,0,0"  
-                     Width="190" 
-                     Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14">
-
+            <Label x:Name="EdIzm" Content="Ед. измерения" Style="{StaticResource LableStyle}"/>
+            <TextBox x:Name="tbEdIzmProduct"  Style="{StaticResource TextBoxStyle }">
                 <TextBox.Text>
                     <Binding Path="Unit" >
                         <Binding.ValidationRules>
@@ -138,49 +50,12 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
-
-                <TextBox.Style>
-                    <Style TargetType="{x:Type TextBox}">
-                        <Setter Property="Validation.ErrorTemplate">
-                            <Setter.Value>
-                                <ControlTemplate>
-                                    <DockPanel LastChildFill="True">
-                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
-                                                       Text="**"/>
-                                        <Border BorderBrush="Red" BorderThickness="2">
-                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
-                                        </Border>
-                                    </DockPanel>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="Validation.HasError" Value="True">
-                                <Setter Property="Foreground" Value="Red"/>
-                                <Setter Property="ToolTip" Value="Недопустимое значение в поле"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Style>
-
             </TextBox>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
-            <Label x:Name="Balance" 
-                   Content="Количество" 
-                   Foreground="White"
-                   FontStyle="Italic"
-                   Height="28" 
-                   Margin="0,14,200,15" 
-                   Background="Transparent"  
-                   Width="187" FontSize="14"/>
-            <TextBox x:Name="tbBalanceProd"  
-                     Height="30"  Margin="-170,0,0,0"  Width="190" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True"
-                     VerticalContentAlignment="Center"
-                     TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"
-                     PreviewTextInput="tbBalanceProd_PreviewTextInput">
-
+            <Label x:Name="Balance" Content="Количество (0)" Style="{StaticResource LableStyle}"/>
+            <TextBox x:Name="tbBalanceProd" PreviewTextInput="tbBalanceProd_PreviewTextInput" Style="{StaticResource TextBoxStyle }">
                 <TextBox.Text>
                     <Binding Path="Quantity" >
                         <Binding.ValidationRules>
@@ -188,50 +63,12 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
-
-                <TextBox.Style>
-                    <Style TargetType="{x:Type TextBox}">
-                        <Setter Property="Validation.ErrorTemplate">
-                            <Setter.Value>
-                                <ControlTemplate>
-                                    <DockPanel LastChildFill="True">
-                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
-                                                       Text="**"/>
-                                        <Border BorderBrush="Red" BorderThickness="2">
-                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
-                                        </Border>
-                                    </DockPanel>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="Validation.HasError" Value="True">
-                                <Setter Property="Foreground" Value="Red"/>
-                                <Setter Property="ToolTip" Value="Допускается ввод только числовых значений"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Style>
-
             </TextBox>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
-            <Label x:Name="Price" 
-                   Content="Цена" 
-                   Foreground="White"
-                   FontStyle="Italic"
-                   Height="28" 
-                   Margin="0,14,200,15" 
-                   Background="Transparent"  
-                   Width="187" FontSize="14"/>
-            <TextBox x:Name="tbPrice"  Height="30"
-                     PreviewTextInput="tbPrice_PreviewTextInput"
-                     VerticalContentAlignment="Center" 
-                     Margin="-170,0,0,0"  
-                     Width="190" 
-                     Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14">
-
+            <Label x:Name="Price" Content="Цена (0.00)" Style="{StaticResource LableStyle }"/>
+            <TextBox x:Name="tbPrice"  Height="30" PreviewTextInput="tbPrice_PreviewTextInput" Style="{StaticResource TextBoxStyle }">
                 <TextBox.Text>
                     <Binding Path="Price" >
                         <Binding.ValidationRules>
@@ -239,73 +76,27 @@
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>
-
-                <TextBox.Style>
-                    <Style TargetType="{x:Type TextBox}">
-                        <Setter Property="Validation.ErrorTemplate">
-                            <Setter.Value>
-                                <ControlTemplate>
-                                    <DockPanel LastChildFill="True">
-                                        <TextBlock DockPanel.Dock="Right" Foreground="Red" FontSize="14" FontWeight="Bold"
-                                                       Text="**"/>
-                                        <Border BorderBrush="Red" BorderThickness="2">
-                                            <AdornedElementPlaceholder Name="adornerPlaceholder"/>
-                                        </Border>
-                                    </DockPanel>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="Validation.HasError" Value="True">
-                                <Setter Property="Foreground" Value="Red"/>
-                                <Setter Property="ToolTip" Value="Допускается ввод только числовых значений - 0.00"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Style>
-
             </TextBox>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
-            <Label x:Name="Prov" 
-                   Content="Поставщик" 
-                   Foreground="White"
-                   FontStyle="Italic"
-                   Height="28" 
-                   Margin="0,14,200,15" 
-                   Background="Transparent"  
-                   Width="187" FontSize="14"/>
-
+            <Label x:Name="Prov"  Content="Поставщик" Style="{StaticResource LableStyle}"/>
             <ComboBox x:Name="cbProvProduct"  Height="30" VerticalContentAlignment="Center" Margin="-170,0,0,0"  Width="190" Padding="5,0,0,0" 
                       FontSize="14" 
                       ItemsSource="{Binding Source={StaticResource ListPostProd}}"
                       DisplayMemberPath="Наименование"
-                      SelectedValuePath="Код_поставщика"
-                      />
+                      SelectedValuePath="Код_поставщика"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
-            <Label x:Name="New" 
-                   Content="Новинка" 
-                   Foreground="White"
-                   FontStyle="Italic"
-                   Height="28" 
-                   Margin="0,14,200,15" 
-                   Background="Transparent"  
-                   Width="187" FontSize="14"/>
+            <Label x:Name="New" Content="Новинка" Style="{StaticResource LableStyle}"/>
             <ComboBox x:Name="tbNewProd" Height="30" VerticalContentAlignment="Center" Padding="5,0,0,0" Margin="-170,0,0,0"  Width="190"  ScrollViewer.CanContentScroll="True"  FontSize="14">
                 <TextBlock Padding="5,0,0,0">Новинка</TextBlock>
             </ComboBox>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center" Margin="42,0,28,0" Width="422">
-
             <Button Content="Добавить" Width="100" Height="30" Margin="156,0,0,0" Style="{StaticResource ButtonGreen}" Click="AddNewProd"></Button>
-
             <Button Content="Очистить" Width="100" Height="30" Margin="50,0,0,0" Style="{StaticResource ButtonRed}"  Click="ClearNewProd" />
-
         </StackPanel>
-
     </StackPanel>
-
 </Window>

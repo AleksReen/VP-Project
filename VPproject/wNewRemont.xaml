@@ -16,49 +16,26 @@
     <StackPanel Background="{StaticResource LGB}" Margin="0,0,0,-3" >
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
-            <Label x:Name="Cl"
-                    Foreground="White"
-                   FontStyle="Italic"
-                   Content="Наименование клиента" 
-                   Height="28" 
-                   Margin="0,14,200,15" 
-                   Background="Transparent"  
-                   Width="187" FontSize="14"/>
-
+            <Label x:Name="Cl" Content="Наименование клиента" Style="{StaticResource LableStyle}"/>
             <ComboBox x:Name="cbCl"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" 
                       FontSize="14" 
                       ItemsSource="{Binding Source={StaticResource LRClients}}"
                       DisplayMemberPath="Организация"
-                      SelectedValuePath="Код_клиента"
-                      />
+                      SelectedValuePath="Код_клиента"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center">
-            <Label x:Name="Pr" 
-                    Foreground="White"
-                   FontStyle="Italic"
-                   Content="Наименование товара" 
-                   Height="28" 
-                   Margin="0,14,200,15" 
-                   Background="Transparent"  
-                   Width="187" FontSize="14"/>
-
+            <Label x:Name="Pr" Content="Наименование товара" Style="{StaticResource LableStyle}"/>
             <ComboBox x:Name="cbPr"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" 
                       FontSize="14" 
                       ItemsSource="{Binding Source={StaticResource LRProducts}}"
                       DisplayMemberPath="Наименование_товара"
-                      SelectedValuePath="Код_товара"
-                      />
+                      SelectedValuePath="Код_товара"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Height="57" HorizontalAlignment="Center" Margin="42,0,28,0" Width="422">
-
             <Button Content="Добавить" Width="100" Height="30" Margin="156,0,0,0" Style="{StaticResource ButtonGreen}" FontStyle="Italic" Click="AddNewRem" />
-
             <Button Content="Очистить" Width="100" Height="30" Margin="50,0,0,0" Style="{StaticResource ButtonRed}" Click="ClearAll"/>
-
         </StackPanel>
-
     </StackPanel>
-
 </Window>
