@@ -13,7 +13,7 @@ namespace VPproject
     {
         public static void Exit()
         {
-            MessageBoxResult result = MessageBox.Show("Вы действительно хотите завершить работу?", "Завершение работы АСУ СтройМир", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("Вы действительно хотите завершить работу?", "Завершение работы АСУ СтройМир", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 Application.Current.Shutdown();
@@ -31,11 +31,9 @@ namespace VPproject
 
         public static void Exports(DataGrid DG, string name)
         {
-
             DG.SelectAllCells();
             DG.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
             ApplicationCommands.Copy.Execute(null, DG);
-
 
             string rezult = (string)Clipboard.GetData(DataFormats.Text);
             DG.UnselectAllCells();
@@ -46,15 +44,19 @@ namespace VPproject
             dgl.DefaultExt = ".xlsx";
             dgl.Filter = "Excel (.xlsx)|*.xls";
 
-            bool? result1 = dgl.ShowDialog();
+            bool? result = dgl.ShowDialog();
 
-            if (result1 == true)
+            if (result == true)
             {
                 string filename = dgl.FileName;
-                StreamWriter file = new StreamWriter(filename, true, Encoding.GetEncoding(1251));
-                file.WriteLine(rezult);
-                file.Close();
-                MessageBox.Show("Отчет успешно экспортирован в Excel", "Экспорт данных");
+ 
+                using (var file = new StreamWriter(filename, true, Encoding.GetEncoding(1251)))
+                {
+                    file.WriteLine(rezult);
+                    file.Close();
+                }
+
+                MessageBox.Show("Отчет успешно экспортирован в Excel", "Экспорт данных", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
