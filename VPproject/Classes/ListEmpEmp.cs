@@ -1,22 +1,13 @@
 ﻿using System.Linq;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace VPproject.Classes
 {
-    class ListEmpEmp: ObservableCollection<Сотрудник>
+    class ListEmpEmp: List<Сотрудник>
     {
         public ListEmpEmp()
         {
-            var listEmp = Employees.dbContext.Сотрудник;
-
-            var queryEmp = from emp in listEmp
-                           orderby emp.Фамилия
-                           select emp;
-
-            foreach (var emp in queryEmp)
-            {
-                this.Add(emp);
-            }
+            this.AddRange(Employees.dbContext.Сотрудник.OrderBy(x => x.Фамилия).ToList());          
         }
     }
 }

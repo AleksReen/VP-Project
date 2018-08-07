@@ -1,23 +1,13 @@
 ﻿using System.Linq;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace VPproject.Classes
 {
-    class ListRemontsClients : ObservableCollection<Клиент>
+    class ListRemontsClients : List<Клиент>
     {
         public ListRemontsClients()
-        {       
-            var listRemCl = Remonts.dbContext.Клиент;
-            
-
-            var queryRemCl = from rс in listRemCl
-                             orderby rс.Организация
-                             select rс;
-
-            foreach (var rс in queryRemCl)
-            {
-                this.Add(rс);
-            }
+        {                
+            this.AddRange(Remonts.dbContext.Клиент.OrderBy(x => x.Организация).ToList());         
         }
     }
 }

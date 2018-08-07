@@ -1,22 +1,13 @@
 ﻿using System.Linq;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace VPproject.Classes
 {
-    class ListZakazEmployee: ObservableCollection<Сотрудник>
+    class ListZakazEmployee: List<Сотрудник>
     {
         public ListZakazEmployee()
         {
-            var listZakEm = Orders.dbContext.Сотрудник;
-            
-            var queryZakEm = from em in listZakEm
-                             orderby em.Фамилия
-                             select em;
-
-            foreach (var em in queryZakEm)
-            {
-                this.Add(em);
-            }
+            this.AddRange(Orders.dbContext.Сотрудник.OrderBy(x => x.Фамилия).ToList());         
         }
     }
 }

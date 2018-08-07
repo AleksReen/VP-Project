@@ -14,11 +14,11 @@
             </TextBlock>
             <StackPanel Orientation="Horizontal" Margin="-450,0,0,0" Height="57" HorizontalAlignment="Center">
                 <Label x:Name="label" Content="Login " Height="28" Margin="80,0,200,0" Background="Transparent"  Width="70" FontSize="14" FontStyle="Italic" Foreground="White"/>
-                <TextBox x:Name="textBox"  Height="30"  Margin="-170,0,0,0"  Width="190" Padding="0,5,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
+                <TextBox x:Name="textBox"  Height="30"  Margin="-170,0,0,0"  Width="190" VerticalContentAlignment="Center" Padding="5,0,0,0" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" AcceptsReturn="True" FontSize="14"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="-450,0,0,0" Height="57" HorizontalAlignment="Center">
                 <Label x:Name="label1" Content="Password"  Margin="80,13,200,13" HorizontalAlignment="Center" Width="70" FontSize="14" FontStyle="Italic" Foreground="White"/>
-                <PasswordBox x:Name="textBox1" Height="30" Margin="-170,0,0,0" HorizontalAlignment="Center" Width="190" FontSize="14" Padding="0,5,0,0"/>
+                <PasswordBox x:Name="textBox1" Height="30" Margin="-170,0,0,0" HorizontalAlignment="Center" Width="190" FontSize="14" VerticalContentAlignment="Center" Padding="5,0,0,0"/>
             </StackPanel>
             <Button x:Name="EnterSecurity" 
                     Content="Вход" Height="30" Margin="-135,20,70,0"  
